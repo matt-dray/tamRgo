@@ -4,7 +4,7 @@
 \alias{lay_egg}
 \title{Generate A New tamRgo Pet}
 \usage{
-lay_egg(pet_name)
+lay_egg(pet_name, overwrite_renviron = TRUE)
 }
 \arguments{
 \item{pet_name}{Character. A name for the new tamRgo pet.}

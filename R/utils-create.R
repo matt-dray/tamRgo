@@ -21,7 +21,7 @@
 #'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)?}
 #' }
 #'
-#' @return A list of lists. See details.
+#' @return A list. See details.
 #'
 #' @export
 #'

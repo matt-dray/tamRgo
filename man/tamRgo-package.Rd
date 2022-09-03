@@ -6,7 +6,7 @@
 \alias{tamRgo-package}
 \title{tamRgo: Digital Pets For R}
 \description{
-Create and care for a digital pet, using GitHub gists to store pet data and GitHub Actions to update that data remotely.
+Create and care for a digital pet, using GitHub gists to store pet 'blueprints'.
 }
 \author{
 \strong{Maintainer}: Matt Dray \email{mwdray@gmail.com}

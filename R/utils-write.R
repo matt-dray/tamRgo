@@ -34,8 +34,8 @@
       !inherits(blueprint, "list"),
       length(blueprint) != 2,
       names(!blueprint %in% c("characteristics", "status")),
-      !names(x[["characteristics"]]) %in% c("name", "species", "stage", "born", "age"),
-      !names(x[["status"]]) %in% c("hungry", "happy", "dirty")
+      !names(blueprint[["characteristics"]]) %in% c("name", "species", "stage", "born", "age"),
+      !names(blueprint[["status"]]) %in% c("hungry", "happy", "dirty")
     )
   ) {
     stop(
@@ -49,7 +49,7 @@
     Sys.time()
   )
 
-  blueprint_yaml <- yaml::as.yaml(blueprint)
+  blueprint_yaml <- paste0(yaml::as.yaml(blueprint), "\n")
 
   gh::gh(
     "POST /gists",
