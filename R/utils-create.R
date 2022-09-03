@@ -1,24 +1,24 @@
 
 #' Generate A Blueprint For A New tamRgo Pet
 #'
-#' @param pet_name Character. A name for hte new tamRgo pet.
+#' @param pet_name Character. A name for the new tamRgo pet.
 #' @param seed Integer or NULL. Supply a seed value to recreate a given tamRgo
 #' pet's sampled values. Defaults to NULL.
 #'
 #' @details
-#' A tamRgo 'blueprint' is a list of lists. The sublist 'characteristics'
-#' contains:
+#' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
+#' that stores information about a pet. The sublist 'characteristics' contains:
 #' \describe{
-#'   \item{species}{Placeholder}
-#'   \item{stage}{Placeholder}
-#'   \item{born}{Placeholder}
-#'   \item{age}{Placeholder}
+#'   \item{species}{Type of pet}
+#'   \item{stage}{Growth stage reached}
+#'   \item{born}{Date of birth}
+#'   \item{age}{Days since birth}
 #' }
-#' The sublist 'status' contains
+#' The sublist 'status' contains:
 #' \describe{
-#'   \item{hunger}{Placeholder}
-#'   \item{happy}{Placeholder}
-#'   \item{clean}{Placeholder}
+#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
+#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)?}
+#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)?}
 #' }
 #'
 #' @return A list of lists. See details.
@@ -26,9 +26,13 @@
 #' @export
 #'
 #' @examples \dontrun{create_blueprint("Kevin", 1234)}
-create_blueprint <- function(pet_name, seed = NULL) {
+.create_blueprint <- function(pet_name, seed = NULL) {
 
-  rolled <- roll_characteristics(seed)
+  if (!inherits(pet_name, "character")) {
+    stop("'pet_name' must be a character string.")
+  }
+
+  rolled <- .roll_characteristics(seed)
 
   list(
     characteristics = list(
@@ -39,9 +43,9 @@ create_blueprint <- function(pet_name, seed = NULL) {
       age = 0L
     ),
     status = list(
-      hunger = 5L,
+      hungry = 0L,
       happy = 0L,
-      clean = 0L
+      dirty = 0L
     )
   )
 
@@ -58,7 +62,7 @@ create_blueprint <- function(pet_name, seed = NULL) {
 #' @export
 #'
 #' @examples \dontrun{roll_characteristics(1234)}
-roll_characteristics <- function(seed = NULL) {
+.roll_characteristics <- function(seed = NULL) {
 
   if (!is.integer(seed)) {
     if (!is.null(seed)) {

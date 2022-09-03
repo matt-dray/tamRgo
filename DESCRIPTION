@@ -1,10 +1,9 @@
 Package: tamRgo
-Title: What the Package Does (One Line, Title Case)
+Title: Digital Pets For R
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Authors@R: person("Matt", "Dray", , "mwdray@gmail.com", role = c("aut", "cre"))
+Description: Create and care for a digital pet, using GitHub gists to store pet 
+    data and GitHub Actions to update that data remotely.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

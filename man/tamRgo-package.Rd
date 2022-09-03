@@ -4,12 +4,12 @@
 \name{tamRgo-package}
 \alias{tamRgo}
 \alias{tamRgo-package}
-\title{tamRgo: What the Package Does (One Line, Title Case)}
+\title{tamRgo: Digital Pets For R}
 \description{
-What the package does (one paragraph).
+Create and care for a digital pet, using GitHub gists to store pet data and GitHub Actions to update that data remotely.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Matt Dray \email{mwdray@gmail.com}
 
 }
 \keyword{internal}
