@@ -11,3 +11,5 @@ RoxygenNote: 7.1.2
 Imports: 
     gh,
     yaml
+Suggests: 
+    covr
