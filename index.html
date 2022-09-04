@@ -70,14 +70,23 @@
 <div class="section level2">
 <h2 id="game-loop">Game loop<a class="anchor" aria-label="anchor" href="#game-loop"></a>
 </h2>
-<p>Create a new pet (i.e. a YAML ‘blueprint’ written to a GitHub gist) and care for it (which adjusts the blueprint’s status values).</p>
-<p>Generate a new pet with <code><a href="reference/lay_egg.html">lay_egg()</a></code>, which:</p>
+<p>You generate a new pet (i.e. a YAML ‘blueprint’ written to a GitHub gist) and care for it via R functions (which adjusts the blueprint’s status values).</p>
+<p>You generate a new pet with <code><a href="reference/lay_egg.html">lay_egg()</a></code>, which:</p>
 <ul>
 <li>creates a ‘blueprint’ (i.e. a YAML file) of characteristics (user-provided ‘name’, randomised ‘species’, ‘stage’ of life, ‘born’ date, ‘age’ in days) and statuses (‘hungry’, ‘happy’, ‘dirty’, all on a scale of 1 to 5)</li>
 <li>writes the blueprint to a fresh GitHub gist</li>
 <li>sets the Renviron value <code>TAMRGO_PET_ID</code> to the pet’s ID value (i.e. the GitHub gist’s ID), which can be read automatically by the package’s functions so that the user doesn’t need to provide the pet ID each time</li>
 </ul>
-<p>You can also <code>relase_pet()</code>, which deletes the GitHub gist that contains the pet’s blueprint YAML file and removes the <code>TAMRGO_PET_ID</code> from your Renviron.</p>
+<p>You can:</p>
+<ul>
+<li>
+<code><a href="reference/see_stats.html">see_stats()</a></code> to print to the console a summary of the loaded pet’s characteristics and status values</li>
+<li>
+<code><a href="reference/load_pet.html">load_pet()</a></code> to set a pet_id (i.e. GitHub gist ID) to an Renviron variable (<code>TAMRGO_PET_ID</code>), which makes it simpler to provide this variable to the functions that use it (they read it from the Renviron, rather than the user having to supply it every time)</li>
+<li>
+<code><a href="reference/release_pet.html">release_pet()</a></code> to delete the GitHub gist that contains the pet’s blueprint YAML file and removes the <code>TAMRGO_PET_ID</code> from your Renviron</li>
+</ul>
+<p>There’s a bunch of internal <code>R/utils-*.R</code> functions (prefixed with a period) that handle blueprint creation, gist handling and setting the Renviron variable.</p>
 </div></details>
 </div>
   </main><aside class="col-md-3"><div class="license">

@@ -64,6 +64,12 @@ in the user's Renviron.</p></dd>
 <dd><p>Character. The name of the characteristic or status to be updated
 in the pet blueprint. See details.</p></dd>
 
+
+<dt>new_value</dt>
+<dd><p>Character or integer (see details). A value to overwrite the
+current value in the blueprint (GitHub gist YAML) for the blueprint
+variable provided by the 'what' argument.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -75,26 +81,26 @@ in the pet blueprint. See details.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 that stores information about a pet. The sublist 'characteristics' contains:</p><dl><dt>species</dt>
-<dd><p>Type of pet</p></dd>
+<dd><p>Type of pet (charcter)</p></dd>
 
 <dt>stage</dt>
-<dd><p>Growth stage reached</p></dd>
+<dd><p>Growth stage reached (integer)</p></dd>
 
 <dt>born</dt>
-<dd><p>Date of birth</p></dd>
+<dd><p>Date of birth (character)</p></dd>
 
 <dt>age</dt>
-<dd><p>Days since birth</p></dd>
+<dd><p>Days since birth (integer)</p></dd>
 
 
 </dl><p>The sublist 'status' contains:</p><dl><dt>hungry</dt>
-<dd><p>Hunger on a scale of 1 (least) to 5 (most)</p></dd>
+<dd><p>Hunger (integer, 1 to 5 where 5 is most hungry)</p></dd>
 
 <dt>happy</dt>
-<dd><p>Happiness on a scale of 1 (least) to 5 (most)</p></dd>
+<dd><p>Happiness (integer, 1 to 5 where 5 is most happy)</p></dd>
 
 <dt>dirty</dt>
-<dd><p>Dirtiness on a scale of 1 (least) to 5 (most)</p></dd>
+<dd><p>Dirtiness (integer, 1 to 5 where 5 is most dirty)</p></dd>
 
 
 </dl></div>
