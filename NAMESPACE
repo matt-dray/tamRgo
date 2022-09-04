@@ -2,3 +2,4 @@
 
 export(lay_egg)
 export(release_pet)
+export(see_stats)

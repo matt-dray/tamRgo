@@ -10,7 +10,7 @@
 #' @param overwrite_renviron Logical. Overwrite the existing pet ID value
 #'     (TAMRGO_PET_ID) in your Renviron file? Defaults to TRUE.
 #'
-#' @return Nothing. A new GitHub gist is created and a message printed ot the
+#' @return Nothing. A new GitHub gist is created and a message printed to the
 #'     console.
 #'
 #' @export
@@ -41,6 +41,41 @@ lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
 
 }
 
+#' See A Stats Summary For A tamRgo Pet
+#'
+#' @description
+#' Print to the console the current characteristics and status of a tamRgo pet.
+#'
+#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
+#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
+#'     in the user's Renviron.
+#'
+#' @return Nothing. A message is printed to the console.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' see_stats(pet_id = gist_id)
+#' }
+see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+
+  bp <- .read_blueprint(pet_id)
+
+  message(
+    "Pet characteristics",                     "\n",
+    "- Name:    ", bp$characteristics$name,    "\n",
+    "- Species: ", bp$characteristics$species, "\n",
+    "- Stage:   ", bp$characteristics$stage,   "\n",
+    "- Born:    ", bp$characteristics$born,    "\n",
+    "- Age:     ", bp$characteristics$age,     "\n",
+    "Pet status",                              "\n",
+    "- Hungry:  ", bp$status$hungry, "/5",     "\n",
+    "- Happy:   ", bp$status$happy,  "/5",     "\n",
+    "- Dirty:   ", bp$status$dirty,  "/5"
+  )
+
+}
 
 #' Release A tamRgo Pet Forever
 #'

@@ -13,7 +13,7 @@ lay_egg(pet_name, overwrite_renviron = TRUE)
 (TAMRGO_PET_ID) in your Renviron file? Defaults to TRUE.}
 }
 \value{
-Nothing. A new GitHub gist is created and a message printed ot the
+Nothing. A new GitHub gist is created and a message printed to the
 console.
 }
 \description{
