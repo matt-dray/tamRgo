@@ -25,14 +25,20 @@ The package depends on [{gh}](https://gh.r-lib.org/) to interact with the GitHub
 
 ## Game loop
 
-Create a new pet (i.e. a YAML 'blueprint' written to a GitHub gist) and care for it (which adjusts the blueprint's status values).
+You generate a new pet (i.e. a YAML 'blueprint' written to a GitHub gist) and care for it via R functions (which adjusts the blueprint's status values).
 
-Generate a new pet with `lay_egg()`, which:
+You generate a new pet with `lay_egg()`, which:
 
 * creates a 'blueprint' (i.e. a YAML file) of characteristics (user-provided 'name', randomised 'species', 'stage' of life, 'born' date, 'age' in days) and statuses ('hungry', 'happy', 'dirty', all on a scale of 1 to 5)
 * writes the blueprint to a fresh GitHub gist
 * sets the Renviron value `TAMRGO_PET_ID` to the pet's ID value (i.e. the GitHub gist's ID), which can be read automatically by the package's functions so that the user doesn't need to provide the pet ID each time
 
-You can also `relase_pet()`, which deletes the GitHub gist that contains the pet's blueprint YAML file and removes the `TAMRGO_PET_ID` from your Renviron.
+You can:
+
+* `see_stats()` to print to the console a summary of the loaded pet's characteristics and status values
+* `load_pet()` to set a pet_id (i.e. GitHub gist ID) to an Renviron variable (`TAMRGO_PET_ID`), which makes it simpler to provide this variable to the functions that use it (they read it from the Renviron, rather than the user having to supply it every time)
+* `release_pet()` to delete the GitHub gist that contains the pet's blueprint YAML file and removes the `TAMRGO_PET_ID` from your Renviron
+
+There's a bunch of internal `R/utils-*.R` functions (prefixed with a period) that handle blueprint creation, gist handling and setting the Renviron variable.
 
 </details>

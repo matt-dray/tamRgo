@@ -12,16 +12,16 @@
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 #' that stores information about a pet. The sublist 'characteristics' contains:
 #' \describe{
-#'   \item{species}{Type of pet}
-#'   \item{stage}{Growth stage reached}
-#'   \item{born}{Date of birth}
-#'   \item{age}{Days since birth}
+#'   \item{species}{Type of pet (charcter)}
+#'   \item{stage}{Growth stage reached (integer)}
+#'   \item{born}{Date of birth (character)}
+#'   \item{age}{Days since birth (integer)}
 #' }
 #' The sublist 'status' contains:
 #' \describe{
-#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
-#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
-#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
+#'   \item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
+#'   \item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
+#'   \item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
 #' }
 #'
 #' @return Nothing.
@@ -90,6 +90,8 @@
 
   gh::gh("DELETE /gists/{gist_id}", gist_id = pet_id)
 
+  message("The blueprint (GitHub gist) for your pet has been deleted.")
+
 }
 
 #' Update A tamRgo Pet's Blueprint
@@ -103,21 +105,24 @@
 #'     in the user's Renviron.
 #' @param what Character. The name of the characteristic or status to be updated
 #'     in the pet blueprint. See details.
+#' @param new_value Character or integer (see details). A value to overwrite the
+#'    current value in the blueprint (GitHub gist YAML) for the blueprint
+#'    variable provided by the 'what' argument.
 #'
 #' @details
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 #' that stores information about a pet. The sublist 'characteristics' contains:
 #' \describe{
-#'   \item{species}{Type of pet}
-#'   \item{stage}{Growth stage reached}
-#'   \item{born}{Date of birth}
-#'   \item{age}{Days since birth}
+#'   \item{species}{Type of pet (charcter)}
+#'   \item{stage}{Growth stage reached (integer)}
+#'   \item{born}{Date of birth (character)}
+#'   \item{age}{Days since birth (integer)}
 #' }
 #' The sublist 'status' contains:
 #' \describe{
-#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
-#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
-#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
+#'   \item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
+#'   \item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
+#'   \item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
 #' }
 #'
 #' @return Nothing.
@@ -172,16 +177,16 @@
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 #' that stores information about a pet. The sublist 'characteristics' contains:
 #' \describe{
-#'   \item{species}{Type of pet}
-#'   \item{stage}{Growth stage reached}
-#'   \item{born}{Date of birth}
-#'   \item{age}{Days since birth}
+#'   \item{species}{Type of pet (charcter)}
+#'   \item{stage}{Growth stage reached (integer)}
+#'   \item{born}{Date of birth (character)}
+#'   \item{age}{Days since birth (integer)}
 #' }
 #' The sublist 'status' contains:
 #' \describe{
-#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
-#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
-#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
+#'   \item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
+#'   \item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
+#'   \item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
 #' }
 #'
 #' @return A list. See details.

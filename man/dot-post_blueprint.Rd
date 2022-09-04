@@ -21,16 +21,16 @@ pet's 'blueprint' (its list of characteristics and status values).
 A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 that stores information about a pet. The sublist 'characteristics' contains:
 \describe{
-\item{species}{Type of pet}
-\item{stage}{Growth stage reached}
-\item{born}{Date of birth}
-\item{age}{Days since birth}
+\item{species}{Type of pet (charcter)}
+\item{stage}{Growth stage reached (integer)}
+\item{born}{Date of birth (character)}
+\item{age}{Days since birth (integer)}
 }
 The sublist 'status' contains:
 \describe{
-\item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
-\item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
-\item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
+\item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
+\item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
+\item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
 }
 }
 \examples{

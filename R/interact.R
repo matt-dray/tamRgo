@@ -18,9 +18,9 @@
 #' @examples \dontrun{lay_egg(name = "Kevin")}
 lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
 
-  bp        <- .create_blueprint(pet_name)
+  bp <- .create_blueprint(pet_name)
   gist_info <- .post_blueprint(bp)
-  pet_id    <- basename(gist_info$url)
+  pet_id <- basename(gist_info$url)
 
   gist_url <- paste0(
     "https://gist.github.com/", gist_info$owner$login, "/", pet_id
@@ -77,6 +77,50 @@ see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
 }
 
+#' Load A tamRgo Pet
+#'
+#' @description
+#' Set a pet_id (i.e. GitHub gist ID) as the Renviron variable TAMRGO_PET_ID.
+#'
+#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
+#'     tamRgo pet's blueprint.
+#' @param overwrite Logical. Should an existing pet ID value in the Renviron be
+#'     overwritten by the supplied pet_id? Defaults to TRUE.
+#'
+#' @return Nothing. Messages are printed to the console and an Renviron variable
+#'     is updated.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' load_pet(pet_id = gist_id)
+#' }
+load_pet <- function(pet_id, overwrite = TRUE) {
+
+  bp <- .read_blueprint(pet_id)
+
+  answer <- readline(
+    paste0(
+      "Set ", bp[["characteristics"]][["name"]],
+      "'s pet ID in the Renviron? y/n: "
+    )
+  )
+
+  if (substr(tolower(answer), 1, 1) == "y") {
+
+    .set_renviron(pet_id, overwrite)
+
+  } else {
+
+    message(
+      "Aborted: TAMRGO_PET_ID has not been set with the provided 'pet_id' value."
+    )
+
+  }
+
+}
+
 #' Release A tamRgo Pet Forever
 #'
 #' @description
@@ -97,16 +141,21 @@ release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
   pet_name <- .read_blueprint(pet_id)[["characteristics"]][["name"]]
 
-  answer_1 <- readline(paste0("Say goodbye to ", pet_name, "? y/n: "))
+  answer_1 <- readline(
+    paste0(
+      "Say goodbye to ", pet_name,
+      " (pet_id ", paste0(substr(pet_id, 1, 8), "..."), ") ? y/n: "
+    )
+  )
 
   if (substr(tolower(answer_1), 1, 1) == "y") {
 
-    answer_2 <- readline("Really delete your tamRgo pet's blueprint? y/n: ")
+    answer_2 <- readline(
+      "Really delete your tamRgo pet's blueprint (GitHub gist)? y/n: "
+    )
 
   } else {
-
     stop("Deletion process stopped.")
-
   }
 
   if (substr(tolower(answer_2), 1, 1) == "y") {
@@ -114,12 +163,10 @@ release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
     .delete_blueprint(pet_id)
     .unset_renviron(pet_id)
 
-    message("You deleted ", pet_name, "'s blueprint :(")
+    message("A tear rolls down your cheek.")
 
   } else {
-
     stop("Deletion process stopped.")
-
   }
 
 }

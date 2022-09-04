@@ -60,8 +60,14 @@
   }
 
   if (!id_exists) {
+
     Sys.setenv(TAMRGO_PET_ID = pet_id)
-    message("TAMRGO_PET_ID has been set with the provided 'pet_id' value.")
+
+    message(
+      "The Renviron variable TAMRGO_PET_ID has been set with the provided ",
+      "'pet_id' value."
+    )
+
   }
 
 }
@@ -96,9 +102,7 @@
 
     Sys.unsetenv("TAMRGO_PET_ID")
 
-    message(
-      "The TAMRGO_PET_ID value for your pet has been unset in your Renviron."
-    )
+    message("The Renviron variable TAMRGO_PET_ID has been reset.")
 
   }
 
