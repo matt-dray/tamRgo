@@ -2,20 +2,25 @@
 % Please edit documentation in R/interact.R
 \name{lay_egg}
 \alias{lay_egg}
-\title{Generate A New tamRgo Pet}
+\title{Generate A New tamRgo Pet Egg}
 \usage{
 lay_egg(pet_name, overwrite_renviron = TRUE)
 }
 \arguments{
 \item{pet_name}{Character. A name for the new tamRgo pet.}
+
+\item{overwrite_renviron}{Logical. Overwrite the existing pet ID value
+(TAMRGO_PET_ID) in your Renviron file? Defaults to TRUE.}
 }
 \value{
 Nothing. A new GitHub gist is created and a message printed ot the
 console.
 }
 \description{
-Create a new tamRgo pet blueprint and write it to a new gist
+Create a new tamRgo-pet blueprint, write it to a new gist and set its pet ID
+(i.e. GitHub gist ID) in your Renviron file as TAMRGO_PET_ID. The new pet is
+at the egg stage.
 }
 \examples{
-\dontrun{lay_egg("Kevin")}
+\dontrun{lay_egg(name = "Kevin")}
 }
