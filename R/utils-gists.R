@@ -101,6 +101,24 @@
 #' @param pet_id Character. A GitHub gist ID for a gist that contains a given
 #'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
 #'     in the user's Renviron.
+#' @param what Character. The name of the characteristic or status to be updated
+#'     in the pet blueprint. See details.
+#'
+#' @details
+#' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
+#' that stores information about a pet. The sublist 'characteristics' contains:
+#' \describe{
+#'   \item{species}{Type of pet}
+#'   \item{stage}{Growth stage reached}
+#'   \item{born}{Date of birth}
+#'   \item{age}{Days since birth}
+#' }
+#' The sublist 'status' contains:
+#' \describe{
+#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
+#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
+#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
+#' }
 #'
 #' @return Nothing.
 #'
@@ -108,13 +126,36 @@
 #' gist_id <- "1234567890abcdefghijklmnopqrstuv"
 #' .update_blueprint(pet_id = gist_id)
 #' }
-.update_blueprint <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+.update_blueprint <- function(
+    pet_id = Sys.getenv("TAMRGO_PET_ID"),
+    what = c(
+      "name", "species", "stage", "born", "age",
+      "hungry", "happy", "dirty"
+    ),
+    new_value
+) {
 
-  if (!is.character(pet_id) | nchar(pet_id) != 32L) {
-    stop("'pet_id' must be a GitHub gist ID: a string of 32 characters.")
+  what <- match.arg(what)
+
+  bp <- .read_blueprint(pet_id)
+
+  if (what %in% c("name", "species", "stage", "born", "age")) {
+    bp[["characteristics"]][[what]] <- new_value
   }
 
-  # TODO: overwrite an existing gist.
+  if (what %in% c("hungry", "happy", "dirty")) {
+    bp[["status"]][[what]] <- new_value
+  }
+
+  blueprint_yaml <- paste0(yaml::as.yaml(bp), "\n")
+
+  x <- gh::gh(
+    "PATCH /gists/{gist_id}",
+    gist_id = pet_id,
+    files = list(tamRgo.yaml = list(content = blueprint_yaml))
+  )
+
+  message("Blueprint updated: '", what, "' changed to '", new_value, "'")
 
 }
 

@@ -4,12 +4,19 @@
 \alias{.update_blueprint}
 \title{Update A tamRgo Pet's Blueprint}
 \usage{
-.update_blueprint(pet_id = Sys.getenv("TAMRGO_PET_ID"))
+.update_blueprint(
+  pet_id = Sys.getenv("TAMRGO_PET_ID"),
+  what = c("name", "species", "stage", "born", "age", "hungry", "happy", "dirty"),
+  new_value
+)
 }
 \arguments{
 \item{pet_id}{Character. A GitHub gist ID for a gist that contains a given
 tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
 in the user's Renviron.}
+
+\item{what}{Character. The name of the characteristic or status to be updated
+in the pet blueprint. See details.}
 }
 \value{
 Nothing.
@@ -17,6 +24,22 @@ Nothing.
 \description{
 Update an existing GitHub gist that contains a tamRgo pet's 'blueprint' (its
 list of characteristics and status values).
+}
+\details{
+A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
+that stores information about a pet. The sublist 'characteristics' contains:
+\describe{
+\item{species}{Type of pet}
+\item{stage}{Growth stage reached}
+\item{born}{Date of birth}
+\item{age}{Days since birth}
+}
+The sublist 'status' contains:
+\describe{
+\item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
+\item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
+\item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
+}
 }
 \examples{
 \dontrun{
