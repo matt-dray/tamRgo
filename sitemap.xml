@@ -22,10 +22,13 @@
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-delete_blueprint.html</loc>
   </url>
   <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-post_blueprint.html</loc>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-get_blueprint.html</loc>
   </url>
   <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-read_blueprint.html</loc>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-patch_blueprint.html</loc>
+  </url>
+  <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-post_blueprint.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-roll_characteristics.html</loc>
@@ -35,9 +38,6 @@
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-unset_renviron.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-update_blueprint.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/index.html</loc>
