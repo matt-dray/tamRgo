@@ -25,7 +25,10 @@
 ) {
 
   if (!is.character(pet_id) | nchar(pet_id) != 32L) {
-    stop("'pet_id' must be a GitHub gist ID: a string of 32 characters.")
+    stop(
+      "'pet_id' must be a GitHub gist ID: a string of 32 characters.",
+      call. = FALSE
+    )
   }
 
   id_exists <- "TAMRGO_PET_ID" %in% names(Sys.getenv())
@@ -35,7 +38,10 @@
     id_matches <- Sys.getenv("TAMRGO_PET_ID") == pet_id
 
     if (id_matches) {
-      stop("You've already set that 'pet_id' value in your Renviron file.")
+      stop(
+        "You've already set that 'pet_id' value in your Renviron file.",
+        call. = FALSE
+      )
     }
 
     if (!overwrite) {
@@ -93,7 +99,10 @@
 .unset_renviron <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
   if (!is.character(pet_id) | nchar(pet_id) != 32L) {
-    stop("'pet_id' must be a GitHub gist ID: a string of 32 characters.")
+    stop(
+      "'pet_id' must be a GitHub gist ID: a string of 32 characters.",
+      call. = FALSE
+    )
   }
 
   id_exists <- "TAMRGO_PET_ID" %in% names(Sys.getenv())

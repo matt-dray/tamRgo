@@ -4,14 +4,11 @@
 \alias{load_pet}
 \title{Load A tamRgo Pet}
 \usage{
-load_pet(pet_id, overwrite = TRUE)
+load_pet(pet_id)
 }
 \arguments{
 \item{pet_id}{Character. A GitHub gist ID for a gist that contains a given
 tamRgo pet's blueprint.}
-
-\item{overwrite}{Logical. Should an existing pet ID value in the Renviron be
-overwritten by the supplied pet_id? Defaults to TRUE.}
 }
 \value{
 Nothing. Messages are printed to the console and an Renviron variable

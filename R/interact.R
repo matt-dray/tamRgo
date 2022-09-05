@@ -60,7 +60,7 @@ lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
 #' }
 see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
-  bp <- .read_blueprint(pet_id)
+  bp <- .get_blueprint(pet_id)
 
   message(
     "Pet characteristics",                     "\n",
@@ -84,8 +84,6 @@ see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 #'
 #' @param pet_id Character. A GitHub gist ID for a gist that contains a given
 #'     tamRgo pet's blueprint.
-#' @param overwrite Logical. Should an existing pet ID value in the Renviron be
-#'     overwritten by the supplied pet_id? Defaults to TRUE.
 #'
 #' @return Nothing. Messages are printed to the console and an Renviron variable
 #'     is updated.
@@ -96,9 +94,9 @@ see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 #' gist_id <- "1234567890abcdefghijklmnopqrstuv"
 #' load_pet(pet_id = gist_id)
 #' }
-load_pet <- function(pet_id, overwrite = TRUE) {
+load_pet <- function(pet_id) {
 
-  bp <- .read_blueprint(pet_id)
+  bp <- .get_blueprint(pet_id)
 
   answer <- readline(
     paste0(
@@ -109,7 +107,7 @@ load_pet <- function(pet_id, overwrite = TRUE) {
 
   if (substr(tolower(answer), 1, 1) == "y") {
 
-    .set_renviron(pet_id, overwrite)
+    .set_renviron(pet_id, overwrite = TRUE)
 
   } else {
 
@@ -139,7 +137,7 @@ load_pet <- function(pet_id, overwrite = TRUE) {
 #' @examples \dontrun{release_pet()}
 release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
-  pet_name <- .read_blueprint(pet_id)[["characteristics"]][["name"]]
+  pet_name <- .get_blueprint(pet_id)[["characteristics"]][["name"]]
 
   answer_1 <- readline(
     paste0(
@@ -155,7 +153,7 @@ release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
     )
 
   } else {
-    stop("Deletion process stopped.")
+    stop("Deletion process stopped.", call. = FALSE)
   }
 
   if (substr(tolower(answer_2), 1, 1) == "y") {
@@ -166,7 +164,7 @@ release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
     message("A tear rolls down your cheek.")
 
   } else {
-    stop("Deletion process stopped.")
+    stop("Deletion process stopped.", call. = FALSE)
   }
 
 }

@@ -46,7 +46,8 @@
   ) {
     stop(
       "'blueprint' must be a list of length 2.\n",
-      "Run ?post_blueprint for details of its structure."
+      "Run ?post_blueprint for details of its structure.",
+      call. = FALSE
     )
   }
 
@@ -85,7 +86,10 @@
 .delete_blueprint <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
   if (!is.character(pet_id) | nchar(pet_id) != 32L) {
-    stop("'pet_id' must be a GitHub gist ID: a string of 32 characters.")
+    stop(
+      "'pet_id' must be a GitHub gist ID: a string of 32 characters.",
+      call. = FALSE
+    )
   }
 
   gh::gh("DELETE /gists/{gist_id}", gist_id = pet_id)
@@ -129,9 +133,9 @@
 #'
 #' @examples \dontrun{
 #' gist_id <- "1234567890abcdefghijklmnopqrstuv"
-#' .update_blueprint(pet_id = gist_id)
+#' .patch_blueprint(pet_id = gist_id)
 #' }
-.update_blueprint <- function(
+.patch_blueprint <- function(
     pet_id = Sys.getenv("TAMRGO_PET_ID"),
     what = c(
       "name", "species", "stage", "born", "age",
@@ -142,7 +146,7 @@
 
   what <- match.arg(what)
 
-  bp <- .read_blueprint(pet_id)
+  bp <- .get_blueprint(pet_id)
 
   if (what %in% c("name", "species", "stage", "born", "age")) {
     bp[["characteristics"]][[what]] <- new_value
@@ -193,12 +197,15 @@
 #'
 #' @examples \dontrun{
 #' gist_id <- "1234567890abcdefghijklmnopqrstuv"
-#' .read_blueprint(pet_id = gist_id)
+#' .get_blueprint(pet_id = gist_id)
 #' }
-.read_blueprint <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+.get_blueprint <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
   if (any(!is.character(pet_id), nchar(pet_id) != 32L)) {
-    stop("'pet_id' must be a GitHub gist ID: a string of 32 characters.")
+    stop(
+      "'pet_id' must be a GitHub gist ID: a string of 32 characters.",
+      call. = FALSE
+    )
   }
 
   gist_content <- gh::gh("GET /gists/{gist_id}", gist_id = pet_id)
