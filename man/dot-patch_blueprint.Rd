@@ -11,9 +11,9 @@
 )
 }
 \arguments{
-\item{pet_id}{Character. A GitHub gist ID for a gist that contains a given
-tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-in the user's Renviron.}
+\item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
+given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+stored in the user's Renviron.}
 
 \item{what}{Character. The name of the characteristic or status to be updated
 in the pet blueprint. See details.}

@@ -6,9 +6,9 @@
 #' user's Renviron file. This prevents a user having to supply the pet_id
 #' whenever they interact with their pet.
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-#'     in the user's Renviron.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #' @param overwrite Logical. Should an existing pet ID value in the Renviron be
 #'     overwritten by the supplied pet_id? Defaults to TRUE.
 #'
@@ -85,9 +85,9 @@
 #' user's Renviron file. This prevents a user having to supply the pet_id
 #' whenever they interact with their pet.
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-#'     in the user's Renviron.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #'
 #' @return Nothing. Updates the user's Renviron file, prints messages to the
 #'     console.

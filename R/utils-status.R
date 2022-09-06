@@ -1,4 +1,29 @@
 
+#' Change A Blueprint Status Value
+#'
+#' @description
+#' Change the status value of a pet. This may happen over time (i.e. hunger
+#' should increase) or as a result of player interaction (e.g. feeding will
+#' reduce hunger).
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#' @param status_type Character. The status that will be updated. One of
+#'     'hungry', 'happy' or 'dirty'.
+#' @param change Integer. The amount that the status value should change by (can
+#'     be positive or negative, but must be between the values of min_value and
+#'     max_value)
+#' @param min_value Integer. The minimum value that the status value can take.
+#' @param max_value Integer. The maximum value that the status value can take.
+#'
+#' @return Nothing. Messages may be printed to the console and a GitHub gist may
+#'     be updated.
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' .change_status(pet_id = gist_id, status_type = "happy", change = -1L)
+#' }
 .change_status <- function(
     pet_id = Sys.getenv("TAMRGO_PET_ID"),
     status_type = c("happy", "hungry", "dirty"),

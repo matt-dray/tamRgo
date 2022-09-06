@@ -73,9 +73,9 @@
 #' Delete an existing GitHub gist that contains a tamRgo pet's 'blueprint' (its
 #' list of characteristics and status values).
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-#'     in the user's Renviron.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #'
 #' @return Nothing.
 #'
@@ -104,9 +104,9 @@
 #' Update an existing GitHub gist that contains a tamRgo pet's 'blueprint' (its
 #' list of characteristics and status values).
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-#'     in the user's Renviron.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #' @param what Character. The name of the characteristic or status to be updated
 #'     in the pet blueprint. See details.
 #' @param new_value Character or integer (see details). A value to overwrite the
@@ -173,9 +173,9 @@
 #' @description
 #' Read a YAML file from a GitHub Gist that contains a tamRgo 'blueprint'.
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-#'     in the user's Renviron.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #'
 #' @details
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')

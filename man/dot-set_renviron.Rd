@@ -7,9 +7,9 @@
 .set_renviron(pet_id = Sys.getenv("TAMRGO_PET_ID"), overwrite = TRUE)
 }
 \arguments{
-\item{pet_id}{Character. A GitHub gist ID for a gist that contains a given
-tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-in the user's Renviron.}
+\item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
+given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+stored in the user's Renviron.}
 
 \item{overwrite}{Logical. Should an existing pet ID value in the Renviron be
 overwritten by the supplied pet_id? Defaults to TRUE.}

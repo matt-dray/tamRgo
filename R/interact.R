@@ -46,9 +46,9 @@ lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
 #' @description
 #' Print to the console the current characteristics and status of a tamRgo pet.
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-#'     in the user's Renviron.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #'
 #' @return Nothing. A message is printed to the console.
 #'
@@ -82,8 +82,9 @@ see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 #' @description
 #' Set a pet_id (i.e. GitHub gist ID) as the Renviron variable TAMRGO_PET_ID.
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #'
 #' @return Nothing. Messages are printed to the console and an Renviron variable
 #'     is updated.
@@ -125,9 +126,9 @@ load_pet <- function(pet_id) {
 #' Delete a tamRgo pet's blueprint (YAML file) from its associated GitHub gist.
 #' Also unsets the pet ID (TAMRGO_PET_ID) from the Renviron.
 #'
-#' @param pet_id Character. A GitHub gist ID for a gist that contains a given
-#'     tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value stored
-#'     in the user's Renviron.
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
 #'
 #' @return Nothing. Interactive messages are printed to the console and a GitHub
 #'     gist may be deleted.
@@ -166,5 +167,83 @@ release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
   } else {
     stop("Deletion process stopped.", call. = FALSE)
   }
+
+}
+
+#' Feed A tamRgo Pet
+#'
+#' @description
+#' Feed a tamRgo pet, decreasing its 'hungry' status by 1.
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#'
+#' @return Nothing. Messages are printed to the console and a GitHub gist may be
+#'     updated.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' feed_pet(pet_id = gist_id)
+#' }
+feed_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+
+  change_value <- -1L
+  .change_status(pet_id, "hungry", change_value, 0L, 5L)
+  .patch_blueprint(pet_id, status_type, new_value)
+
+}
+
+#' Play With A tamRgo Pet
+#'
+#' @description
+#' Play with a tamRgo pet, increasing its 'happy' status by 1.
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#'
+#' @return Nothing. Messages are printed to the console and a GitHub gist may be
+#'     updated.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' play_with_pet(pet_id = gist_id)
+#' }
+play_with_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+
+  change_value <- 1L
+  .change_status(pet_id, "happy", change_value, 0L, 5L)
+  .patch_blueprint(pet_id, status_type, new_value)
+
+}
+
+#' Clean A tamRgo Pet
+#'
+#' @description
+#' Clean a tamRgo pet, decreasing its 'dirty' status by 1.
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#'
+#' @return Nothing. Messages are printed to the console and a GitHub gist may be
+#'     updated.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' clean_pet(pet_id = gist_id)
+#' }
+clean_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+
+  change_value <- -1L
+  .change_status(pet_id, "dirty", change_value, 0L, 5L)
+  .patch_blueprint(pet_id, status_type, new_value)
 
 }

@@ -13,3 +13,6 @@ Imports:
     yaml
 Suggests: 
     covr
+Depends: 
+    R (>= 2.10)
+LazyData: true
