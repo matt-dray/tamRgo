@@ -117,16 +117,39 @@
 
 }
 
+#' Create an 'tamRgo.environ' File in User's Home Directory
+#'
+#' @description
+#' Create a persistent file in the user's home directory called tamRgo.environ
+#' and write to it a provided pet ID (i.e. gist ID) value, with the label
+#' TAMRGO_PET_ID.
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#' @param read Logical. Read back the value from the newly-created
+#'     tamRgo.environ file in the Renviron? Defaults to TRUE
+#'
+#' @return Nothing.
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' .create_environ(pet_id = gist_id)
+#' }
+.create_environ <- function(pet_id, read = TRUE) {
 
+  if (any(!is.character(pet_id), nchar(pet_id) != 32L)) {
+    stop(
+      "'pet_id' must be a GitHub gist ID: a string of 32 characters.",
+      call. = FALSE
+    )
+  }
 
+  if (!is.logical(read)) {
+    stop("'read' must be logical (TRUE or FALSE).")
+  }
 
-
-
-.create_environ <- function(pet_id) {
-
-  pet_env <- c(paste0("TAMRGO_PET_ID=\"", pet_id, "\""))
-
-  create_env <- utils::menu(
+  response <- utils::menu(
     c("Yes", "No"),
     title = paste(
       "\n{tamRgo} needs to save a file called tamRgo.environ",
@@ -136,7 +159,7 @@
     )
   )
 
-  if (create_env == 1) {
+  if (response == 1) {
 
     env_path <- file.path(Sys.getenv("HOME"), "tamRgo.environ")
 
@@ -144,13 +167,17 @@
       message("\ntamRgo.environ already exists and will be overwritten")
     }
 
+    pet_env <- c(paste0("TAMRGO_PET_ID=\"", pet_id, "\""))
+
     writeLines(pet_env, env_path)
 
     message(env_path, " created.")
 
-    readRenviron(env_path)
+    if (read == TRUE) {
+      readRenviron(env_path)
+    }
 
-  } else if (create_env == 2) {
+  } else if (response == 2) {
 
     stop("tamRgo.renviron was not written.")
 
@@ -158,10 +185,41 @@
 
 }
 
+#' Delete the 'tamRgo.environ' File in User's Home Directory
+#'
+#' @description
+#' Delete the tamRgo.environ file in the user's home directory. This is the
+#' persistent file that contains a pet ID (i.e. gist ID) stored as
+#' TAMRGO_PET_ID.
+#'
+#' @return Nothing.
+#'
+#' @examples \dontrun{.destroy_environ(pet_id = gist_id)}
 .destroy_environ <- function() {
 
   env_path <- file.path(Sys.getenv("HOME"), "tamRgo.environ")
 
-  file.remove(env_path)
+  file_exists <- file.exists(env_path)
+
+  if (!file_exists) {
+    stop("File tamRgo.environ doesn't exist in your home directory.")
+  }
+
+  response <- utils::menu(
+    c("Yes", "No"),
+    title = paste(
+      "\nDelete the file called tamRgo.environ from your home directory?",
+      "It contains a local copy of your pet's ID (which is also the unqiue ID",
+      "of the GitHub gist that hosts remotely your pet's blueprint YAML file).",
+      "Is this ok?"
+    )
+  )
+
+  if (response == 1) {
+    file.remove(env_path)
+    message(env_path, " deleted.")
+  }  else if (response == 2) {
+    stop("tamRgo.renviron was not written.")
+  }
 
 }
