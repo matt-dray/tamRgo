@@ -116,3 +116,52 @@
   }
 
 }
+
+
+
+
+
+
+.create_environ <- function(pet_id) {
+
+  pet_env <- c(paste0("TAMRGO_PET_ID=\"", pet_id, "\""))
+
+  create_env <- utils::menu(
+    c("Yes", "No"),
+    title = paste(
+      "\n{tamRgo} needs to save a file called tamRgo.environ",
+      "in your home directory. It will contain a local copy of your pet's ID",
+      "(which is also the unqiue ID of the GitHub gist that hosts remotely your
+      pet's blueprint YAML file). Is this ok?"
+    )
+  )
+
+  if (create_env == 1) {
+
+    env_path <- file.path(Sys.getenv("HOME"), "tamRgo.environ")
+
+    if (file.exists(env_path)) {
+      message("\ntamRgo.environ already exists and will be overwritten")
+    }
+
+    writeLines(pet_env, env_path)
+
+    message(env_path, " created.")
+
+    readRenviron(env_path)
+
+  } else if (create_env == 2) {
+
+    stop("tamRgo.renviron was not written.")
+
+  }
+
+}
+
+.destroy_environ <- function() {
+
+  env_path <- file.path(Sys.getenv("HOME"), "tamRgo.environ")
+
+  file.remove(env_path)
+
+}
