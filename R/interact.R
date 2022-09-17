@@ -20,11 +20,10 @@ lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
 
   bp <- .create_blueprint(pet_name)
   gist_info <- .post_blueprint(bp)
-  pet_id <- basename(gist_info$url)
 
-  gist_url <- paste0(
-    "https://gist.github.com/", gist_info$owner$login, "/", pet_id
-  )
+  pet_id <- basename(gist_info$url)
+  bp$characteristics$pet_id <- pet_id
+  suppressMessages(.patch_blueprint(pet_id, "pet_id", pet_id))
 
   message("You have a new egg!")
 
@@ -37,7 +36,10 @@ lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
     message("- pet_id (not set in Renviron): ", pet_id)
   }
 
-  message("- blueprint: ", gist_url)
+  message(
+    "- blueprint URL: ",
+    paste0("<https://gist.github.com/", gist_info$owner$login, "/", pet_id, ">")
+  )
 
 }
 
@@ -66,9 +68,10 @@ see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
     "Pet characteristics",                     "\n",
     "- Name:    ", bp$characteristics$name,    "\n",
     "- Species: ", bp$characteristics$species, "\n",
-    "- Stage:   ", bp$characteristics$stage,   "\n",
     "- Born:    ", bp$characteristics$born,    "\n",
     "- Age:     ", bp$characteristics$age,     "\n",
+    "- Stage:   ", bp$characteristics$stage,   "\n",
+    "- XP:      ", bp$characteristics$xp,      "\n",
     "Pet status",                              "\n",
     "- Hungry:  ", bp$status$hungry, "/5",     "\n",
     "- Happy:   ", bp$status$happy,  "/5",     "\n",

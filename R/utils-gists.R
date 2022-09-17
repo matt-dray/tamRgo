@@ -12,16 +12,19 @@
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 #' that stores information about a pet. The sublist 'characteristics' contains:
 #' \describe{
-#'   \item{species}{Type of pet (charcter)}
-#'   \item{stage}{Growth stage reached (integer)}
-#'   \item{born}{Date of birth (character)}
-#'   \item{age}{Days since birth (integer)}
+#'   \item{pet_id}{Unique pet identification number (GitHub Gist ID number)}
+#'   \item{name}{The pet's name}
+#'   \item{species}{Type of pet}
+#'   \item{born}{Date of birth}
+#'   \item{stage}{Growth stage reached}
+#'   \item{age}{Days since birth}
+#'   \item{xp}{Experience points}
 #' }
 #' The sublist 'status' contains:
 #' \describe{
-#'   \item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
-#'   \item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
-#'   \item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
+#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
+#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
+#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
 #' }
 #'
 #' @return Nothing.
@@ -39,7 +42,7 @@
       length(blueprint) != 2,
       names(!blueprint %in% c("characteristics", "status")),
       !names(blueprint[["characteristics"]]) %in% c(
-        "name", "species", "stage", "born", "age"
+        "pet_id", "name", "species", "born", "stage", "age", "xp"
       ),
       !names(blueprint[["status"]]) %in% c("hungry", "happy", "dirty")
     )
@@ -117,16 +120,19 @@
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 #' that stores information about a pet. The sublist 'characteristics' contains:
 #' \describe{
-#'   \item{species}{Type of pet (charcter)}
-#'   \item{stage}{Growth stage reached (integer)}
-#'   \item{born}{Date of birth (character)}
-#'   \item{age}{Days since birth (integer)}
+#'   \item{pet_id}{Unique pet identification number (GitHub Gist ID number)}
+#'   \item{name}{The pet's name}
+#'   \item{species}{Type of pet}
+#'   \item{born}{Date of birth}
+#'   \item{stage}{Growth stage reached}
+#'   \item{age}{Days since birth}
+#'   \item{xp}{Experience points}
 #' }
 #' The sublist 'status' contains:
 #' \describe{
-#'   \item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
-#'   \item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
-#'   \item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
+#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
+#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
+#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
 #' }
 #'
 #' @return Nothing.
@@ -138,7 +144,7 @@
 .patch_blueprint <- function(
     pet_id = Sys.getenv("TAMRGO_PET_ID"),
     what = c(
-      "name", "species", "stage", "born", "age",
+      "pet_id", "name", "species", "born", "stage", "age", "xp",
       "hungry", "happy", "dirty"
     ),
     new_value
@@ -148,7 +154,7 @@
 
   bp <- .get_blueprint(pet_id)
 
-  if (what %in% c("name", "species", "stage", "born", "age")) {
+  if (what %in% c("pet_id", "name", "species", "born", "stage", "age", "xp")) {
     bp[["characteristics"]][[what]] <- new_value
   }
 
@@ -181,16 +187,19 @@
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 #' that stores information about a pet. The sublist 'characteristics' contains:
 #' \describe{
-#'   \item{species}{Type of pet (charcter)}
-#'   \item{stage}{Growth stage reached (integer)}
-#'   \item{born}{Date of birth (character)}
-#'   \item{age}{Days since birth (integer)}
+#'   \item{pet_id}{Unique pet identification number (GitHub Gist ID number)}
+#'   \item{name}{The pet's name}
+#'   \item{species}{Type of pet}
+#'   \item{born}{Date of birth}
+#'   \item{stage}{Growth stage reached}
+#'   \item{age}{Days since birth}
+#'   \item{xp}{Experience points}
 #' }
 #' The sublist 'status' contains:
 #' \describe{
-#'   \item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
-#'   \item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
-#'   \item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
+#'   \item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
+#'   \item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
+#'   \item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
 #' }
 #'
 #' @return A list. See details.
