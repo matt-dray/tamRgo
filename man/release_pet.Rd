@@ -4,7 +4,7 @@
 \alias{release_pet}
 \title{Release A tamRgo Pet Forever}
 \usage{
-release_pet(pet_id = Sys.getenv("TAMRGO_PET_ID"))
+release_pet(pet_id)
 }
 \arguments{
 \item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
@@ -12,8 +12,7 @@ given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
 stored in the user's Renviron.}
 }
 \value{
-Nothing. Interactive messages are printed to the console and a GitHub
-gist may be deleted.
+Nothing.
 }
 \description{
 Delete a tamRgo pet's blueprint (YAML file) from its associated GitHub gist.

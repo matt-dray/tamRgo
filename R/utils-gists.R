@@ -78,7 +78,7 @@
 #'
 #' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
 #'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
+#'     that's in the current environment.
 #'
 #' @return Nothing.
 #'
@@ -88,12 +88,7 @@
 #' }
 .delete_blueprint <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
-  if (!is.character(pet_id) | nchar(pet_id) != 32L) {
-    stop(
-      "'pet_id' must be a GitHub gist ID: a string of 32 characters.",
-      call. = FALSE
-    )
-  }
+  .check_pet_id(pet_id)
 
   gh::gh("DELETE /gists/{gist_id}", gist_id = pet_id)
 
@@ -109,7 +104,7 @@
 #'
 #' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
 #'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
+#'     that's in the current environment.
 #' @param what Character. The name of the characteristic or status to be updated
 #'     in the pet blueprint. See details.
 #' @param new_value Character or integer (see details). A value to overwrite the
@@ -150,6 +145,7 @@
     new_value
 ) {
 
+  .check_pet_id(pet_id)
   what <- match.arg(what)
 
   bp <- .get_blueprint(pet_id)
@@ -181,7 +177,7 @@
 #'
 #' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
 #'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
+#'     that's in the current environment.
 #'
 #' @details
 #' A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
@@ -210,12 +206,7 @@
 #' }
 .get_blueprint <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
-  if (any(!is.character(pet_id), nchar(pet_id) != 32L)) {
-    stop(
-      "'pet_id' must be a GitHub gist ID: a string of 32 characters.",
-      call. = FALSE
-    )
-  }
+  .check_pet_id(pet_id)
 
   gist_content <- gh::gh("GET /gists/{gist_id}", gist_id = pet_id)
 

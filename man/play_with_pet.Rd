@@ -12,8 +12,7 @@ given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
 stored in the user's Renviron.}
 }
 \value{
-Nothing. Messages are printed to the console and a GitHub gist may be
-updated.
+Nothing.
 }
 \description{
 Play with a tamRgo pet, increasing its 'happy' status by 1.

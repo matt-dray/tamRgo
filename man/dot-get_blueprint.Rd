@@ -9,7 +9,7 @@
 \arguments{
 \item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
 given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-stored in the user's Renviron.}
+that's in the current environment.}
 }
 \value{
 A list. See details.
