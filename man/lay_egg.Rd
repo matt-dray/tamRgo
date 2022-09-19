@@ -8,9 +8,6 @@ lay_egg(pet_name)
 }
 \arguments{
 \item{pet_name}{Character. A name for the new tamRgo pet.}
-
-\item{overwrite_pet_id}{Logical. Overwrite the existing pet ID value
-(TAMRGO_PET_ID) in your Renviron file? Defaults to TRUE.}
 }
 \value{
 Nothing.

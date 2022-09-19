@@ -8,6 +8,10 @@
   env_path = file.path(Sys.getenv("HOME"), "tamRgo.environ")
 )
 }
+\arguments{
+\item{env_path}{Character. Path to a possible 'tamRgo.environ' file on the
+user's machine.}
+}
 \value{
 Logical.
 }

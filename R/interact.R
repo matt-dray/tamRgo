@@ -7,8 +7,6 @@
 #' at the egg stage.
 #'
 #' @param pet_name Character. A name for the new tamRgo pet.
-#' @param overwrite_pet_id Logical. Overwrite the existing pet ID value
-#'     (TAMRGO_PET_ID) in your Renviron file? Defaults to TRUE.
 #'
 #' @return Nothing.
 #'

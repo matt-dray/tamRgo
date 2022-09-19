@@ -87,6 +87,9 @@
 #' Read into the environment a pet ID (i.e. gist ID) that's stored as
 #' TAMRGO_PET_ID in the tamRgo.environ file in the user's home directory,
 #'
+#' @param env_path Character. Path to a possible 'tamRgo.environ' file on the
+#'     user's machine.
+#'
 #' @return Nothing.
 #'
 #' @examples \dontrun{.read_environ()}
@@ -102,6 +105,9 @@
 #' Check that the tamRgo.environ file exisst in the user's home directory. This
 #' is the persistent file that contains a pet ID (i.e. gist ID) stored as
 #' TAMRGO_PET_ID.
+#'
+#' @param env_path Character. Path to a possible 'tamRgo.environ' file on the
+#'     user's machine.
 #'
 #' @return Logical.
 #'
