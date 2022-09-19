@@ -4,17 +4,13 @@
 \alias{lay_egg}
 \title{Generate A New tamRgo Pet Egg}
 \usage{
-lay_egg(pet_name, overwrite_renviron = TRUE)
+lay_egg(pet_name)
 }
 \arguments{
 \item{pet_name}{Character. A name for the new tamRgo pet.}
-
-\item{overwrite_renviron}{Logical. Overwrite the existing pet ID value
-(TAMRGO_PET_ID) in your Renviron file? Defaults to TRUE.}
 }
 \value{
-Nothing. A new GitHub gist is created and a message printed to the
-console.
+Nothing.
 }
 \description{
 Create a new tamRgo-pet blueprint, write it to a new gist and set its pet ID

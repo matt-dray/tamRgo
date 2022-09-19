@@ -8,7 +8,7 @@
 #'
 #' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
 #'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
+#'     that's in the current environment.
 #' @param status_type Character. The status that will be updated. One of
 #'     'hungry', 'happy' or 'dirty'.
 #' @param change Integer. The amount that the status value should change by (can
@@ -32,6 +32,7 @@
     max_value = 5L
 ) {
 
+  .check_pet_id(pet_id)
   status_type <- match.arg(status_type)
 
   if (!is.integer(change)) {

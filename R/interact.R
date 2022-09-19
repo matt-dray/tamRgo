@@ -7,37 +7,61 @@
 #' at the egg stage.
 #'
 #' @param pet_name Character. A name for the new tamRgo pet.
-#' @param overwrite_renviron Logical. Overwrite the existing pet ID value
-#'     (TAMRGO_PET_ID) in your Renviron file? Defaults to TRUE.
 #'
-#' @return Nothing. A new GitHub gist is created and a message printed to the
-#'     console.
+#' @return Nothing.
 #'
 #' @export
 #'
 #' @examples \dontrun{lay_egg(name = "Kevin")}
-lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
+lay_egg <- function(pet_name) {
 
   bp <- .create_blueprint(pet_name)
   gist_info <- .post_blueprint(bp)
   pet_id <- basename(gist_info$url)
-
-  gist_url <- paste0(
-    "https://gist.github.com/", gist_info$owner$login, "/", pet_id
-  )
+  bp$characteristics$pet_id <- pet_id
+  suppressMessages(.patch_blueprint(pet_id, "pet_id", pet_id))
 
   message("You have a new egg!")
 
-  if (overwrite_renviron) {
-    suppressMessages(.set_renviron(pet_id, overwrite = TRUE))
-    message("- pet_id (set in Renviron as TAMRGO_PET_ID): ", pet_id)
-  }
+  has_environ <- .check_environ_exists()
+  .create_environ(pet_id)
 
-  if (!overwrite_renviron) {
-    message("- pet_id (not set in Renviron): ", pet_id)
-  }
+}
 
-  message("- blueprint: ", gist_url)
+#' Load A tamRgo Pet
+#'
+#' @description
+#' Fetch a pet ID (i.e. GitHub gist ID) from the TAMRGO_PET_ID variable in the
+#' tamRgo.environ file on the user's home directory. If tamRgo.environ doesn't
+#' exist, then prompt to create it.
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' load_pet(pet_id = gist_id)
+#' }
+load_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+
+  if (pet_id == "") {
+
+    has_environ <- .check_environ_exists()
+
+    if (has_environ) {
+      .read_environ()
+    }
+
+  } else {
+
+    .create_environ(pet_id)
+
+  }
 
 }
 
@@ -48,9 +72,9 @@ lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
 #'
 #' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
 #'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
+#'     stored in the user's home directory in a tamRgo.environ file.
 #'
-#' @return Nothing. A message is printed to the console.
+#' @return Nothing.
 #'
 #' @export
 #'
@@ -60,15 +84,23 @@ lay_egg <- function(pet_name, overwrite_renviron = TRUE) {
 #' }
 see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
+  if (pet_id == "") {
+    load_pet(pet_id)
+    pet_id <- Sys.getenv("TAMRGO_PET_ID")
+  } else {
+    .create_environ(pet_id)
+  }
+
   bp <- .get_blueprint(pet_id)
 
   message(
     "Pet characteristics",                     "\n",
     "- Name:    ", bp$characteristics$name,    "\n",
     "- Species: ", bp$characteristics$species, "\n",
-    "- Stage:   ", bp$characteristics$stage,   "\n",
     "- Born:    ", bp$characteristics$born,    "\n",
     "- Age:     ", bp$characteristics$age,     "\n",
+    "- Stage:   ", bp$characteristics$stage,   "\n",
+    "- XP:      ", bp$characteristics$xp,      "\n",
     "Pet status",                              "\n",
     "- Hungry:  ", bp$status$hungry, "/5",     "\n",
     "- Happy:   ", bp$status$happy,  "/5",     "\n",
@@ -77,46 +109,103 @@ see_stats <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
 }
 
-#' Load A tamRgo Pet
+#' Feed A tamRgo Pet
 #'
 #' @description
-#' Set a pet_id (i.e. GitHub gist ID) as the Renviron variable TAMRGO_PET_ID.
+#' Feed a tamRgo pet, decreasing its 'hungry' status by 1.
 #'
 #' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
 #'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
 #'     stored in the user's Renviron.
 #'
-#' @return Nothing. Messages are printed to the console and an Renviron variable
-#'     is updated.
+#' @return Nothing.
 #'
 #' @export
 #'
 #' @examples \dontrun{
 #' gist_id <- "1234567890abcdefghijklmnopqrstuv"
-#' load_pet(pet_id = gist_id)
+#' feed_pet(pet_id = gist_id)
 #' }
-load_pet <- function(pet_id) {
+feed_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
 
-  bp <- .get_blueprint(pet_id)
-
-  answer <- readline(
-    paste0(
-      "Set ", bp[["characteristics"]][["name"]],
-      "'s pet ID in the Renviron? y/n: "
-    )
-  )
-
-  if (substr(tolower(answer), 1, 1) == "y") {
-
-    .set_renviron(pet_id, overwrite = TRUE)
-
+  if (pet_id == "") {
+    load_pet(pet_id)
+    pet_id <- Sys.getenv("TAMRGO_PET_ID")
   } else {
-
-    message(
-      "Aborted: TAMRGO_PET_ID has not been set with the provided 'pet_id' value."
-    )
-
+    .create_environ(pet_id)
   }
+
+  change_value <- -1L
+  .change_status(pet_id, "hungry", change_value, 0L, 5L)
+
+  .patch_blueprint(pet_id, "hungry", change_value)
+
+}
+
+#' Play With A tamRgo Pet
+#'
+#' @description
+#' Play with a tamRgo pet, increasing its 'happy' status by 1.
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' play_with_pet(pet_id = gist_id)
+#' }
+play_with_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+
+  if (pet_id == "") {
+    load_pet(pet_id)
+    pet_id <- Sys.getenv("TAMRGO_PET_ID")
+  } else {
+    .create_environ(pet_id)
+  }
+
+  change_value <- 1L
+  .change_status(pet_id, "happy", change_value, 0L, 5L)
+
+  .patch_blueprint(pet_id, "happy", change_value)
+
+
+}
+
+#' Clean A tamRgo Pet
+#'
+#' @description
+#' Clean a tamRgo pet, decreasing its 'dirty' status by 1.
+#'
+#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
+#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
+#'     stored in the user's Renviron.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{
+#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
+#' clean_pet(pet_id = gist_id)
+#' }
+clean_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+
+  if (pet_id == "") {
+    load_pet(pet_id)
+    pet_id <- Sys.getenv("TAMRGO_PET_ID")
+  } else {
+    .create_environ(pet_id)
+  }
+
+  change_value <- -1L
+  .change_status(pet_id, "dirty", change_value, 0L, 5L)
+
+  .patch_blueprint(pet_id, "dirty", change_value)
 
 }
 
@@ -130,20 +219,21 @@ load_pet <- function(pet_id) {
 #'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
 #'     stored in the user's Renviron.
 #'
-#' @return Nothing. Interactive messages are printed to the console and a GitHub
-#'     gist may be deleted.
+#' @return Nothing.
 #'
 #' @export
 #'
 #' @examples \dontrun{release_pet()}
-release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
+release_pet <- function(pet_id) {
+
+  .check_pet_id(pet_id)
 
   pet_name <- .get_blueprint(pet_id)[["characteristics"]][["name"]]
 
   answer_1 <- readline(
     paste0(
       "Say goodbye to ", pet_name,
-      " (pet_id ", paste0(substr(pet_id, 1, 8), "..."), ") ? y/n: "
+      " (pet_id ", paste0(substr(pet_id, 1, 8), "..."), ")? y/n: "
     )
   )
 
@@ -160,90 +250,12 @@ release_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
   if (substr(tolower(answer_2), 1, 1) == "y") {
 
     .delete_blueprint(pet_id)
-    .unset_renviron(pet_id)
+    .delete_environ()
 
     message("A tear rolls down your cheek.")
 
   } else {
     stop("Deletion process stopped.", call. = FALSE)
   }
-
-}
-
-#' Feed A tamRgo Pet
-#'
-#' @description
-#' Feed a tamRgo pet, decreasing its 'hungry' status by 1.
-#'
-#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
-#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
-#'
-#' @return Nothing. Messages are printed to the console and a GitHub gist may be
-#'     updated.
-#'
-#' @export
-#'
-#' @examples \dontrun{
-#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
-#' feed_pet(pet_id = gist_id)
-#' }
-feed_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
-
-  change_value <- -1L
-  .change_status(pet_id, "hungry", change_value, 0L, 5L)
-  .patch_blueprint(pet_id, status_type, new_value)
-
-}
-
-#' Play With A tamRgo Pet
-#'
-#' @description
-#' Play with a tamRgo pet, increasing its 'happy' status by 1.
-#'
-#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
-#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
-#'
-#' @return Nothing. Messages are printed to the console and a GitHub gist may be
-#'     updated.
-#'
-#' @export
-#'
-#' @examples \dontrun{
-#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
-#' play_with_pet(pet_id = gist_id)
-#' }
-play_with_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
-
-  change_value <- 1L
-  .change_status(pet_id, "happy", change_value, 0L, 5L)
-  .patch_blueprint(pet_id, status_type, new_value)
-
-}
-
-#' Clean A tamRgo Pet
-#'
-#' @description
-#' Clean a tamRgo pet, decreasing its 'dirty' status by 1.
-#'
-#' @param pet_id Character. A GitHub gist ID for a YAML file that contains a
-#'     given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-#'     stored in the user's Renviron.
-#'
-#' @return Nothing. Messages are printed to the console and a GitHub gist may be
-#'     updated.
-#'
-#' @export
-#'
-#' @examples \dontrun{
-#' gist_id <- "1234567890abcdefghijklmnopqrstuv"
-#' clean_pet(pet_id = gist_id)
-#' }
-clean_pet <- function(pet_id = Sys.getenv("TAMRGO_PET_ID")) {
-
-  change_value <- -1L
-  .change_status(pet_id, "dirty", change_value, 0L, 5L)
-  .patch_blueprint(pet_id, status_type, new_value)
 
 }

@@ -22,10 +22,13 @@ Generate A Blueprint For A New tamRgo Pet
 A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 that stores information about a pet. The sublist 'characteristics' contains:
 \describe{
+\item{pet_id}{Unique pet identification number (GitHub Gist ID number)}
+\item{name}{The pet's name}
 \item{species}{Type of pet}
-\item{stage}{Growth stage reached}
 \item{born}{Date of birth}
+\item{stage}{Growth stage reached}
 \item{age}{Days since birth}
+\item{xp}{Experience points}
 }
 The sublist 'status' contains:
 \describe{

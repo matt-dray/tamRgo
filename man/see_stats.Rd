@@ -9,10 +9,10 @@ see_stats(pet_id = Sys.getenv("TAMRGO_PET_ID"))
 \arguments{
 \item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
 given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-stored in the user's Renviron.}
+stored in the user's home directory in a tamRgo.environ file.}
 }
 \value{
-Nothing. A message is printed to the console.
+Nothing.
 }
 \description{
 Print to the console the current characteristics and status of a tamRgo pet.

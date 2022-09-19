@@ -6,14 +6,15 @@
 \usage{
 .patch_blueprint(
   pet_id = Sys.getenv("TAMRGO_PET_ID"),
-  what = c("name", "species", "stage", "born", "age", "hungry", "happy", "dirty"),
+  what = c("pet_id", "name", "species", "born", "stage", "age", "xp", "hungry",
+    "happy", "dirty"),
   new_value
 )
 }
 \arguments{
 \item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
 given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-stored in the user's Renviron.}
+that's in the current environment.}
 
 \item{what}{Character. The name of the characteristic or status to be updated
 in the pet blueprint. See details.}
@@ -33,16 +34,19 @@ list of characteristics and status values).
 A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
 that stores information about a pet. The sublist 'characteristics' contains:
 \describe{
-\item{species}{Type of pet (charcter)}
-\item{stage}{Growth stage reached (integer)}
-\item{born}{Date of birth (character)}
-\item{age}{Days since birth (integer)}
+\item{pet_id}{Unique pet identification number (GitHub Gist ID number)}
+\item{name}{The pet's name}
+\item{species}{Type of pet}
+\item{born}{Date of birth}
+\item{stage}{Growth stage reached}
+\item{age}{Days since birth}
+\item{xp}{Experience points}
 }
 The sublist 'status' contains:
 \describe{
-\item{hungry}{Hunger (integer, 1 to 5 where 5 is most hungry)}
-\item{happy}{Happiness (integer, 1 to 5 where 5 is most happy)}
-\item{dirty}{Dirtiness (integer, 1 to 5 where 5 is most dirty)}
+\item{hungry}{Hunger on a scale of 1 (least) to 5 (most)}
+\item{happy}{Happiness on a scale of 1 (least) to 5 (most)}
+\item{dirty}{Dirtiness on a scale of 1 (least) to 5 (most)}
 }
 }
 \examples{

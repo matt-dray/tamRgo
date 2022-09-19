@@ -4,7 +4,7 @@
 \alias{load_pet}
 \title{Load A tamRgo Pet}
 \usage{
-load_pet(pet_id)
+load_pet(pet_id = Sys.getenv("TAMRGO_PET_ID"))
 }
 \arguments{
 \item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
@@ -12,11 +12,12 @@ given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
 stored in the user's Renviron.}
 }
 \value{
-Nothing. Messages are printed to the console and an Renviron variable
-is updated.
+Nothing.
 }
 \description{
-Set a pet_id (i.e. GitHub gist ID) as the Renviron variable TAMRGO_PET_ID.
+Fetch a pet ID (i.e. GitHub gist ID) from the TAMRGO_PET_ID variable in the
+tamRgo.environ file on the user's home directory. If tamRgo.environ doesn't
+exist, then prompt to create it.
 }
 \examples{
 \dontrun{
