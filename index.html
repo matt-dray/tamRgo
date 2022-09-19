@@ -58,36 +58,7 @@
 <!-- badges: start -->
 <p><em>Tamago</em> (egg) + <em>uotchi</em> (‘watch’) = <a href="https://en.wikipedia.org/wiki/Tamagotchi" class="external-link">Tamagotchi</a>. <em>Tamago</em> + R = {tamRgo}.</p>
 <p>A work-in-progress R package to create and care for a digital pet, using GitHub gists to store pet ‘blueprints’.</p>
-<details><p><summary>Secret dev notes (don’t click)</summary></p>
-<div class="section level2">
-<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
-</h2>
-<p>Install from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"matt-dray/tamRgo"</span><span class="op">)</span></span></code></pre></div>
-<p>The package depends on <a href="https://gh.r-lib.org/" class="external-link">{gh}</a> to interact with the GitHub API (i.e. to GET, POST and DELETE GitHub gists) and <a href="https://github.com/vubiostat/r-yaml/" class="external-link">{yaml}</a> to read and write YAML files (i.e. the format used for pet blueprints).</p>
-</div>
-<div class="section level2">
-<h2 id="game-loop">Game loop<a class="anchor" aria-label="anchor" href="#game-loop"></a>
-</h2>
-<p>You generate a new pet (i.e. a YAML ‘blueprint’ written to a GitHub gist) and care for it via R functions (which adjusts the blueprint’s status values).</p>
-<p>You generate a new pet with <code><a href="reference/lay_egg.html">lay_egg()</a></code>, which:</p>
-<ul>
-<li>creates a ‘blueprint’ (i.e. a YAML file) of characteristics (user-provided ‘name’, randomised ‘species’, ‘stage’ of life, ‘born’ date, ‘age’ in days) and statuses (‘hungry’, ‘happy’, ‘dirty’, all on a scale of 1 to 5)</li>
-<li>writes the blueprint to a fresh GitHub gist</li>
-<li>sets the Renviron value <code>TAMRGO_PET_ID</code> to the pet’s ID value (i.e. the GitHub gist’s ID), which can be read automatically by the package’s functions so that the user doesn’t need to provide the pet ID each time</li>
-</ul>
-<p>You can:</p>
-<ul>
-<li>
-<code><a href="reference/see_stats.html">see_stats()</a></code> to print to the console a summary of the loaded pet’s characteristics and status values</li>
-<li>
-<code><a href="reference/load_pet.html">load_pet()</a></code> to set a pet_id (i.e. GitHub gist ID) to an Renviron variable (<code>TAMRGO_PET_ID</code>), which makes it simpler to provide this variable to the functions that use it (they read it from the Renviron, rather than the user having to supply it every time)</li>
-<li>
-<code><a href="reference/release_pet.html">release_pet()</a></code> to delete the GitHub gist that contains the pet’s blueprint YAML file and removes the <code>TAMRGO_PET_ID</code> from your Renviron</li>
-</ul>
-<p>There’s a bunch of internal <code>R/utils-*.R</code> functions (prefixed with a period) that handle blueprint creation, gist handling and setting the Renviron variable.</p>
-</div></details>
+<p>Don’t try and install it; basic functionality is missing and it may alter files on your machine without your knowledge.</p>
 </div>
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>

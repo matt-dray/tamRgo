@@ -28,10 +28,19 @@
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-change_status.html</loc>
   </url>
   <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-check_environ_exists.html</loc>
+  </url>
+  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-create_blueprint.html</loc>
   </url>
   <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-create_environ.html</loc>
+  </url>
+  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-delete_blueprint.html</loc>
+  </url>
+  <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-delete_environ.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-get_blueprint.html</loc>
@@ -43,13 +52,10 @@
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-post_blueprint.html</loc>
   </url>
   <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-read_environ.html</loc>
+  </url>
+  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-roll_characteristics.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-set_renviron.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-unset_renviron.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/feed_pet.html</loc>

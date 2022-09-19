@@ -47,7 +47,8 @@ list of characteristics and status values).</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.patch_blueprint</span><span class="op">(</span></span>
 <span>  pet_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"TAMRGO_PET_ID"</span><span class="op">)</span>,</span>
-<span>  what <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"species"</span>, <span class="st">"stage"</span>, <span class="st">"born"</span>, <span class="st">"age"</span>, <span class="st">"hungry"</span>, <span class="st">"happy"</span>, <span class="st">"dirty"</span><span class="op">)</span>,</span>
+<span>  what <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pet_id"</span>, <span class="st">"name"</span>, <span class="st">"species"</span>, <span class="st">"born"</span>, <span class="st">"stage"</span>, <span class="st">"age"</span>, <span class="st">"xp"</span>, <span class="st">"hungry"</span>,</span>
+<span>    <span class="st">"happy"</span>, <span class="st">"dirty"</span><span class="op">)</span>,</span>
 <span>  <span class="va">new_value</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -57,7 +58,7 @@ list of characteristics and status values).</p>
     <dl><dt>pet_id</dt>
 <dd><p>Character. A GitHub gist ID for a YAML file that contains a
 given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-stored in the user's Renviron.</p></dd>
+that's in the current environment.</p></dd>
 
 
 <dt>what</dt>
@@ -80,27 +81,36 @@ variable provided by the 'what' argument.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>A tamRgo 'blueprint' is a list of two lists ('characteristics' and 'status')
-that stores information about a pet. The sublist 'characteristics' contains:</p><dl><dt>species</dt>
-<dd><p>Type of pet (charcter)</p></dd>
+that stores information about a pet. The sublist 'characteristics' contains:</p><dl><dt>pet_id</dt>
+<dd><p>Unique pet identification number (GitHub Gist ID number)</p></dd>
 
-<dt>stage</dt>
-<dd><p>Growth stage reached (integer)</p></dd>
+<dt>name</dt>
+<dd><p>The pet's name</p></dd>
+
+<dt>species</dt>
+<dd><p>Type of pet</p></dd>
 
 <dt>born</dt>
-<dd><p>Date of birth (character)</p></dd>
+<dd><p>Date of birth</p></dd>
+
+<dt>stage</dt>
+<dd><p>Growth stage reached</p></dd>
 
 <dt>age</dt>
-<dd><p>Days since birth (integer)</p></dd>
+<dd><p>Days since birth</p></dd>
+
+<dt>xp</dt>
+<dd><p>Experience points</p></dd>
 
 
 </dl><p>The sublist 'status' contains:</p><dl><dt>hungry</dt>
-<dd><p>Hunger (integer, 1 to 5 where 5 is most hungry)</p></dd>
+<dd><p>Hunger on a scale of 1 (least) to 5 (most)</p></dd>
 
 <dt>happy</dt>
-<dd><p>Happiness (integer, 1 to 5 where 5 is most happy)</p></dd>
+<dd><p>Happiness on a scale of 1 (least) to 5 (most)</p></dd>
 
 <dt>dirty</dt>
-<dd><p>Dirtiness (integer, 1 to 5 where 5 is most dirty)</p></dd>
+<dd><p>Dirtiness on a scale of 1 (least) to 5 (most)</p></dd>
 
 
 </dl></div>
