@@ -19,6 +19,9 @@
     <loc>https://www.github.com/matt-dray/tamRgo/news/index.html</loc>
   </url>
   <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/clean.html</loc>
+  </url>
+  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-create_blueprint.html</loc>
   </url>
   <url>
@@ -34,10 +37,16 @@
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-write_blueprint.html</loc>
   </url>
   <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/feed.html</loc>
+  </url>
+  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/index.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/lay_egg.html</loc>
+  </url>
+  <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/play.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/release_pet.html</loc>
