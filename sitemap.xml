@@ -16,61 +16,28 @@
     <loc>https://www.github.com/matt-dray/tamRgo/index.html</loc>
   </url>
   <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/blueprint_list.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/blueprint_yaml.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/clean_pet.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-change_status.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-check_environ_exists.html</loc>
+    <loc>https://www.github.com/matt-dray/tamRgo/news/index.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-create_blueprint.html</loc>
   </url>
   <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-create_environ.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-delete_blueprint.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-delete_environ.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-get_blueprint.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-patch_blueprint.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-post_blueprint.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-read_environ.html</loc>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-read_blueprint.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-roll_characteristics.html</loc>
   </url>
   <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/feed_pet.html</loc>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-update_blueprint.html</loc>
+  </url>
+  <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-write_blueprint.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/index.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/lay_egg.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/load_pet.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/play_with_pet.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/release_pet.html</loc>
