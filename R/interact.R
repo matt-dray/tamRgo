@@ -111,3 +111,60 @@ release_pet <- function() {
   }
 
 }
+
+#' Play with Pet
+#'
+#' @description Increase 'happy' status value by 1 (max 5).
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{play()}
+play <- function() {
+
+  bp <- .check_and_update()
+
+  bp$status$happy <- min(bp$status$happy + 1L, 5L)
+  suppressMessages(.write_blueprint(bp, ask = FALSE))
+  message("'Happy' status value is now ", bp$status$happy, "/5")
+
+}
+
+#' Feed Pet
+#'
+#' @description Reduce 'hungry' status value by 1 (min 0).
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{feed()}
+feed <- function() {
+
+  bp <- .check_and_update()
+
+  bp$status$hungry <- max(bp$status$hungry - 1L, 0L)
+  suppressMessages(.write_blueprint(bp, ask = FALSE))
+  message("'Hungry' status value is now ", bp$status$hungry, "/5")
+
+}
+
+#' Clean Pet
+#'
+#' @description Reduce 'dirty' status value to 0.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{clean()}
+clean <- function() {
+
+  bp <- .check_and_update()
+
+  bp$status$dirty <- 0L
+  suppressMessages(.write_blueprint(bp, ask = FALSE))
+  message("'Dirty' status value is now 0/5")
+
+}
