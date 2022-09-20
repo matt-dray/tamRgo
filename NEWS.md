@@ -1,6 +1,7 @@
 # tamRgo 0.0.0.9002
 
-* Add `play()`, `feed()` and `clean()` functions for altering the pet's status values.
+* Added `play()`, `feed()` and `clean()` functions for altering the pet's status values.
+* Set `Depends` to `R (>= 4.0)`.
 
 # tamRgo 0.0.0.9001
 
