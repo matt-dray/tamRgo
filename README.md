@@ -9,6 +9,6 @@
 
 _Tamago_ (egg) + _uotchi_ ('watch') = [Tamagotchi](https://en.wikipedia.org/wiki/Tamagotchi). _Tamago_ + R = {tamRgo}.
 
-A work-in-progress R package to create and care for a digital pet, using GitHub gists to store pet 'blueprints'.
+A work-in-progress R package that lets you care in the R console for a digital pet whose status is persistent across R sessions.
 
-Don't try and install it; basic functionality is missing and it may alter files on your machine without your knowledge.
+Warning: don't try and install the package yet. Basic functionality is missing and it may alter files on your machine without your knowledge.

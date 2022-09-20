@@ -4,12 +4,17 @@
 \name{tamRgo-package}
 \alias{tamRgo}
 \alias{tamRgo-package}
-\title{tamRgo: Digital Pets For R}
+\title{tamRgo: Digital Pets in R}
 \description{
-Create and care for a digital pet, using GitHub gists to store pet 'blueprints'.
+Create and care for a digital pet inside R sessions.
 }
 \author{
 \strong{Maintainer}: Matt Dray \email{mwdray@gmail.com}
+
+Other contributors:
+\itemize{
+  \item Adriana De Palma [contributor]
+}
 
 }
 \keyword{internal}

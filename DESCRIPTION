@@ -1,16 +1,13 @@
 Package: tamRgo
-Title: Digital Pets For R
-Version: 0.0.0.9000
-Authors@R: person("Matt", "Dray", , "mwdray@gmail.com", role = c("aut", "cre"))
-Description: Create and care for a digital pet, using GitHub gists to store pet 
-    'blueprints'.
+Title: Digital Pets in R
+Version: 0.0.0.9001
+Authors@R: c(person("Matt", "Dray", , "mwdray@gmail.com", role = c("aut", "cre")),
+    person("Adriana", "De Palma", , , role = "ctb"))
+Description: Create and care for a digital pet inside R sessions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Imports: 
-    gh,
-    yaml
 Suggests: 
     covr
 Depends: 
