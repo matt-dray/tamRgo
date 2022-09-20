@@ -1,0 +1,113 @@
+#' Create a New Pet
+#'
+#' @description Generate and save a new pet's blueprint. The pet begins life as
+#'     an egg.
+#'
+#' @param pet_name Character. A name for the new tamRgo pet. Maximum eight
+#'     characters.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{lay_egg(name = "KEVIN")}
+lay_egg <- function(pet_name) {
+
+  bp <- .create_blueprint(pet_name)
+  .write_blueprint(bp)
+
+  message("You have a new egg", appendLF = FALSE)
+  Sys.sleep(1)
+  message(".", appendLF = FALSE)
+  Sys.sleep(1)
+  message(".", appendLF = FALSE)
+  Sys.sleep(1)
+  message(".", appendLF = FALSE)
+  Sys.sleep(1)
+  message(" it hatched!", appendLF = FALSE)
+  message("\nSee its stats with see_stats()")
+
+
+}
+
+#' Print Pet Stats
+#'
+#' @description Print to the console the characteristics, experience and status
+#'     of the current pet.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{see_stats()}
+see_stats <- function() {
+
+  data_dir <- tools::R_user_dir("tamRgo", which = "data")
+  data_file <- file.path(data_dir, "blueprint.rds")
+  has_data_file <- file.exists(data_file)
+
+  if (!has_data_file) {
+    stop("A pet blueprint hasn't been found.")
+  }
+
+  bp <- .read_blueprint()
+  bp <- suppressMessages(.update_blueprint())
+
+  message(
+    "Characteristics",
+    "\n  - Name:    ", bp$characteristics$name,
+    "\n  - Species: ", bp$characteristics$species,
+    "\n  - Born:    ", bp$characteristics$born,
+    "\n  - Age:     ", bp$characteristics$age,
+    "\nExperience",
+    "\n  - Level:   ", bp$experience$level,
+    "\n  - XP:      ", bp$experience$xp,
+    "\nStatus",
+    "\n  - Happy:   ", bp$status$happy,  "/5",
+    "\n  - Hungry:  ", bp$status$hungry, "/5",
+    "\n  - Dirty:   ", bp$status$dirty,  "/5"
+  )
+
+}
+
+#' Release a Pet
+#'
+#' @description Delete the current blueprint.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{see_stats()}
+release_pet <- function() {
+
+  data_dir <- tools::R_user_dir("tamRgo", which = "data")
+  data_file <- file.path(data_dir, "blueprint.rds")
+  has_data_file <- file.exists(data_file)
+
+  if (!has_data_file) {
+    stop("A pet blueprint hasn't been found.")
+  }
+
+  bp <- .read_blueprint()
+  bp <- suppressMessages(.update_blueprint())
+
+  answer_a <-
+    readline(paste0("Really release ", bp$characteristics$name, "? y/n: "))
+
+  if (substr(tolower(answer_a), 1, 1) == "y") {
+
+    answer_b <- readline("Are you sure? y/n: ")
+
+    if (substr(tolower(answer_b), 1, 1) == "y") {
+      file.remove(data_file)
+      message(bp$characteristics$name, " was set free!")
+    } else {
+      message(bp$characteristics$name, " was not released.")
+    }
+
+  } else {
+    message(bp$characteristics$name, " was not released.")
+  }
+
+}

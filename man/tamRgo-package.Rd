@@ -6,7 +6,16 @@
 \alias{tamRgo-package}
 \title{tamRgo: Digital Pets in R}
 \description{
-Create and care for a digital pet inside R sessions.
+Play with a digital pet in your R console.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://matt-dray.github.io/tamRgo/}
+  \item \url{https://github.com/matt-dray/tamRgo}
+  \item Report bugs at \url{https://github.com/matt-dray/tamRgo/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Matt Dray \email{mwdray@gmail.com}

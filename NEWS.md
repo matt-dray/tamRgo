@@ -1,6 +1,11 @@
 # tamRgo 0.0.0.9001
 
-* Shifted focus to a fully local experience.
+* Shifted focus to a fully local experience (#20).
+* Added internal functions to `.create_`, `.write_`, `.read_` and `.update_blueprint()`s.
+* Introduced time-dependent blueprint updates (toward #9).
+* Added exported functions to `lay_egg()`, `see_stats()` and `release_pet()`.
+* Added startup message (#6).
+* Updated README and DESCRIPTION.
 * Added NEWS file to track changes.
 
 # tamRgo 0.0.0.9000
