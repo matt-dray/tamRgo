@@ -212,12 +212,14 @@
   bp <- .read_blueprint()
 
   current_interaction <- Sys.time()
-  time_difference <- as.integer(current_interaction - bp$meta$last_interaction)
+
+  time_difference <-
+    as.numeric(current_interaction - bp$meta$last_interaction, units = "mins")
 
   bp$meta$last_interaction <- current_interaction
 
   bp$characteristics$age <-
-    as.integer(Sys.Date() - as.Date(bp$characteristics$born))
+    as.numeric(Sys.Date() - as.Date(bp$characteristics$born), units = "days")
 
   bp$experience$xp <- bp$experience$xp + (time_difference %/% xp_increment)
 

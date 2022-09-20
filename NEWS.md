@@ -1,3 +1,7 @@
+# tamRgo 0.0.0.9002
+
+* Add `play()`, `feed()` and `clean()` functions for altering the pet's status values.
+
 # tamRgo 0.0.0.9001
 
 * Shifted focus to a fully local experience (#20).

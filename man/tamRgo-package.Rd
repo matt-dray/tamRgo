@@ -6,7 +6,7 @@
 \alias{tamRgo-package}
 \title{tamRgo: Digital Pets in R}
 \description{
-Play with a digital pet in your R console.
+Store a digital pet on your computer and interact with it in your R console.
 }
 \seealso{
 Useful links:
