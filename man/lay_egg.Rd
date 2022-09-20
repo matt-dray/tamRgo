@@ -2,21 +2,21 @@
 % Please edit documentation in R/interact.R
 \name{lay_egg}
 \alias{lay_egg}
-\title{Generate A New tamRgo Pet Egg}
+\title{Create a New Pet}
 \usage{
 lay_egg(pet_name)
 }
 \arguments{
-\item{pet_name}{Character. A name for the new tamRgo pet.}
+\item{pet_name}{Character. A name for the new tamRgo pet. Maximum eight
+characters.}
 }
 \value{
 Nothing.
 }
 \description{
-Create a new tamRgo-pet blueprint, write it to a new gist and set its pet ID
-(i.e. GitHub gist ID) in your Renviron file as TAMRGO_PET_ID. The new pet is
-at the egg stage.
+Generate and save a new pet's blueprint. The pet begins life as
+an egg.
 }
 \examples{
-\dontrun{lay_egg(name = "Kevin")}
+\dontrun{lay_egg(name = "KEVIN")}
 }

@@ -2,24 +2,17 @@
 % Please edit documentation in R/interact.R
 \name{see_stats}
 \alias{see_stats}
-\title{See A Stats Summary For A tamRgo Pet}
+\title{Print Pet Stats}
 \usage{
-see_stats(pet_id = Sys.getenv("TAMRGO_PET_ID"))
-}
-\arguments{
-\item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
-given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-stored in the user's home directory in a tamRgo.environ file.}
+see_stats()
 }
 \value{
 Nothing.
 }
 \description{
-Print to the console the current characteristics and status of a tamRgo pet.
+Print to the console the characteristics, experience and status
+of the current pet.
 }
 \examples{
-\dontrun{
-gist_id <- "1234567890abcdefghijklmnopqrstuv"
-see_stats(pet_id = gist_id)
-}
+\dontrun{see_stats()}
 }

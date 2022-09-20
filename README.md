@@ -7,8 +7,61 @@
 [![Codecov test coverage](https://codecov.io/gh/matt-dray/tamRgo/branch/main/graph/badge.svg)](https://app.codecov.io/gh/matt-dray/tamRgo?branch=main)
 <!-- badges: end -->
 
-_Tamago_ (egg) + _uotchi_ ('watch') = [Tamagotchi](https://en.wikipedia.org/wiki/Tamagotchi). _Tamago_ + R = {tamRgo}.
+_Tamago_ (egg) + _uotchi_ ('watch') = [Tamagotchi](https://en.wikipedia.org/wiki/Tamagotchi). _Tamago_ + R = [{tamRgo}](https://github.com/matt-dray/tamRgo).
 
-A work-in-progress R package to create and care for a digital pet, using GitHub gists to store pet 'blueprints'.
+A work-in-progress R package that lets you interact in the R console with a little digital pet that lives on your computer.
 
-Don't try and install it; basic functionality is missing and it may alter files on your machine without your knowledge.
+## Install
+
+Install {tamRgo} [from GitHub](https://www.github.com/matt-dray/tamRgo).
+
+``` r
+install.packages("remotes")  # if not yet installed
+remotes::install_github("matt-dray/tamRgo")
+```
+
+The package is currently dependency free, but you need R version 4 or higher.
+
+## Play
+
+Much of the package's functionality is yet to be developed. You can expect the code below to change a great deal. See [the GitHub issues](https://github.com/matt-dray/tamRgo/issues) for upcoming functionality. 
+
+You must first request for an egg to be laid. This stores a persistent blueprint of your pet to your computer for safekeeping.
+
+``` r
+lay_egg("KEVIN")
+# Save pet blueprint? y/n: y
+# Saved pet blueprint.
+# You have a new egg!
+```
+
+At any time you can see the latest stats about your pet. These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get.
+
+``` r
+see_stats()
+# Characteristics
+#   - Name:    KEVIN
+#   - Species: Z
+#   - Born:    2022-09-20
+#   - Age:     0
+# Experience
+#   - Level:   1
+#   - XP:      0
+# Status
+#   - Happy:   0/5
+#   - Hungry:  0/5
+#   - Dirty:   0/5
+```
+
+You can release your pet if you feel the time is right. This will delete its blueprint from your computer.
+
+``` r
+release_pet()
+# Really release KEVIN? y/n: y
+# Are you sure? y/n: y
+# KEVIN was set free!
+```
+
+## Advanced
+
+The package's main mechanism is the persistent storage of a 'blueprint'---an RDS file containing a list of pet-related values---which is saved to the path resolved by `tools::R_user_dir("tamRgo", which = "data")`. The values in the blueprint are updated when a player interacts with the pet, given the time that's elapsed since the last interaction.

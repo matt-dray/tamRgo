@@ -2,22 +2,16 @@
 % Please edit documentation in R/interact.R
 \name{release_pet}
 \alias{release_pet}
-\title{Release A tamRgo Pet Forever}
+\title{Release a Pet}
 \usage{
-release_pet(pet_id)
-}
-\arguments{
-\item{pet_id}{Character. A GitHub gist ID for a YAML file that contains a
-given tamRgo pet's blueprint. By default it uses the TAMRGO_PET_ID value
-stored in the user's Renviron.}
+release_pet()
 }
 \value{
 Nothing.
 }
 \description{
-Delete a tamRgo pet's blueprint (YAML file) from its associated GitHub gist.
-Also unsets the pet ID (TAMRGO_PET_ID) from the Renviron.
+Delete the current blueprint.
 }
 \examples{
-\dontrun{release_pet()}
+\dontrun{see_stats()}
 }
