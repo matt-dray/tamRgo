@@ -22,21 +22,6 @@
     <loc>https://www.github.com/matt-dray/tamRgo/reference/clean.html</loc>
   </url>
   <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-create_blueprint.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-read_blueprint.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-roll_characteristics.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-update_blueprint.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/dot-write_blueprint.html</loc>
-  </url>
-  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/feed.html</loc>
   </url>
   <url>
@@ -50,6 +35,9 @@
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/release_pet.html</loc>
+  </url>
+  <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/see_pet.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/see_stats.html</loc>
