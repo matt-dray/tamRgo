@@ -7,6 +7,8 @@
 #' @return A list.
 #'
 #' @examples \dontrun{.create_blueprint(name = "Kevin")}
+#'
+#' @noRd
 .create_blueprint <- function(pet_name) {
 
   if (!is.character(pet_name) | nchar(pet_name) > 8) {
@@ -45,6 +47,8 @@
 #' @return A list.
 #'
 #' @examples \dontrun{.roll_characteristics()}
+#'
+#' @noRd
 .roll_characteristics <- function() {
 
   pet_id_chars <- c(letters, LETTERS, 0:9)
@@ -72,6 +76,8 @@
 #'     bp <- .create_blueprint("KEVIN")
 #'     .write_blueprint(bp, ask = FALSE)
 #'     }
+#'
+#' @noRd
 .write_blueprint <- function(blueprint, ask = TRUE) {
 
   if (!is.list(blueprint) |
@@ -150,6 +156,8 @@
 #' @return Nothing.
 #'
 #' @examples \dontrun{.create_blueprint(name = "Kevin")}
+#'
+#' @noRd
 .read_blueprint <- function() {
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
@@ -182,9 +190,9 @@
 #'
 #' @return A list.
 #'
-#' @export
-#'
 #' @examples \dontrun{.update_blueprint()}
+#'
+#' @noRd
 .update_blueprint <- function(
     happy_increment  = 10L,
     hungry_increment = 15L,

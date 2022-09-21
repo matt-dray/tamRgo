@@ -2,7 +2,7 @@
 % Please edit documentation in R/interact.R
 \name{clean}
 \alias{clean}
-\title{Clean Pet}
+\title{Clean Your Pet}
 \usage{
 clean()
 }
@@ -10,7 +10,7 @@ clean()
 Nothing.
 }
 \description{
-Reduce 'dirty' status value to 0.
+Reduces 'dirty' status value to 0.
 }
 \examples{
 \dontrun{clean()}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/interact.R
 \name{play}
 \alias{play}
-\title{Play with Pet}
+\title{Play with Your Pet}
 \usage{
 play()
 }

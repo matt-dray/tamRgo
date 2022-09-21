@@ -1,3 +1,7 @@
+# tamRgo 0.0.0.9003
+
+* Added placeholder 'graphics' and methods to call (i.e. `.get_pet_matrix()`) and print them (i.e. `.draw_pet()`), wrapped into the exported function `see_pet()` (towards #10).
+
 # tamRgo 0.0.0.9002
 
 * Added `play()`, `feed()` and `clean()` functions for altering the pet's status values.

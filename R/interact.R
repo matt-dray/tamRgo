@@ -27,10 +27,9 @@ lay_egg <- function(pet_name) {
   message(" it hatched!", appendLF = FALSE)
   message("\nSee its stats with see_stats()")
 
-
 }
 
-#' Print Pet Stats
+#' Print Your Pet's Stats
 #'
 #' @description Print to the console the characteristics, experience and status
 #'     of the current pet.
@@ -42,16 +41,7 @@ lay_egg <- function(pet_name) {
 #' @examples \dontrun{see_stats()}
 see_stats <- function() {
 
-  data_dir <- tools::R_user_dir("tamRgo", which = "data")
-  data_file <- file.path(data_dir, "blueprint.rds")
-  has_data_file <- file.exists(data_file)
-
-  if (!has_data_file) {
-    stop("A pet blueprint hasn't been found.")
-  }
-
-  bp <- .read_blueprint()
-  bp <- suppressMessages(.update_blueprint())
+  bp <- .check_and_update()
 
   message(
     "Characteristics",
@@ -70,49 +60,25 @@ see_stats <- function() {
 
 }
 
-#' Release a Pet
+#' See Your Pet
 #'
-#' @description Delete the current blueprint.
+#' @description Print to the console an image of your pet.
 #'
 #' @return Nothing.
 #'
 #' @export
 #'
-#' @examples \dontrun{see_stats()}
-release_pet <- function() {
+#' @examples \dontrun{see_pet()}
+see_pet <- function() {
 
-  data_dir <- tools::R_user_dir("tamRgo", which = "data")
-  data_file <- file.path(data_dir, "blueprint.rds")
-  has_data_file <- file.exists(data_file)
+  bp <- .check_and_update()
 
-  if (!has_data_file) {
-    stop("A pet blueprint hasn't been found.")
-  }
-
-  bp <- .read_blueprint()
-  bp <- suppressMessages(.update_blueprint())
-
-  answer_a <-
-    readline(paste0("Really release ", bp$characteristics$name, "? y/n: "))
-
-  if (substr(tolower(answer_a), 1, 1) == "y") {
-
-    answer_b <- readline("Are you sure? y/n: ")
-
-    if (substr(tolower(answer_b), 1, 1) == "y") {
-      file.remove(data_file)
-      message(bp$characteristics$name, " was set free!")
-    } else {
-      message(bp$characteristics$name, " was not released.")
-    }
-
-  } else {
-    message(bp$characteristics$name, " was not released.")
-  }
+  pet_matrix <- .get_pet_matrix(bp$characteristics$species)
+  .draw_pet(pet_matrix)
 
 }
 
-#' Play with Pet
+#' Play with Your Pet
 #'
 #' @description Increase 'happy' status value by 1 (max 5).
 #'
@@ -131,7 +97,7 @@ play <- function() {
 
 }
 
-#' Feed Pet
+#' Feed Your Pet
 #'
 #' @description Reduce 'hungry' status value by 1 (min 0).
 #'
@@ -150,9 +116,9 @@ feed <- function() {
 
 }
 
-#' Clean Pet
+#' Clean Your Pet
 #'
-#' @description Reduce 'dirty' status value to 0.
+#' @description Reduces 'dirty' status value to 0.
 #'
 #' @return Nothing.
 #'
@@ -166,5 +132,43 @@ clean <- function() {
   bp$status$dirty <- 0L
   suppressMessages(.write_blueprint(bp, ask = FALSE))
   message("'Dirty' status value is now 0/5")
+
+}
+
+#' Release Your Pet
+#'
+#' @description Delete the current blueprint.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{see_stats()}
+release_pet <- function() {
+
+  bp <- .check_and_update()
+
+  answer_a <-
+    readline(paste0("Really release ", bp$characteristics$name, "? y/n: "))
+
+  if (substr(tolower(answer_a), 1, 1) == "y") {
+
+    answer_b <- readline("Are you sure? y/n: ")
+
+    if (substr(tolower(answer_b), 1, 1) == "y") {
+
+      file.remove(
+        file.path(tools::R_user_dir("tamRgo", which = "data"), "blueprint.rds")
+      )
+
+      message(bp$characteristics$name, " was set free!")
+
+    } else {
+      message(bp$characteristics$name, " was not released.")
+    }
+
+  } else {
+    message(bp$characteristics$name, " was not released.")
+  }
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/interact.R
 \name{release_pet}
 \alias{release_pet}
-\title{Release a Pet}
+\title{Release Your Pet}
 \usage{
 release_pet()
 }

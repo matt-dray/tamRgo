@@ -67,6 +67,16 @@ see_stats()
 #   - Dirty:   0/5
 ```
 
+You can view in the console an image (currently a placeholder) of your pet at any time. Their appearance will depend on their species.
+
+```
+see_pet()
+# ░░░░
+# ░░░░
+# ░░██
+# ░░██
+```
+
 You can `play()`, `feed()` or `clean()` to change your pet's status values.
 
 ``` r

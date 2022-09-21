@@ -2,7 +2,7 @@
 % Please edit documentation in R/interact.R
 \name{see_stats}
 \alias{see_stats}
-\title{Print Pet Stats}
+\title{Print Your Pet's Stats}
 \usage{
 see_stats()
 }
