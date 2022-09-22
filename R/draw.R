@@ -5,7 +5,7 @@
 #'
 #' @return A matrix.
 #'
-#' @examples \dontrun{mat <- .get_pet_matrix("X")}
+#' @examples \dontrun{ .get_pet_matrix("X")}
 #'
 #' @noRd
 .get_pet_matrix <- function(species = c("X", "Y", "Z"), size = 16L) {

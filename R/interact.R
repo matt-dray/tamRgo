@@ -16,14 +16,10 @@ lay_egg <- function(pet_name) {
   bp <- .create_blueprint(pet_name)
   .write_blueprint(bp)
 
-  message("You have a new egg", appendLF = FALSE)
-  Sys.sleep(1)
-  message(".", appendLF = FALSE)
-  Sys.sleep(1)
-  message(".", appendLF = FALSE)
-  Sys.sleep(1)
-  message(".", appendLF = FALSE)
-  Sys.sleep(1)
+  message("You have a new egg", appendLF = FALSE); Sys.sleep(1)
+  message(".", appendLF = FALSE); Sys.sleep(1)
+  message(".", appendLF = FALSE); Sys.sleep(1)
+  message(".", appendLF = FALSE); Sys.sleep(1)
   message(" it hatched!", appendLF = FALSE)
   message("\nSee its stats with see_stats()")
 
@@ -33,6 +29,21 @@ lay_egg <- function(pet_name) {
 #'
 #' @description Print to the console the characteristics, experience and status
 #'     of the current pet.
+#'
+#' @details The  output will show the following elements of the blueprint:
+#'
+#' Section 'characteristics':
+#' \describe{
+#'   \item{name}{Pet's user-provided name.}
+#'   \item{species}{Randomly-selected pet species.}
+#'   \item{born}{Date that the pet was created.}
+#'   \item{age}{Days since born.}
+#'   \item{level}{Growth stage.}
+#'   \item{xp}{Experience points.}
+#'   \item{happy}{Happiness on a scale of 0 to 5.}
+#'   \item{hungry}{Hunger on a scale of 0 to 5.}
+#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
+#' }
 #'
 #' @return Nothing.
 #'
@@ -45,17 +56,17 @@ see_stats <- function() {
 
   message(
     "Characteristics",
-    "\n  - Name:    ", bp$characteristics$name,
-    "\n  - Species: ", bp$characteristics$species,
-    "\n  - Born:    ", bp$characteristics$born,
-    "\n  - Age:     ", bp$characteristics$age,
+    "\n - Name:    ", bp$characteristics$name,
+    "\n - Species: ", bp$characteristics$species,
+    "\n - Born:    ", bp$characteristics$born,
+    "\n - Age:     ", bp$characteristics$age,
     "\nExperience",
-    "\n  - Level:   ", bp$experience$level,
-    "\n  - XP:      ", bp$experience$xp,
+    "\n - Level:   ", bp$experience$level,
+    "\n - XP:      ", bp$experience$xp,
     "\nStatus",
-    "\n  - Happy:   ", bp$status$happy,  "/5",
-    "\n  - Hungry:  ", bp$status$hungry, "/5",
-    "\n  - Dirty:   ", bp$status$dirty,  "/5"
+    "\n - Happy:   ", bp$status$happy,  "/5",
+    "\n - Hungry:  ", bp$status$hungry, "/5",
+    "\n - Dirty:   ", bp$status$dirty,  "/5"
   )
 
 }

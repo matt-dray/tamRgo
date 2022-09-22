@@ -13,6 +13,22 @@ Nothing.
 Print to the console the characteristics, experience and status
 of the current pet.
 }
+\details{
+The  output will show the following elements of the blueprint:
+
+Section 'characteristics':
+\describe{
+\item{name}{Pet's user-provided name.}
+\item{species}{Randomly-selected pet species.}
+\item{born}{Date that the pet was created.}
+\item{age}{Days since born.}
+\item{level}{Growth stage.}
+\item{xp}{Experience points.}
+\item{happy}{Happiness on a scale of 0 to 5.}
+\item{hungry}{Hunger on a scale of 0 to 5.}
+\item{dirty}{Dirtiness on a scale of 0 to 5.}
+}
+}
 \examples{
 \dontrun{see_stats()}
 }
