@@ -49,7 +49,7 @@ lay_egg("KEVIN")
 # See its stats with see_stats()
 ```
 
-At any time you can see the latest statistics about your pet. These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get.
+At any time you can see the latest statistics about your pet. 
 
 ``` r
 see_stats()
@@ -66,6 +66,8 @@ see_stats()
 #   - Hungry:  0/5
 #   - Dirty:   0/5
 ```
+
+These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate experience points (XP) that contribute towards levelling up and visual transformations.
 
 You can view in the console an image (currently a placeholder) of your pet at any time. Their appearance will depend on their species.
 
