@@ -45,7 +45,6 @@
 
   bp <- .read_blueprint()
 
-  # update
   current_interaction <- Sys.time()
   bp$meta$last_interaction <- current_interaction
 
@@ -124,7 +123,8 @@
     stop("'xp_threshold_*' values must be integers.")
   }
 
-  bp$experience$xp <- bp$experience$xp + (time_difference %/% xp_increment)
+  blueprint$experience$xp <-
+    blueprint$experience$xp + (time_difference %/% xp_increment)
 
   if (blueprint$experience$xp >= xp_threshold_1) {
     blueprint$experience$level <- 1L
