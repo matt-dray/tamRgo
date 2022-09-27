@@ -112,26 +112,22 @@
       length(blueprint) != 4 |
       all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
   ) {
-    stop("'blueprint' must be a list of lists")
+    stop("'blueprint' must be a list of lists.")
   }
 
-  if(
-    !is.integer(xp_threshold_1) |
-    !is.integer(xp_threshold_2) |
-    !is.integer(xp_threshold_3)
-  ) {
+  if(!is.integer(c(xp_threshold_1, xp_threshold_2, xp_threshold_3)) ) {
     stop("'xp_threshold_*' values must be integers.")
   }
 
   blueprint$experience$xp <-
     blueprint$experience$xp + (time_difference %/% xp_increment)
 
-  if (blueprint$experience$xp >= xp_threshold_1) {
-    blueprint$experience$level <- 1L
+  if (blueprint$experience$xp >= xp_threshold_3) {
+    blueprint$experience$level <- 3L
   } else if (blueprint$experience$xp >= xp_threshold_2) {
     blueprint$experience$level <- 2L
-  } else if (blueprint$experience$xp >= xp_threshold_3) {
-    blueprint$experience$level <- 3L
+  } else if (blueprint$experience$xp >= xp_threshold_1) {
+    blueprint$experience$level <- 1L
   }
 
   return(blueprint)
