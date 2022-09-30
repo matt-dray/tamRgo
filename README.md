@@ -69,14 +69,18 @@ see_stats()
 
 These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate experience points (XP) that contribute towards levelling up and visual transformations.
 
-You can view in the console an image (currently a placeholder) of your pet at any time. Their appearance will depend on their species.
+You can view in the console an image of your pet at any time. Their appearance will depend on their species.
 
 ```
 see_pet()
-░░░░
-░░░░
-░░██
-░░██
+░░░░░░░░
+░░█░░█░░
+░░████░░
+░█░██░█░
+░██████░
+░██░░██░
+░░████░░
+░░░░░░░░
 ```
 
 You can `play()`, `feed()` or `clean()` to change your pet's status values.
