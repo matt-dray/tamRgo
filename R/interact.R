@@ -50,7 +50,7 @@ lay_egg <- function(pet_name) {
 #' @export
 #'
 #' @examples \dontrun{see_stats()}
-see_stats <- function() {
+get_stats <- function() {
 
   bp <- .check_and_update()
 
@@ -155,7 +155,7 @@ clean <- function() {
 #' @export
 #'
 #' @examples \dontrun{see_stats()}
-release_pet <- function() {
+release <- function() {
 
   bp <- .check_and_update()
 

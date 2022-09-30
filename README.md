@@ -73,10 +73,10 @@ You can view in the console an image (currently a placeholder) of your pet at an
 
 ```
 see_pet()
-# ░░░░
-# ░░░░
-# ░░██
-# ░░██
+░░░░
+░░░░
+░░██
+░░██
 ```
 
 You can `play()`, `feed()` or `clean()` to change your pet's status values.
@@ -94,6 +94,8 @@ release_pet()
 # Are you sure? y/n: y
 # KEVIN was set free!
 ```
+
+Fare thee well, sweet KEVIN.
 
 ## Advanced
 
