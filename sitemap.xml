@@ -10,6 +10,12 @@
     <loc>https://www.github.com/matt-dray/tamRgo/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/articles/technical.html</loc>
+  </url>
+  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/authors.html</loc>
   </url>
   <url>
@@ -25,6 +31,9 @@
     <loc>https://www.github.com/matt-dray/tamRgo/reference/feed.html</loc>
   </url>
   <url>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/get_stats.html</loc>
+  </url>
+  <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/index.html</loc>
   </url>
   <url>
@@ -34,13 +43,10 @@
     <loc>https://www.github.com/matt-dray/tamRgo/reference/play.html</loc>
   </url>
   <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/release_pet.html</loc>
+    <loc>https://www.github.com/matt-dray/tamRgo/reference/release.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/see_pet.html</loc>
-  </url>
-  <url>
-    <loc>https://www.github.com/matt-dray/tamRgo/reference/see_stats.html</loc>
   </url>
   <url>
     <loc>https://www.github.com/matt-dray/tamRgo/reference/tamRgo-package.html</loc>

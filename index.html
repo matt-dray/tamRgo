@@ -40,6 +40,12 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/technical.html">Technical explanation</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
@@ -100,7 +106,7 @@
 <span><span class="co"># See its stats with see_stats()</span></span></code></pre></div>
 <p>At any time you can see the latest statistics about your pet.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/see_stats.html">see_stats</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">see_stats</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># Characteristics</span></span>
 <span><span class="co">#   - Name:    KEVIN</span></span>
 <span><span class="co">#   - Species: Z</span></span>
@@ -115,21 +121,22 @@
 <span><span class="co">#   - Dirty:   0/5</span></span></code></pre></div>
 <p>These values will update over time. For example, the longer you wait to interact with your pet, the higher the ‘hunger’ status value will get. The pet will also accumulate experience points (XP) that contribute towards levelling up and visual transformations.</p>
 <p>You can view in the console an image (currently a placeholder) of your pet at any time. Their appearance will depend on their species.</p>
-<pre><code><span><span class="fu"><a href="reference/see_pet.html">see_pet</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># ░░░░</span></span>
-<span><span class="co"># ░░░░</span></span>
-<span><span class="co"># ░░██</span></span>
-<span><span class="co"># ░░██</span></span></code></pre>
+<pre><code>see_pet()
+░░░░
+░░░░
+░░██
+░░██</code></pre>
 <p>You can <code><a href="reference/play.html">play()</a></code>, <code><a href="reference/feed.html">feed()</a></code> or <code><a href="reference/clean.html">clean()</a></code> to change your pet’s status values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/play.html">play</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># 'Happy' status value is now 1/5</span></span></code></pre></div>
 <p>You can release your pet if you feel the time is right. This will delete its blueprint from your computer.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/release_pet.html">release_pet</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">release_pet</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># Really release KEVIN? y/n: y</span></span>
 <span><span class="co"># Are you sure? y/n: y</span></span>
 <span><span class="co"># KEVIN was set free!</span></span></code></pre></div>
+<p>Fare thee well, sweet KEVIN.</p>
 </div>
 <div class="section level2">
 <h2 id="advanced">Advanced<a class="anchor" aria-label="anchor" href="#advanced"></a>
