@@ -1,0 +1,38 @@
+---
+title: "Technical explanation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Technical explanation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#"
+)
+```
+
+This (draft) technical document explains the main functions in the package and what they do.
+
+Blueprints
+
+* `.create_blueprint()` is responsible for creating a new 'blueprint', a list of lists that contains the initial data for a new pet.
+* `.write_blueprint()` takes a blueprint and saves it to the system-dependent file path at `tools::R_user_dir("tamRgo", which = "data")`. It first checks if a blueprint already exists at the location. The function is interactive and asks the user to confirm their choice, but it can be overridden with the `ask` argument.
+* `.read_blueprint()` checks for a blueprint and reads it from the system-dependent path returned by `tools::R_user_dir("tamRgo", which = "data")`.
+
+Update blueprint
+
+* `.update_blueprint()` reads the blueprint; calculates time elapsed since the last interaction; adjusts age, XP, levels and status; and writes the new blueprint.
+* `.update_age()` checks the 'born' date in the blueprint against the current date. The difference days is the 'age' of the pet.
+* `.update_xp()` uses the time elapsed since the last interaction to to adjust the XP value given the provided 'XP increment' value. The new XP is compared to certain thresholds and the pet's level is adjusted depending on which of these are exceeded.
+* `.update_status()` changes the status values (happy, hungry, dirty) given the elapsed since the last interaction
+
+Interact with pet
+
+* `lay_egg()` generates and writes a new blueprint with some user interaction.
+* `get_stats()` reads the blueprint and prints certain parts of it.
+* `see_pet()` fetches a matrix that encodes the pet's image given its species and level and prints it to the console.
+* `play()`, `feed()` and `clean()` are cllaed by the user to adjust the 'happy', 'hungry' and 'dirty' values in the blueprint.
+* `release()` deletes the blueprint from your computer.

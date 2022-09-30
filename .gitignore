@@ -51,3 +51,4 @@ rsconnect/
 # macOS
 .DS_Store
 docs
+inst/doc
