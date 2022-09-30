@@ -1,55 +1,26 @@
 #' Return a Pet's Image as a Matrix
 #'
 #' @param species Character. The species of the pet to be drawn.
-#' @param size Integer. The number of rows and oclumns in the matrix.
 #'
 #' @return A matrix.
 #'
 #' @examples \dontrun{ .get_pet_matrix("X")}
 #'
 #' @noRd
-.get_pet_matrix <- function(species = c("X", "Y", "Z"), size = 16L) {
+.get_pet_matrix <- function(species = c("X", "Y", "Z")) {
 
   species <- match.arg(species)
 
   if (species == "X") {
-
-    matrix(
-      c(
-        rep(c(rep("\U2588", 2), rep("\U2591", 2)), 2),
-        rep(rep("\U2591", 4), 2)
-      ),
-      sqrt(size),
-      byrow = TRUE
-    )
-
+    return(species_images[["X"]])
   }
 
   if (species == "Y") {
-
-    matrix(
-      c(
-        rep("\U2591", 4),
-        rep(c("\U2591", rep("\U2588", 2), "\U2591"), 2),
-        rep("\U2591", 4)
-      ),
-      sqrt(size),
-      byrow = TRUE
-    )
-
+    return(species_images[["Y"]])
   }
 
   if (species == "Z") {
-
-    matrix(
-      c(
-        rep(rep("\U2591", 4), 2),
-        rep(c(rep("\U2591", 2), rep("\U2588", 2)), 2)
-      ),
-      sqrt(size),
-      byrow = TRUE
-    )
-
+    return(species_images[["Z"]])
   }
 
 }
