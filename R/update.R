@@ -26,12 +26,12 @@
 #'
 #' @noRd
 .update_blueprint <- function(
-    happy_increment  = 10L,
-    hungry_increment = 15L,
-    dirty_increment  = 30L,
+    happy_increment  = 5L,
+    hungry_increment = 10L,
+    dirty_increment  = 15L,
     xp_increment     = 5L,
     xp_threshold_1   = 100L,
-    xp_threshold_2   = 250L,
+    xp_threshold_2   = 200L,
     xp_threshold_3   = 500L
 ) {
 
@@ -45,60 +45,86 @@
 
   bp <- .read_blueprint()
 
-  current_interaction <- Sys.time()
-  bp$meta$last_interaction <- current_interaction
+  current_time <- Sys.time()
+  current_date <- Sys.Date()
 
-  time_diff <-
-    as.numeric(current_interaction - bp$meta$last_interaction, units = "mins")
+  time_diff <- as.integer(
+    as.numeric(
+      current_time - bp$meta$last_interaction,
+      units = "mins"
+    )
+  )
 
-  bp$characteristics$age <-
-    as.numeric(Sys.Date() - as.Date(bp$characteristics$born), units = "days")
+  bp <- .update_age(bp, current_date)
 
   bp <- .update_status(
-    bp, time_diff,
-    happy_increment, hungry_increment, dirty_increment
+    bp,
+    time_diff,
+    happy_increment,
+    hungry_increment,
+    dirty_increment
   )
 
   bp <- .update_xp(
-    bp, time_diff,
-    xp_increment, xp_threshold_1, xp_threshold_2, xp_threshold_3
+    bp,
+    time_diff,
+    xp_increment,
+    xp_threshold_1,
+    xp_threshold_2,
+    xp_threshold_3
   )
 
+  bp$meta$last_interaction <- current_time
   .write_blueprint(bp, ask = FALSE)
 
   return(bp)
 
 }
 
-.update_status <- function(
-    blueprint,
-    time_difference,
-    happy_increment,
-    hungry_increment,
-    dirty_increment
-) {
+.update_age <- function(blueprint, date) {
 
-  if(
-    !is.integer(happy_increment) |
-    !is.integer(hungry_increment) |
-    !is.integer(dirty_increment)
+  if (!is.list(blueprint) |
+      length(blueprint) != 4 |
+      all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
   ) {
-    stop("'*_increment' values must integers.")
+    stop("Argument 'blueprint' must be a list of lists.")
   }
 
-  blueprint$status$happy <-
-    max(blueprint$status$happy - (time_difference %/% happy_increment), 0L)
+  if (!inherits(date, "Date")) {
+    stop("Argument 'date' must be of class Date.")
+  }
 
-  blueprint$status$hungry <-
-    min(blueprint$status$hungry + (time_difference %/% hungry_increment), 5L)
-
-  blueprint$status$dirty <-
-    min(blueprint$status$dirty + (time_difference %/% dirty_increment), 5L)
+  blueprint$characteristics$age <- as.integer(
+    as.numeric(
+      date - as.Date(blueprint$characteristics$born),
+      units = "days"
+    )
+  )
 
   return(blueprint)
 
 }
 
+#' Update Time-Dependent Experience Values
+#'
+#' @description Update time-dependent blueprint values given how much time has
+#'     elapsed since the last recorded interaction. Affects  experience values
+#'     ('XP', 'level').
+#'
+#' @param happy_increment Integer. How many minutes must elapse before the
+#'     'happy' status value decreases by 1?
+#' @param hungry_increment Integer. How many minutes must elapse before the
+#'     'hungry' status value decreases by 1?
+#' @param dirty_increment Integer. How many minutes must elapse before the
+#'     'dirty' status value decreases by 1?
+#'
+#' @details A sub-function of \code{\link{.update_blueprint}}.
+#'
+#' @return A list.available
+#'
+#' @examples \dontrun{.update_status()}
+#'
+#' @noRd
 .update_xp <- function(
     blueprint,
     time_difference,
@@ -112,16 +138,18 @@
       length(blueprint) != 4 |
       all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
   ) {
-    stop("'blueprint' must be a list of lists.")
+    stop("Argument 'blueprint' must be a list of lists.")
   }
 
   if(!is.integer(c(xp_threshold_1, xp_threshold_2, xp_threshold_3)) ) {
-    stop("'xp_threshold_*' values must be integers.")
+    stop("Arguments 'xp_threshold_*' must be integers.")
   }
 
+  # Increment XP
   blueprint$experience$xp <-
     blueprint$experience$xp + (time_difference %/% xp_increment)
 
+  # Check if XP meets threshold to level up
   if (blueprint$experience$xp >= xp_threshold_3) {
     blueprint$experience$level <- 3L
   } else if (blueprint$experience$xp >= xp_threshold_2) {
@@ -129,6 +157,58 @@
   } else if (blueprint$experience$xp >= xp_threshold_1) {
     blueprint$experience$level <- 1L
   }
+
+  return(blueprint)
+
+}
+
+#' Update Time-Dependent Status Values
+#'
+#' @description Update time-dependent blueprint values given how much time has
+#'     elapsed since the last recorded interaction. Affects statuses ('happy',
+#'     'hungry', 'dirty').
+#'
+#' @param happy_increment Integer. How many minutes must elapse before the
+#'     'happy' status value decreases by 1?
+#' @param hungry_increment Integer. How many minutes must elapse before the
+#'     'hungry' status value decreases by 1?
+#' @param dirty_increment Integer. How many minutes must elapse before the
+#'     'dirty' status value decreases by 1?
+#'
+#' @details A sub-function of \code{\link{.update_blueprint}}.
+#'
+#' @return A list.available
+#'
+#' @examples \dontrun{.update_status()}
+#'
+#' @noRd
+.update_status <- function(
+    blueprint,
+    time_difference,
+    happy_increment,
+    hungry_increment,
+    dirty_increment
+) {
+
+  if (!is.list(blueprint) |
+      length(blueprint) != 4 |
+      all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
+  ) {
+    stop("Argument 'blueprint' must be a list of lists.")
+  }
+
+  if(!is.integer(c(happy_increment, hungry_increment, dirty_increment))) {
+    stop("Arguments '*_increment' must be integers.")
+  }
+
+  blueprint$status$happy <-
+    max(blueprint$status$happy - (time_difference %/% happy_increment), 0L)
+
+  blueprint$status$hungry <-
+    min(blueprint$status$hungry + (time_difference %/% hungry_increment), 5L)
+
+  blueprint$status$dirty <-
+    min(blueprint$status$dirty + (time_difference %/% dirty_increment), 5L)
 
   return(blueprint)
 
