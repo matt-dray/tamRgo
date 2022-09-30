@@ -27,12 +27,9 @@ Instructions will appear when you load the package.
 ``` r
 library(tamRgo)
 # Welcome to {tamRgo}, a digital pet in the R console!
-#   - Docs at <https://matt-dray.github.io/tamRgo>
-#   - Create a new pet: lay_egg()
-#   - Get pet stats: see_stats()
-#   - Interact: play(), feed(), clean()
-#   - Say goodbye: release_pet()
-#   - Your pet continues to exist after your session ends
+#  - Docs: <https://matt-dray.github.io/tamRgo>
+#  - New pet: lay_egg()
+#  - Then: get_stats(), see_pet(), play(), feed(), clean()
 ```
 
 ## Play
@@ -46,7 +43,7 @@ lay_egg("KEVIN")
 # Save pet blueprint? y/n: y
 # Saved pet blueprint.
 # You have a new egg... it hatched!
-# See its stats with see_stats()
+# See its stats with get_stats()
 ```
 
 At any time you can see the latest statistics about your pet. 

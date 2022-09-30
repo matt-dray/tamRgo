@@ -21,7 +21,7 @@ lay_egg <- function(pet_name) {
   message(".", appendLF = FALSE); Sys.sleep(1)
   message(".", appendLF = FALSE); Sys.sleep(1)
   message(" it hatched!", appendLF = FALSE)
-  message("\nSee its stats with see_stats()")
+  message("\nSee its stats with get_stats()")
 
 }
 
