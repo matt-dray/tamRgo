@@ -51,20 +51,17 @@ At any time you can see the latest statistics about your pet.
 ``` r
 see_stats()
 # Characteristics
-#   - Name:    KEVIN
-#   - Species: Z
-#   - Born:    2022-09-20
-#   - Age:     0
-# Experience
-#   - Level:   1
-#   - XP:      0
+#   Name:    KEVIN
+#   Species: Z
+#   Age:     0
+#   Level:   1
 # Status
-#   - Happy:   0/5
-#   - Hungry:  0/5
-#   - Dirty:   0/5
+#   Happy:  □□□□□
+#   Hungry: □□□□□
+#   Dirty:  □□□□□
 ```
 
-These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate experience points (XP) that contribute towards levelling up and visual transformations.
+These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate (hidden) experience points (XP) that contribute towards levelling up and visual transformations.
 
 You can view in the console an image of your pet at any time. Their appearance will depend on their species.
 
@@ -86,6 +83,23 @@ You can `play()`, `feed()` or `clean()` to change your pet's status values.
 play()
 # 'Happy' status value is now 1/5
 ```
+
+Let's recheck the 'happy' status.
+
+``` r
+see_stats()
+# Characteristics
+#   Name:    KEVIN
+#   Species: Z
+#   Age:     0
+#   Level:   1
+# Status
+#   Happy:  ■□□□□
+#   Hungry: □□□□□
+#   Dirty:  □□□□□
+```
+
+Huzzah.
 
 You can release your pet if you feel the time is right. This will delete its blueprint from your computer.
 

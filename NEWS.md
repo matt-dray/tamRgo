@@ -1,4 +1,8 @@
 
+# tamRgo 0.0.0.9004
+
+* Simplified the output of `get_stats()` and included 'bars' for status values.
+
 # tamRgo 0.0.0.9003
 
 * Added a list of placeholder 'graphics' as internal data, with methods to call (i.e. `.get_pet_matrix()`) and print them (i.e. `.draw_pet()`), wrapped into the exported function `see_pet()` (towards #10).

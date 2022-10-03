@@ -56,17 +56,14 @@ get_stats <- function() {
 
   message(
     "Characteristics",
-    "\n - Name:    ", bp$characteristics$name,
-    "\n - Species: ", bp$characteristics$species,
-    "\n - Born:    ", bp$characteristics$born,
-    "\n - Age:     ", bp$characteristics$age,
-    "\nExperience",
-    "\n - Level:   ", bp$experience$level,
-    "\n - XP:      ", bp$experience$xp,
+    "\n  Name:    ", bp$characteristics$name,
+    "\n  Species: ", bp$characteristics$species,
+    "\n  Age:     ", bp$characteristics$age,
+    "\n  Level:   ", bp$experience$level,
     "\nStatus",
-    "\n - Happy:   ", bp$status$happy,  "/5",
-    "\n - Hungry:  ", bp$status$hungry, "/5",
-    "\n - Dirty:   ", bp$status$dirty,  "/5"
+    "\n  Happy:   ", rep("■", bp$status$happy),  rep("□", 5 - bp$status$happy),
+    "\n  Hungry:  ", rep("■", bp$status$hungry), rep("□", 5 - bp$status$hungry),
+    "\n  Dirty:   ", rep("■", bp$status$dirty),  rep("□", 5 - bp$status$dirty)
   )
 
 }

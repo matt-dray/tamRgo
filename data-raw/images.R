@@ -3,10 +3,10 @@ xm <- pixeltrix::click_pixels(8, 8)
 ym <- pixeltrix::click_pixels(8, 8)
 zm <- pixeltrix::click_pixels(8, 8)
 
-matrix_to_sprite <- function(m, map = c("0" = "░", "1" = "█"), preview = TRUE) {
+matrix_to_sprite <- function(m, states = c("0" = "░", "1" = "█"), preview = TRUE) {
 
   mode(m) <- "character"
-  x <- matrix(map[m], nrow(m), ncol(m))
+  x <- matrix(states[m], nrow(m), ncol(m))
 
   if (preview) {
     for (i in seq(nrow(x))) {
