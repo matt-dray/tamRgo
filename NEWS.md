@@ -2,6 +2,7 @@
 # tamRgo 0.0.0.9004
 
 * Simplified the output of `get_stats()` and included 'bars' for status values.
+* Added graphics for species X, Y and Z for levels 0 (shared), 1, 2 and 3 (#10).
 
 # tamRgo 0.0.0.9003
 

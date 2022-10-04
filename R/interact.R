@@ -81,7 +81,11 @@ see_pet <- function() {
 
   bp <- .check_and_update()
 
-  pet_matrix <- .get_pet_matrix(bp$characteristics$species)
+  pet_matrix <- .get_pet_matrix(
+    bp$characteristics$species,
+    bp$experience$level
+  )
+
   .draw_pet(pet_matrix)
 
 }

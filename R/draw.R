@@ -7,20 +7,36 @@
 #' @examples \dontrun{ .get_pet_matrix("X")}
 #'
 #' @noRd
-.get_pet_matrix <- function(species = c("X", "Y", "Z")) {
+.get_pet_matrix <- function(species = c("X", "Y", "Z"), level = 1L:3L) {
 
   species <- match.arg(species)
 
-  if (species == "X") {
-    return(species_images[["X"]])
+  if (level == 0L) {
+    return(species_images[["X"]][["level_0"]])
   }
 
-  if (species == "Y") {
-    return(species_images[["Y"]])
+  if (species == "X" & level == 1L) {
+    return(species_images[["X"]][["level_1"]])
+  } else if (species == "X" & level == 2L) {
+    return(species_images[["X"]][["level_2"]])
+  } else if (species == "X" & level == 3L) {
+    return(species_images[["X"]][["level_3"]])
   }
 
-  if (species == "Z") {
-    return(species_images[["Z"]])
+  if (species == "Y" & level == 1L) {
+    return(species_images[["Y"]][["level_1"]])
+  } else if (species == "Y" & level == 2L) {
+    return(species_images[["Y"]][["level_2"]])
+  } else if (species == "Y" & level == 3L) {
+    return(species_images[["Y"]][["level_3"]])
+  }
+
+  if (species == "Z" & level == 1L) {
+    return(species_images[["Z"]][["level_1"]])
+  } else if (species == "Z" & level == 2L) {
+    return(species_images[["Z"]][["level_2"]])
+  } else if (species == "Z" & level == 3L) {
+    return(species_images[["Z"]][["level_3"]])
   }
 
 }
