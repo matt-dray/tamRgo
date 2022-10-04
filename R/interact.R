@@ -56,17 +56,14 @@ get_stats <- function() {
 
   message(
     "Characteristics",
-    "\n - Name:    ", bp$characteristics$name,
-    "\n - Species: ", bp$characteristics$species,
-    "\n - Born:    ", bp$characteristics$born,
-    "\n - Age:     ", bp$characteristics$age,
-    "\nExperience",
-    "\n - Level:   ", bp$experience$level,
-    "\n - XP:      ", bp$experience$xp,
+    "\n  Name:    ", bp$characteristics$name,
+    "\n  Species: ", bp$characteristics$species,
+    "\n  Age:     ", bp$characteristics$age,
+    "\n  Level:   ", bp$experience$level,
     "\nStatus",
-    "\n - Happy:   ", bp$status$happy,  "/5",
-    "\n - Hungry:  ", bp$status$hungry, "/5",
-    "\n - Dirty:   ", bp$status$dirty,  "/5"
+    "\n  Happy:   ", rep("\U025A0", bp$status$happy),  rep("\U025A1", 5 - bp$status$happy),
+    "\n  Hungry:  ", rep("\U025A0", bp$status$hungry), rep("\U025A1", 5 - bp$status$hungry),
+    "\n  Dirty:   ", rep("\U025A0", bp$status$dirty),  rep("\U025A1", 5 - bp$status$dirty)
   )
 
 }
@@ -84,7 +81,11 @@ see_pet <- function() {
 
   bp <- .check_and_update()
 
-  pet_matrix <- .get_pet_matrix(bp$characteristics$species)
+  pet_matrix <- .get_pet_matrix(
+    bp$characteristics$species,
+    bp$experience$level
+  )
+
   .draw_pet(pet_matrix)
 
 }
