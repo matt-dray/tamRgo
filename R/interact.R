@@ -61,9 +61,9 @@ get_stats <- function() {
     "\n  Age:     ", bp$characteristics$age,
     "\n  Level:   ", bp$experience$level,
     "\nStatus",
-    "\n  Happy:   ", rep("■", bp$status$happy),  rep("□", 5 - bp$status$happy),
-    "\n  Hungry:  ", rep("■", bp$status$hungry), rep("□", 5 - bp$status$hungry),
-    "\n  Dirty:   ", rep("■", bp$status$dirty),  rep("□", 5 - bp$status$dirty)
+    "\n  Happy:   ", rep("\U025A0", bp$status$happy),  rep("\U025A1", 5 - bp$status$happy),
+    "\n  Hungry:  ", rep("\U025A0", bp$status$hungry), rep("\U025A1", 5 - bp$status$hungry),
+    "\n  Dirty:   ", rep("\U025A0", bp$status$dirty),  rep("\U025A1", 5 - bp$status$dirty)
   )
 
 }

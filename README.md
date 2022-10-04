@@ -67,14 +67,13 @@ You can view in the console an image of your pet at any time. Their appearance w
 
 ```
 see_pet()
-░░░░░░░░
-░░█░░█░░
-░░████░░
-░█░██░█░
-░██████░
-░██░░██░
-░░████░░
-░░░░░░░░
+       
+  ███  
+ █ █ █ 
+ █████ 
+ ██ ██ 
+  ███  
+       
 ```
 
 You can `play()`, `feed()` or `clean()` to change your pet's status values.
