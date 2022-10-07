@@ -42,7 +42,6 @@ lay_egg <- function(pet_name) {
 #'   \item{xp}{Experience points.}
 #'   \item{happy}{Happiness on a scale of 0 to 5.}
 #'   \item{hungry}{Hunger on a scale of 0 to 5.}
-#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
 #' }
 #'
 #' @return Nothing.
@@ -62,8 +61,7 @@ get_stats <- function() {
     "\n  Level:   ", bp$experience$level,
     "\nStatus",
     "\n  Happy:   ", rep("\U025A0", bp$status$happy),  rep("\U025A1", 5 - bp$status$happy),
-    "\n  Hungry:  ", rep("\U025A0", bp$status$hungry), rep("\U025A1", 5 - bp$status$hungry),
-    "\n  Dirty:   ", rep("\U025A0", bp$status$dirty),  rep("\U025A1", 5 - bp$status$dirty)
+    "\n  Hungry:  ", rep("\U025A0", bp$status$hungry), rep("\U025A1", 5 - bp$status$hungry)
   )
 
 }
@@ -125,25 +123,6 @@ feed <- function() {
   bp$status$hungry <- max(bp$status$hungry - 1L, 0L)
   suppressMessages(.write_blueprint(bp, ask = FALSE))
   message("'Hungry' status value is now ", bp$status$hungry, "/5")
-
-}
-
-#' Clean Your Pet
-#'
-#' @description Reduces 'dirty' status value to 0.
-#'
-#' @return Nothing.
-#'
-#' @export
-#'
-#' @examples \dontrun{clean()}
-clean <- function() {
-
-  bp <- .check_and_update()
-
-  bp$status$dirty <- 0L
-  suppressMessages(.write_blueprint(bp, ask = FALSE))
-  message("'Dirty' status value is now 0/5")
 
 }
 

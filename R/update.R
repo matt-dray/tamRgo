@@ -3,14 +3,12 @@
 #'
 #' @description Update time-dependent blueprint values given how much time has
 #'     elapsed since the last recorded interaction. Affects statuses ('happy',
-#'     'hungry', 'dirty') and experience ('XP', 'level').
+#'     'hungry') and experience ('XP', 'level').
 #'
 #' @param happy_increment Integer. How many minutes must elapse before the
 #'     'happy' status value decreases by 1?
 #' @param hungry_increment Integer. How many minutes must elapse before the
 #'     'hungry' status value decreases by 1?
-#' @param dirty_increment Integer. How many minutes must elapse before the
-#'     'dirty' status value decreases by 1?
 #' @param xp_increment Integer. How many minutes must elapse before the pet
 #'     gains 1 XP (experience point)?
 #' @param xp_threshold_1 Integer. Minimum experience points (XP) required to
@@ -28,7 +26,6 @@
 .update_blueprint <- function(
     happy_increment  = 5L,
     hungry_increment = 10L,
-    dirty_increment  = 15L,
     xp_increment     = 5L,
     xp_threshold_1   = 100L,
     xp_threshold_2   = 200L,
@@ -61,8 +58,7 @@
     bp,
     time_diff,
     happy_increment,
-    hungry_increment,
-    dirty_increment
+    hungry_increment
   )
 
   bp <- .update_xp(
@@ -85,7 +81,7 @@
 
   if (!is.list(blueprint) |
       length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
+      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
   ) {
     stop("Argument 'blueprint' must be a list of lists.")
   }
@@ -115,8 +111,6 @@
 #'     'happy' status value decreases by 1?
 #' @param hungry_increment Integer. How many minutes must elapse before the
 #'     'hungry' status value decreases by 1?
-#' @param dirty_increment Integer. How many minutes must elapse before the
-#'     'dirty' status value decreases by 1?
 #'
 #' @details A sub-function of \code{\link{.update_blueprint}}.
 #'
@@ -136,7 +130,7 @@
 
   if (!is.list(blueprint) |
       length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
+      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
   ) {
     stop("Argument 'blueprint' must be a list of lists.")
   }
@@ -166,14 +160,12 @@
 #'
 #' @description Update time-dependent blueprint values given how much time has
 #'     elapsed since the last recorded interaction. Affects statuses ('happy',
-#'     'hungry', 'dirty').
+#'     'hungry').
 #'
 #' @param happy_increment Integer. How many minutes must elapse before the
 #'     'happy' status value decreases by 1?
 #' @param hungry_increment Integer. How many minutes must elapse before the
 #'     'hungry' status value decreases by 1?
-#' @param dirty_increment Integer. How many minutes must elapse before the
-#'     'dirty' status value decreases by 1?
 #'
 #' @details A sub-function of \code{\link{.update_blueprint}}.
 #'
@@ -186,18 +178,17 @@
     blueprint,
     time_difference,
     happy_increment,
-    hungry_increment,
-    dirty_increment
+    hungry_increment
 ) {
 
   if (!is.list(blueprint) |
       length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
+      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
   ) {
     stop("Argument 'blueprint' must be a list of lists.")
   }
 
-  if(!is.integer(c(happy_increment, hungry_increment, dirty_increment))) {
+  if(!is.integer(c(happy_increment, hungry_increment))) {
     stop("Arguments '*_increment' must be integers.")
   }
 
@@ -206,9 +197,6 @@
 
   blueprint$status$hungry <-
     min(blueprint$status$hungry + (time_difference %/% hungry_increment), 5L)
-
-  blueprint$status$dirty <-
-    min(blueprint$status$dirty + (time_difference %/% dirty_increment), 5L)
 
   return(blueprint)
 
