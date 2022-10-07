@@ -101,7 +101,12 @@ play <- function() {
 
   bp <- .check_and_update()
 
+  if (bp$status$happy >= 5) {
+    stop("Happiness is already at the maximum value! Can't play.")
+  }
+
   bp$status$happy <- min(bp$status$happy + 1L, 5L)
+  bp$experience$xp <- bp$experience$xp + 10L
   suppressMessages(.write_blueprint(bp, ask = FALSE))
   message("'Happy' status value is now ", bp$status$happy, "/5")
 
@@ -120,7 +125,12 @@ feed <- function() {
 
   bp <- .check_and_update()
 
+  if (bp$status$hungry <= 0) {
+    stop("Hunger is already at the minimum value! Can't feed.")
+  }
+
   bp$status$hungry <- max(bp$status$hungry - 1L, 0L)
+  bp$experience$xp <- bp$experience$xp + 5L
   suppressMessages(.write_blueprint(bp, ask = FALSE))
   message("'Hungry' status value is now ", bp$status$hungry, "/5")
 
