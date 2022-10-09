@@ -90,7 +90,7 @@ see_pet <- function() {
 
 #' Play with Your Pet
 #'
-#' @description Increase 'happy' status value by 1 (max 5).
+#' @description Increase 'happy' status value by 1 (max 5) and add 10 XP.
 #'
 #' @return Nothing.
 #'

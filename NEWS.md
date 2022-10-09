@@ -1,4 +1,9 @@
 
+# tamRgo 0.0.0.9005
+
+* Allowed for fourth level, a stage at which a pet can become unalive (towards #23).
+* Added common images for level 4 and unalive (towards #23).
+
 # tamRgo 0.0.0.9004
 
 * Simplified the output of `get_stats()` and included 'bars' for status values.

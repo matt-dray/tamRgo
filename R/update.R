@@ -17,6 +17,8 @@
 #'     reach level 2.
 #' @param xp_threshold_3 Integer. Minimum experience points (XP) required to
 #'     reach level 3.
+#' @param xp_threshold_4 Integer. Minimum experience points (XP) required to
+#'     reach level 4.
 #'
 #' @return A list.available
 #'
@@ -29,7 +31,8 @@
     xp_increment     = 5L,
     xp_threshold_1   = 100L,
     xp_threshold_2   = 200L,
-    xp_threshold_3   = 500L
+    xp_threshold_3   = 500L,
+    xp_threshold_4   = 1000L
 ) {
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
@@ -67,7 +70,8 @@
     xp_increment,
     xp_threshold_1,
     xp_threshold_2,
-    xp_threshold_3
+    xp_threshold_3,
+    xp_threshold_4
   )
 
   bp$meta$last_interaction <- current_time
@@ -125,7 +129,8 @@
     xp_increment,
     xp_threshold_1,
     xp_threshold_2,
-    xp_threshold_3
+    xp_threshold_3,
+    xp_threshold_4
 ) {
 
   if (!is.list(blueprint) |
@@ -135,7 +140,9 @@
     stop("Argument 'blueprint' must be a list of lists.")
   }
 
-  if(!is.integer(c(xp_threshold_1, xp_threshold_2, xp_threshold_3)) ) {
+  if(!is.integer(
+    c(xp_threshold_1, xp_threshold_2, xp_threshold_3, xp_threshold_4))
+  ) {
     stop("Arguments 'xp_threshold_*' must be integers.")
   }
 
@@ -144,7 +151,9 @@
     blueprint$experience$xp + (time_difference %/% xp_increment)
 
   # Check if XP meets threshold to level up
-  if (blueprint$experience$xp >= xp_threshold_3) {
+  if (blueprint$experience$xp >= xp_threshold_4) {
+    blueprint$experience$level <- 4L
+  } else if (blueprint$experience$xp >= xp_threshold_3) {
     blueprint$experience$level <- 3L
   } else if (blueprint$experience$xp >= xp_threshold_2) {
     blueprint$experience$level <- 2L

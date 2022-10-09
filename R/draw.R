@@ -12,31 +12,41 @@
   species <- match.arg(species)
 
   if (level == 0L) {
-    return(species_images[["X"]][["level_0"]])
+    return(species_images[["XYZ"]][["level_0"]])
+  } else if (level == 4L) {
+    return(species_images[["XYZ"]][["level_4"]])
+  } else if (level == "5L") {
+    return(species_images[["XYZ"]][["unalive"]])
   }
 
-  if (species == "X" & level == 1L) {
-    return(species_images[["X"]][["level_1"]])
-  } else if (species == "X" & level == 2L) {
-    return(species_images[["X"]][["level_2"]])
-  } else if (species == "X" & level == 3L) {
-    return(species_images[["X"]][["level_3"]])
+  if (species == "X") {
+    if (level == 1L) {
+      return(species_images[["X"]][["level_1"]])
+    } else if (level == 2L) {
+      return(species_images[["X"]][["level_2"]])
+    } else if (level == 3L) {
+      return(species_images[["X"]][["level_3"]])
+    }
   }
 
-  if (species == "Y" & level == 1L) {
-    return(species_images[["Y"]][["level_1"]])
-  } else if (species == "Y" & level == 2L) {
-    return(species_images[["Y"]][["level_2"]])
-  } else if (species == "Y" & level == 3L) {
-    return(species_images[["Y"]][["level_3"]])
+  if (species == "Y") {
+    if (level == 1L) {
+      return(species_images[["Y"]][["level_1"]])
+    } else if (level == 2L) {
+      return(species_images[["Y"]][["level_2"]])
+    } else if (level == 3L) {
+      return(species_images[["Y"]][["level_3"]])
+    }
   }
 
-  if (species == "Z" & level == 1L) {
-    return(species_images[["Z"]][["level_1"]])
-  } else if (species == "Z" & level == 2L) {
-    return(species_images[["Z"]][["level_2"]])
-  } else if (species == "Z" & level == 3L) {
-    return(species_images[["Z"]][["level_3"]])
+  if (species == "Z") {
+    if (level == 1L) {
+      return(species_images[["Z"]][["level_1"]])
+    } else if (level == 2L) {
+      return(species_images[["Z"]][["level_2"]])
+    } else if (level == 3L) {
+      return(species_images[["Z"]][["level_3"]])
+    }
   }
 
 }
