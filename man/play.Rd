@@ -10,7 +10,7 @@ play()
 Nothing.
 }
 \description{
-Increase 'happy' status value by 1 (max 5).
+Increase 'happy' status value by 1 (max 5) and add 10 XP.
 }
 \examples{
 \dontrun{play()}

@@ -33,7 +33,6 @@
 #' \describe{
 #'   \item{happy}{Happiness on a scale of 0 to 5.}
 #'   \item{hungry}{Hunger on a scale of 0 to 5.}
-#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
 #' }
 #'
 #' @return A list.
@@ -67,8 +66,7 @@
     ),
     status = list(
       happy = 0L,
-      hungry = 0L,
-      dirty = 0L
+      hungry = 0L
     )
   )
 

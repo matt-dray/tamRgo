@@ -11,7 +11,7 @@
         "Welcome to {tamRgo}, a digital pet in the R console!",
         "\n - Docs: <https://matt-dray.github.io/tamRgo>",
         "\n - New pet: lay_egg()",
-        "\n - Then: get_stats(), see_pet(), play(), feed(), clean()"
+        "\n - Then: get_stats(), see_pet(), play(), feed()"
       )
     )
 
@@ -25,7 +25,7 @@
       paste0(
         "Your pet, ", bp$characteristics$name, ", is pleased to see you!",
         "\n - Docs: <https://matt-dray.github.io/tamRgo>",
-        "\n - You can get_stats(), see_pet(), play(), feed(), clean()"
+        "\n - You can get_stats(), see_pet(), play(), feed()"
       )
     )
 

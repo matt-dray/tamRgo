@@ -34,5 +34,5 @@ Interact with pet
 * `lay_egg()` generates and writes a new blueprint with some user interaction.
 * `get_stats()` reads the blueprint and prints certain parts of it.
 * `see_pet()` fetches a matrix that encodes the pet's image given its species and level and prints it to the console.
-* `play()`, `feed()` and `clean()` are cllaed by the user to adjust the 'happy', 'hungry' and 'dirty' values in the blueprint.
+* `play()`, `feed()` and `clean()` are cllaed by the user to adjust the 'happy' and 'hungry' values in the blueprint.
 * `release()` deletes the blueprint from your computer.

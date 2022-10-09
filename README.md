@@ -29,7 +29,7 @@ library(tamRgo)
 # Welcome to {tamRgo}, a digital pet in the R console!
 #  - Docs: <https://matt-dray.github.io/tamRgo>
 #  - New pet: lay_egg()
-#  - Then: get_stats(), see_pet(), play(), feed(), clean()
+#  - Then: get_stats(), see_pet(), play(), feed()
 ```
 
 ## Play
@@ -58,7 +58,6 @@ see_stats()
 # Status
 #   Happy:  □□□□□
 #   Hungry: □□□□□
-#   Dirty:  □□□□□
 ```
 
 These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate (hidden) experience points (XP) that contribute towards levelling up and visual transformations.
@@ -76,7 +75,7 @@ see_pet()
        
 ```
 
-You can `play()`, `feed()` or `clean()` to change your pet's status values.
+You can `play()` or `feed()` to change your pet's status values.
 
 ``` r
 play()
@@ -95,7 +94,6 @@ see_stats()
 # Status
 #   Happy:  ■□□□□
 #   Hungry: □□□□□
-#   Dirty:  □□□□□
 ```
 
 Huzzah.

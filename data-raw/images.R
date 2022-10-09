@@ -1,3 +1,7 @@
+
+# Create internal data list of species images -----------------------------
+
+
 xyz0 <- pixeltrix::click_pixels(7, 7)
 
 x1 <- pixeltrix::click_pixels(8, 8)
@@ -12,7 +16,12 @@ z1 <- pixeltrix::click_pixels(8, 8)
 z2 <- pixeltrix::click_pixels(10, 10)
 z3 <- pixeltrix::click_pixels(12, 12)
 
-matrix_to_sprite <- function(m, states = c("0" = " ", "1" = "█"), preview = TRUE) {
+xyz4 <- pixeltrix::click_pixels(12, 12)
+xyz_unalive <- pixeltrix::click_pixels(10, 10)
+
+matrix_to_sprite <- function(m,
+                             states = c("0" = " ", "1" = "█"),
+                             preview = TRUE) {
 
   mode(m) <- "character"
   x <- matrix(states[m], nrow(m), ncol(m))
@@ -42,10 +51,16 @@ matrix_to_sprite(z1) -> z1_s
 matrix_to_sprite(z2) -> z2_s
 matrix_to_sprite(z3) -> z3_s
 
+matrix_to_sprite(xyz4) -> xyz4_s
+matrix_to_sprite(xyz_unalive) -> xyz_unalive_s
+
 species_images <- list(
-  X = list(level_0 = xyz0_s, level_1 = x1_s, level_2 = x2_s, level_3 = x3_s),
-  Y = list(level_0 = xyz0_s, level_1 = y1_s, level_2 = y2_s, level_3 = y3_s) ,
-  Z = list(level_0 = xyz0_s, level_1 = z1_s, level_2 = z2_s, level_3 = z3_s)
+  XYZ = list(level_0 = xyz0_s, level_4 = xyz4_s, unalive = xyz_unalive_s),
+  X = list(level_1 = x1_s, level_2 = x2_s, level_3 = x3_s),
+  Y = list(level_1 = y1_s, level_2 = y2_s, level_3 = y3_s),
+  Z = list(level_1 = z1_s, level_2 = z2_s, level_3 = z3_s)
 )
 
 usethis::use_data(species_images, internal = TRUE, overwrite = TRUE)
+
+# load("R/sysdata.rda")  # load saved file
