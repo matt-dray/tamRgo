@@ -130,7 +130,6 @@ feed <- function() {
   }
 
   bp$status$hungry <- max(bp$status$hungry - 1L, 0L)
-  bp$experience$xp <- bp$experience$xp + 5L
   suppressMessages(.write_blueprint(bp, ask = FALSE))
   message("'Hungry' status value is now ", bp$status$hungry, "/5")
 

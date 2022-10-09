@@ -7,7 +7,7 @@
 #' @examples \dontrun{ .get_pet_matrix("X")}
 #'
 #' @noRd
-.get_pet_matrix <- function(species = c("X", "Y", "Z"), level = 1L:3L) {
+.get_pet_matrix <- function(species = c("X", "Y", "Z"), level = 0L:5L) {
 
   species <- match.arg(species)
 
