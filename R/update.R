@@ -216,7 +216,7 @@
   if (age > 30L) {
 
     blueprint$characteristics$alive <- FALSE
-    blueprint$experience$level <- 5L
+    blueprint$experience$level <- 4L
 
   }
 

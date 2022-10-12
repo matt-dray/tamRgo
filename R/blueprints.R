@@ -54,7 +54,7 @@
     meta = list(
       pet_id = rolled$pet_id,
       last_interaction = datetime,
-      alive = TRUE,
+      alive = TRUE
     ),
     characteristics = list(
       name = pet_name,
