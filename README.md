@@ -100,7 +100,9 @@ see_stats()
 
 Huzzah.
 
-You can release your pet if you feel the time is right. This will delete its blueprint from your computer.
+Note that your pet will get older and eventually it will be not be alive anymore. It's not completely clear what causes a pet to reach its demise, but I've heard that responsible pet owners may get longer-living pets.
+
+You can also release your pet if you feel the time is right. This will delete its blueprint from your computer.
 
 ``` r
 release_pet()
@@ -110,6 +112,8 @@ release_pet()
 ```
 
 Fare thee well, sweet KEVIN.
+
+
 
 ## Advanced
 
