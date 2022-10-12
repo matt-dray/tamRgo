@@ -1,8 +1,14 @@
+# tamRgo 0.0.0.9006
+
+* Add simple draft of unalive logic (towards #23).
+* Re-instigated concept of 'dirty'.
+* Add check_blueprint to utils.
 
 # tamRgo 0.0.0.9005
 
 * Allowed for fourth level, a stage at which a pet can become unalive (towards #23).
 * Added common images for level 4 and unalive (towards #23).
+* Removed 'dirty' concept for simplificiation.
 
 # tamRgo 0.0.0.9004
 

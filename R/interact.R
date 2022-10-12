@@ -42,6 +42,7 @@ lay_egg <- function(pet_name) {
 #'   \item{xp}{Experience points.}
 #'   \item{happy}{Happiness on a scale of 0 to 5.}
 #'   \item{hungry}{Hunger on a scale of 0 to 5.}
+#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
 #' }
 #'
 #' @return Nothing.
@@ -53,15 +54,38 @@ get_stats <- function() {
 
   bp <- .check_and_update()
 
+  if (bp$experience$level == 0L) {
+    level_text <- "newborn"
+  } else if (bp$experience$level == 1L) {
+    level_text <- "child"
+  } else if (bp$experience$level == 2L) {
+    level_text <- "teen"
+  } else if (bp$experience$level == 3L) {
+    level_text <- "adult"
+  } else if (bp$experience$level == 4L) {
+    level_text <- "ageing"
+  } else if (bp$experience$level == 5L) {
+    level_text <- "unalive"
+  }
+
+  empty_happy  <- rep("\U025A0", bp$status$happy)
+  empty_hungry <- rep("\U025A0", bp$status$hungry)
+  empty_dirty  <- rep("\U025A0", bp$status$dirty)
+
+  filled_happy  <- rep("\U025A1", 5 - bp$status$happy)
+  filled_hungry <- rep("\U025A1", 5 - bp$status$hungry)
+  filled_dirty  <- rep("\U025A1", 5 - bp$status$dirty)
+
   message(
     "Characteristics",
     "\n  Name:    ", bp$characteristics$name,
     "\n  Species: ", bp$characteristics$species,
     "\n  Age:     ", bp$characteristics$age,
-    "\n  Level:   ", bp$experience$level,
+    "\n  Level:   ", bp$experience$level, paste0(" (", level_text, ")"),
     "\nStatus",
-    "\n  Happy:   ", rep("\U025A0", bp$status$happy),  rep("\U025A1", 5 - bp$status$happy),
-    "\n  Hungry:  ", rep("\U025A0", bp$status$hungry), rep("\U025A1", 5 - bp$status$hungry)
+    "\n  Happy:   ", empty_happy,  filled_happy,  ifelse(filled_happy  == 0L, " !", ""),
+    "\n  Hungry:  ", empty_hungry, filled_hungry, ifelse(filled_hungry == 5L, " !", ""),
+    "\n  Dirty:   ", empty_dirty,  filled_dirty,  ifelse(filled_dirty  == 5L, " !", "")
   )
 
 }
@@ -102,7 +126,10 @@ play <- function() {
   bp <- .check_and_update()
 
   if (bp$status$happy >= 5) {
-    stop("Happiness is already at the maximum value! Can't play.")
+    stop(
+      "Happiness is already at the maximum value! Can't play.",
+      call. = FALSE
+    )
   }
 
   bp$status$happy <- min(bp$status$happy + 1L, 5L)
@@ -126,12 +153,41 @@ feed <- function() {
   bp <- .check_and_update()
 
   if (bp$status$hungry <= 0) {
-    stop("Hunger is already at the minimum value! Can't feed.")
+    stop(
+      "Hunger is already at the minimum value! Can't feed.",
+      call. = FALSE
+    )
   }
 
   bp$status$hungry <- max(bp$status$hungry - 1L, 0L)
   suppressMessages(.write_blueprint(bp, ask = FALSE))
   message("'Hungry' status value is now ", bp$status$hungry, "/5")
+
+}
+
+#' Clean Your Pet
+#'
+#' @description Reduces 'dirty' status value to 0.
+#'
+#' @return Nothing.
+#'
+#' @export
+#'
+#' @examples \dontrun{clean()}
+clean <- function() {
+
+  bp <- .check_and_update()
+
+  if (bp$status$dirty == 0) {
+    stop(
+      "Dirtiness is already at the minimum value! Can't clean.",
+      call. = FALSE
+    )
+  }
+
+  bp$status$dirty <- 0L
+  suppressMessages(.write_blueprint(bp, ask = FALSE))
+  message("'Dirty' status value is now 0/5")
 
 }
 

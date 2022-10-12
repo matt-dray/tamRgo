@@ -34,6 +34,7 @@
 #' \describe{
 #'   \item{happy}{Happiness on a scale of 0 to 5.}
 #'   \item{hungry}{Hunger on a scale of 0 to 5.}
+#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
 #' }
 #'
 #' @return A list.
@@ -44,7 +45,10 @@
 .create_blueprint <- function(pet_name) {
 
   if (!is.character(pet_name) | nchar(pet_name) > 8) {
-    stop("Argument 'pet_name' must be a string with 8 characters or fewer.")
+    stop(
+      "Argument 'pet_name' must be a string with 8 characters or fewer.",
+      call. = FALSE
+    )
   }
 
   rolled <- .roll_characteristics()
@@ -68,7 +72,8 @@
     ),
     status = list(
       happy = 0L,
-      hungry = 0L
+      hungry = 0L,
+      dirty = 0L
     )
   )
 
@@ -156,7 +161,7 @@
 
     } else {
 
-      stop("Did not write pet's blueprint.")
+      stop("Did not write pet's blueprint.", call. = FALSE)
 
     }
 
@@ -178,7 +183,7 @@
 
     } else {
 
-      stop("Did not overwrite existing pet blueprint.")
+      stop("Did not overwrite existing pet blueprint.", call. = FALSE)
 
     }
 
@@ -200,7 +205,7 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("There is no blueprint to read.")
+    stop("There is no blueprint to read.", call. = FALSE)
   }
 
   if (has_data_file) {

@@ -19,7 +19,7 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("A pet blueprint hasn't been found.")
+    stop("A pet blueprint hasn't been found.", call. = FALSE)
   }
 
   bp <- .read_blueprint()
@@ -29,14 +29,13 @@
 
 }
 
-
 .check_blueprint <-  function(blueprint) {
 
   if (!is.list(blueprint) |
       length(blueprint) != 4 |
       all(lengths(blueprint) != c(3L, 4L, 2L, 3L))
   ) {
-    stop("Argument 'blueprint' must be a list of lists")
+    stop("Argument 'blueprint' must be a list of lists", call. = FALSE)
   }
 
 }
