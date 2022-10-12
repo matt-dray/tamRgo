@@ -75,7 +75,16 @@
   )
 
   bp$meta$last_interaction <- current_time
+
+  bp <- .update_alive(bp, bp$characteristics$age)
+
   .write_blueprint(bp, ask = FALSE)
+
+  if (!bp$characteristics$age) {
+    message("Uhoh", bp$characteristics$name, "is unalive.")
+
+  }
+
 
   return(bp)
 
@@ -191,6 +200,25 @@
 
   blueprint$status$hungry <-
     min(blueprint$status$hungry + (time_difference %/% hungry_increment), 5L)
+
+  return(blueprint)
+
+}
+
+.update_alive <- function(blueprint, age) {
+
+  .check_blueprint(blueprint)
+
+  if (!inherits(age, "integer")) {
+    stop("Argument 'age' must be of class integer.")
+  }
+
+  if (age > 30L) {
+
+    blueprint$characteristics$alive <- FALSE
+    blueprint$experience$level <- 5L
+
+  }
 
   return(blueprint)
 

@@ -13,7 +13,7 @@
 
 * Added a list of placeholder 'graphics' as internal data, with methods to call (i.e. `.get_pet_matrix()`) and print them (i.e. `.draw_pet()`), wrapped into the exported function `see_pet()` (towards #10).
 * Added simple system for levelling up through `.update_xp()` (towards #9, #24).
-* `see_stats` renamed to `get_stats()`
+* `see_stats()` renamed to `get_stats()`
 
 # tamRgo 0.0.0.9002
 
