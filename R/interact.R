@@ -76,6 +76,10 @@ get_stats <- function() {
   filled_hungry <- rep("\U025A1", 5 - bp$status$hungry)
   filled_dirty  <- rep("\U025A1", 5 - bp$status$dirty)
 
+  warn_happy  <- ifelse(length(filled_happy)  == 5L, " !", "  ")
+  warn_hungry <- ifelse(length(filled_hungry) == 0L, " !", "  ")
+  warn_dirty  <- ifelse(length(filled_dirty)  == 0L, " !", "  ")
+
   message(
     "Characteristics",
     "\n  Name:    ", bp$characteristics$name,
@@ -83,9 +87,9 @@ get_stats <- function() {
     "\n  Age:     ", bp$characteristics$age,
     "\n  Level:   ", bp$experience$level, paste0(" (", level_text, ")"),
     "\nStatus",
-    "\n  Happy:   ", empty_happy,  filled_happy,  ifelse(filled_happy  == 0L, " !", ""),
-    "\n  Hungry:  ", empty_hungry, filled_hungry, ifelse(filled_hungry == 5L, " !", ""),
-    "\n  Dirty:   ", empty_dirty,  filled_dirty,  ifelse(filled_dirty  == 5L, " !", "")
+    "\n  Happy:   ", empty_happy,  filled_happy,  warn_happy,
+    "\n  Hungry:  ", empty_hungry, filled_hungry, warn_hungry,
+    "\n  Dirty:   ", empty_dirty,  filled_dirty,  warn_dirty
   )
 
 }
