@@ -83,12 +83,7 @@
 
 .update_age <- function(blueprint, date) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists.")
-  }
+  .check_blueprint(blueprint)
 
   if (!inherits(date, "Date")) {
     stop("Argument 'date' must be of class Date.")
@@ -133,12 +128,7 @@
     xp_threshold_4
 ) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists.")
-  }
+  .check_blueprint(blueprint)
 
   if(!is.integer(
     c(xp_threshold_1, xp_threshold_2, xp_threshold_3, xp_threshold_4))
@@ -190,12 +180,7 @@
     hungry_increment
 ) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists.")
-  }
+  .check_blueprint(blueprint)
 
   if(!is.integer(c(happy_increment, hungry_increment))) {
     stop("Arguments '*_increment' must be integers.")

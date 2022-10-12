@@ -12,6 +12,7 @@
 #' Section 'meta':
 #' \describe{
 #'   \item{pet_id}{Unique (probably) identification number.}
+#'   \item{alive}{Is the pet not unalive?}
 #'   \item{last_interaction}{Datetime that user last interacted with their pet.}
 #' }
 #'
@@ -52,7 +53,8 @@
   list(
     meta = list(
       pet_id = rolled$pet_id,
-      last_interaction = datetime
+      last_interaction = datetime,
+      alive = TRUE,
     ),
     characteristics = list(
       name = pet_name,
@@ -118,12 +120,7 @@
 #' @noRd
 .write_blueprint <- function(blueprint, ask = TRUE) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists")
-  }
+  .check_blueprint(blueprint)
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
   has_data_dir <- file.exists(data_dir)
