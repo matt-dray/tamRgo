@@ -43,7 +43,10 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("A pet blueprint hasn't been found.", call. = FALSE)
+    stop(
+      "A pet blueprint hasn't been found. Use lay_egg() for a new pet.",
+      call. = FALSE
+    )
   }
 
   bp <- .read_blueprint()
@@ -84,11 +87,13 @@
 
   .write_blueprint(bp, ask = FALSE)
 
-  if (!bp$characteristics$age) {
-    message("Uhoh", bp$characteristics$name, "is unalive.")
-
+  if (!bp$meta$alive) {
+    message(
+      "Uhoh, your pet ", bp$characteristics$name, " is unalive!",
+      "\n- Review their stats with get_stats()",
+      "\n- Get a new pet with lay_egg()"
+      )
   }
-
 
   return(bp)
 

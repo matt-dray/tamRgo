@@ -19,7 +19,10 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("A pet blueprint hasn't been found.", call. = FALSE)
+    stop(
+      "A pet blueprint hasn't been found. Use lay_egg() for a new pet.",
+      call. = FALSE
+    )
   }
 
   bp <- .read_blueprint()

@@ -21,7 +21,7 @@ lay_egg <- function(pet_name) {
   message(".", appendLF = FALSE); Sys.sleep(1)
   message(".", appendLF = FALSE); Sys.sleep(1)
   message(" it hatched!", appendLF = FALSE)
-  message("\nSee its stats with get_stats()")
+  message("\nYou can get_stats(), see_pet(), play(), feed(), clean().")
 
 }
 
@@ -148,7 +148,7 @@ play <- function() {
 
   bp <- .check_and_update()
 
-  if (bp$status$happy >= 5) {
+  if (bp$status$happy == 5) {
     stop(
       "Happiness is already at the maximum value! Can't play.",
       call. = FALSE
@@ -175,9 +175,9 @@ feed <- function() {
 
   bp <- .check_and_update()
 
-  if (bp$status$hungry >= 5) {
+  if (bp$status$hungry == 0) {
     stop(
-      "Hunger is already at the maximum value! Can't feed.",
+      "Hunger is already at the minimum value! Can't feed.",
       call. = FALSE
     )
   }
