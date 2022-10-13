@@ -59,11 +59,11 @@ get_stats <- function() {
   } else if (bp$experience$level == 1L) {
     level_text <- "child"
   } else if (bp$experience$level == 2L) {
-    level_text <- "teen"
+    level_text <- "youngling"
   } else if (bp$experience$level == 3L) {
     level_text <- "adult"
   } else if (bp$experience$level == 4L) {
-    level_text <- "ageing"
+    level_text <- "mature"
   } else if (bp$experience$level == 5L) {
     level_text <- "unalive"
   }
@@ -76,21 +76,40 @@ get_stats <- function() {
   filled_hungry <- rep("\U025A1", 5 - bp$status$hungry)
   filled_dirty  <- rep("\U025A1", 5 - bp$status$dirty)
 
-  warn_happy  <- ifelse(length(filled_happy)  == 5L, " !", "  ")
-  warn_hungry <- ifelse(length(filled_hungry) == 0L, " !", "  ")
-  warn_dirty  <- ifelse(length(filled_dirty)  == 0L, " !", "  ")
+  if (bp$status$happy == 0L) {
+    warn_happy  <- " !"
+  } else {
+    warn_happy <-  "  "
+  }
+
+  if (bp$status$hungry == 5L) {
+    warn_hungry <- " !"
+  } else {
+    warn_hungry <- "  "
+  }
+
+  if (bp$status$dirty == 5L) {
+    warn_dirty  <- " !"
+  } else {
+    warn_dirty  <- "  "
+  }
 
   message(
     "Characteristics",
     "\n  Name:    ", bp$characteristics$name,
     "\n  Species: ", bp$characteristics$species,
     "\n  Age:     ", bp$characteristics$age,
-    "\n  Level:   ", bp$experience$level, paste0(" (", level_text, ")"),
-    "\nStatus",
-    "\n  Happy:   ", empty_happy,  filled_happy,  warn_happy,
-    "\n  Hungry:  ", empty_hungry, filled_hungry, warn_hungry,
-    "\n  Dirty:   ", empty_dirty,  filled_dirty,  warn_dirty
+    "\n  Level:   ", bp$experience$level, paste0(" (", level_text, ")")
   )
+
+  if (bp$meta$alive) {
+    message(
+      "Status",
+      "\n  Happy:   ", empty_happy,  filled_happy,  warn_happy,
+      "\n  Hungry:  ", empty_hungry, filled_hungry, warn_hungry,
+      "\n  Dirty:   ", empty_dirty,  filled_dirty,  warn_dirty
+    )
+  }
 
 }
 
@@ -156,9 +175,9 @@ feed <- function() {
 
   bp <- .check_and_update()
 
-  if (bp$status$hungry <= 0) {
+  if (bp$status$hungry >= 5) {
     stop(
-      "Hunger is already at the minimum value! Can't feed.",
+      "Hunger is already at the maximum value! Can't feed.",
       call. = FALSE
     )
   }

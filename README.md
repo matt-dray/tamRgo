@@ -34,7 +34,7 @@ library(tamRgo)
 
 ## Play
 
-Much of the package's functionality is yet to be developed. You can expect the code below to change a great deal. See [the GitHub issues](https://github.com/matt-dray/tamRgo/issues) for upcoming functionality. 
+Much of the package's functionality is yet to be developed. You can expect the code and outputs below to change a great deal. See [the GitHub issues](https://github.com/matt-dray/tamRgo/issues) for upcoming functionality. 
 
 You must first request for an egg to be laid. This stores a persistent blueprint of your pet to your computer for safekeeping.
 
@@ -54,9 +54,9 @@ see_stats()
 #   Name:    KEVIN
 #   Species: Z
 #   Age:     0
-#   Level:   0
+#   Level:   0 (newborn)
 # Status
-#   Happy:  □□□□□
+#   Happy:  □□□□□ !
 #   Hungry: □□□□□
 #   Dirty:  □□□□□
 ```
@@ -91,7 +91,7 @@ see_stats()
 #   Name:    KEVIN
 #   Species: Z
 #   Age:     0
-#   Level:   0
+#   Level:   0 (newborn)
 # Status
 #   Happy:  ■□□□□
 #   Hungry: □□□□□

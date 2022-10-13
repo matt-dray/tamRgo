@@ -229,7 +229,7 @@
     stop("Argument 'age' must be of class integer.", call. = FALSE)
   }
 
-  if (age > 30L) {
+  if (age > 21L) {
 
     blueprint$characteristics$alive <- FALSE
     blueprint$experience$level <- 5L

@@ -2,6 +2,7 @@
 
 * Add simple draft of unalive logic (towards #23).
 * Re-instigated concept of 'dirty'.
+* Add warning to `get_stats()` if status bars have reached their maximum negative score.
 * Add check_blueprint to utils.
 
 # tamRgo 0.0.0.9005

@@ -4,7 +4,7 @@
 #'
 #' @return A matrix.
 #'
-#' @examples \dontrun{ .get_pet_matrix("X")}
+#' @examples \dontrun{ .get_pet_matrix("X", level = 3L)}
 #'
 #' @noRd
 .get_pet_matrix <- function(species = c("X", "Y", "Z"), level = 0L:5L) {

@@ -23,7 +23,10 @@
   }
 
   bp <- .read_blueprint()
-  bp <- suppressMessages(.update_blueprint())
+
+  if (bp$meta$alive) {  # don't update it if unalive
+    bp <- suppressMessages(.update_blueprint())
+  }
 
   return(bp)
 
