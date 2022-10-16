@@ -28,7 +28,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tamRgo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9006</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,12 +88,12 @@
 <span><span class="co"># Welcome to {tamRgo}, a digital pet in the R console!</span></span>
 <span><span class="co">#  - Docs: &lt;https://matt-dray.github.io/tamRgo&gt;</span></span>
 <span><span class="co">#  - New pet: lay_egg()</span></span>
-<span><span class="co">#  - Then: get_stats(), see_pet(), play(), feed()</span></span></code></pre></div>
+<span><span class="co">#  - Then: get_stats(), see_pet(), play(), feed(), clean()</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="play">Play<a class="anchor" aria-label="anchor" href="#play"></a>
 </h2>
-<p>Much of the package’s functionality is yet to be developed. You can expect the code below to change a great deal. See <a href="https://github.com/matt-dray/tamRgo/issues" class="external-link">the GitHub issues</a> for upcoming functionality.</p>
+<p>Much of the package’s functionality is yet to be developed. You can expect the code and outputs below to change a great deal. See <a href="https://github.com/matt-dray/tamRgo/issues" class="external-link">the GitHub issues</a> for upcoming functionality.</p>
 <p>You must first request for an egg to be laid. This stores a persistent blueprint of your pet to your computer for safekeeping.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/lay_egg.html">lay_egg</a></span><span class="op">(</span><span class="st">"KEVIN"</span><span class="op">)</span></span>
@@ -108,10 +108,11 @@
 <span><span class="co">#   Name:    KEVIN</span></span>
 <span><span class="co">#   Species: Z</span></span>
 <span><span class="co">#   Age:     0</span></span>
-<span><span class="co">#   Level:   1</span></span>
+<span><span class="co">#   Level:   0 (newborn)</span></span>
 <span><span class="co"># Status</span></span>
-<span><span class="co">#   Happy:  □□□□□</span></span>
-<span><span class="co">#   Hungry: □□□□□</span></span></code></pre></div>
+<span><span class="co">#   Happy:  □□□□□ !</span></span>
+<span><span class="co">#   Hungry: □□□□□</span></span>
+<span><span class="co">#   Dirty:  □□□□□</span></span></code></pre></div>
 <p>These values will update over time. For example, the longer you wait to interact with your pet, the higher the ‘hunger’ status value will get. The pet will also accumulate (hidden) experience points (XP) that contribute towards levelling up and visual transformations.</p>
 <p>You can view in the console an image of your pet at any time. Their appearance will depend on their species.</p>
 <pre><code>see_pet()
@@ -122,7 +123,7 @@
  ██ ██ 
   ███  
        </code></pre>
-<p>You can <code><a href="reference/play.html">play()</a></code> or <code><a href="reference/feed.html">feed()</a></code> to change your pet’s status values.</p>
+<p>You can <code><a href="reference/play.html">play()</a></code>, <code><a href="reference/feed.html">feed()</a></code> or <code><a href="reference/clean.html">clean()</a></code> to change your pet’s status values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/play.html">play</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># 'Happy' status value is now 1/5</span></span></code></pre></div>
@@ -133,12 +134,14 @@
 <span><span class="co">#   Name:    KEVIN</span></span>
 <span><span class="co">#   Species: Z</span></span>
 <span><span class="co">#   Age:     0</span></span>
-<span><span class="co">#   Level:   1</span></span>
+<span><span class="co">#   Level:   0 (newborn)</span></span>
 <span><span class="co"># Status</span></span>
 <span><span class="co">#   Happy:  ■□□□□</span></span>
-<span><span class="co">#   Hungry: □□□□□</span></span></code></pre></div>
+<span><span class="co">#   Hungry: □□□□□</span></span>
+<span><span class="co">#   Dirty:  □□□□□</span></span></code></pre></div>
 <p>Huzzah.</p>
-<p>You can release your pet if you feel the time is right. This will delete its blueprint from your computer.</p>
+<p>Note that your pet will get older and eventually it will be not be alive anymore. It’s not completely clear what causes a pet to reach its demise, but I’ve heard that responsible pet owners may get longer-living pets.</p>
+<p>You can also release your pet if you feel the time is right. This will delete its blueprint from your computer.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">release_pet</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># Really release KEVIN? y/n: y</span></span>
