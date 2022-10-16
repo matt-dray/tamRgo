@@ -26,6 +26,7 @@ Section 'characteristics':
 \item{xp}{Experience points.}
 \item{happy}{Happiness on a scale of 0 to 5.}
 \item{hungry}{Hunger on a scale of 0 to 5.}
+\item{dirty}{Dirtiness on a scale of 0 to 5.}
 }
 }
 \examples{

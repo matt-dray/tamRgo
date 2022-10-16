@@ -29,12 +29,12 @@ library(tamRgo)
 # Welcome to {tamRgo}, a digital pet in the R console!
 #  - Docs: <https://matt-dray.github.io/tamRgo>
 #  - New pet: lay_egg()
-#  - Then: get_stats(), see_pet(), play(), feed()
+#  - Then: get_stats(), see_pet(), play(), feed(), clean()
 ```
 
 ## Play
 
-Much of the package's functionality is yet to be developed. You can expect the code below to change a great deal. See [the GitHub issues](https://github.com/matt-dray/tamRgo/issues) for upcoming functionality. 
+Much of the package's functionality is yet to be developed. You can expect the code and outputs below to change a great deal. See [the GitHub issues](https://github.com/matt-dray/tamRgo/issues) for upcoming functionality. 
 
 You must first request for an egg to be laid. This stores a persistent blueprint of your pet to your computer for safekeeping.
 
@@ -54,10 +54,11 @@ see_stats()
 #   Name:    KEVIN
 #   Species: Z
 #   Age:     0
-#   Level:   1
+#   Level:   0 (newborn)
 # Status
-#   Happy:  □□□□□
+#   Happy:  □□□□□ !
 #   Hungry: □□□□□
+#   Dirty:  □□□□□
 ```
 
 These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate (hidden) experience points (XP) that contribute towards levelling up and visual transformations.
@@ -75,7 +76,7 @@ see_pet()
        
 ```
 
-You can `play()` or `feed()` to change your pet's status values.
+You can `play()`, `feed()` or `clean()` to change your pet's status values.
 
 ``` r
 play()
@@ -90,15 +91,18 @@ see_stats()
 #   Name:    KEVIN
 #   Species: Z
 #   Age:     0
-#   Level:   1
+#   Level:   0 (newborn)
 # Status
 #   Happy:  ■□□□□
 #   Hungry: □□□□□
+#   Dirty:  □□□□□
 ```
 
 Huzzah.
 
-You can release your pet if you feel the time is right. This will delete its blueprint from your computer.
+Note that your pet will get older and eventually it will be not be alive anymore. It's not completely clear what causes a pet to reach its demise, but I've heard that responsible pet owners may get longer-living pets.
+
+You can also release your pet if you feel the time is right. This will delete its blueprint from your computer.
 
 ``` r
 release_pet()
@@ -108,6 +112,8 @@ release_pet()
 ```
 
 Fare thee well, sweet KEVIN.
+
+
 
 ## Advanced
 

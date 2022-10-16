@@ -12,6 +12,7 @@
 #' Section 'meta':
 #' \describe{
 #'   \item{pet_id}{Unique (probably) identification number.}
+#'   \item{alive}{Is the pet not unalive?}
 #'   \item{last_interaction}{Datetime that user last interacted with their pet.}
 #' }
 #'
@@ -33,6 +34,7 @@
 #' \describe{
 #'   \item{happy}{Happiness on a scale of 0 to 5.}
 #'   \item{hungry}{Hunger on a scale of 0 to 5.}
+#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
 #' }
 #'
 #' @return A list.
@@ -43,7 +45,10 @@
 .create_blueprint <- function(pet_name) {
 
   if (!is.character(pet_name) | nchar(pet_name) > 8) {
-    stop("Argument 'pet_name' must be a string with 8 characters or fewer.")
+    stop(
+      "Argument 'pet_name' must be a string with 8 characters or fewer.",
+      call. = FALSE
+    )
   }
 
   rolled <- .roll_characteristics()
@@ -52,7 +57,8 @@
   list(
     meta = list(
       pet_id = rolled$pet_id,
-      last_interaction = datetime
+      last_interaction = datetime,
+      alive = TRUE
     ),
     characteristics = list(
       name = pet_name,
@@ -66,7 +72,8 @@
     ),
     status = list(
       happy = 0L,
-      hungry = 0L
+      hungry = 0L,
+      dirty = 0L
     )
   )
 
@@ -118,12 +125,7 @@
 #' @noRd
 .write_blueprint <- function(blueprint, ask = TRUE) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 3L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists")
-  }
+  .check_blueprint(blueprint)
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
   has_data_dir <- file.exists(data_dir)
@@ -159,7 +161,7 @@
 
     } else {
 
-      stop("Did not write pet's blueprint.")
+      stop("Did not write pet's blueprint.", call. = FALSE)
 
     }
 
@@ -181,7 +183,7 @@
 
     } else {
 
-      stop("Did not overwrite existing pet blueprint.")
+      stop("Did not overwrite existing pet blueprint.", call. = FALSE)
 
     }
 
@@ -203,7 +205,7 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("There is no blueprint to read.")
+    stop("There is no blueprint to read.", call. = FALSE)
   }
 
   if (has_data_file) {

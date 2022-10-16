@@ -19,12 +19,29 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("A pet blueprint hasn't been found.")
+    stop(
+      "A pet blueprint hasn't been found. Use lay_egg() for a new pet.",
+      call. = FALSE
+    )
   }
 
   bp <- .read_blueprint()
-  bp <- suppressMessages(.update_blueprint())
+
+  if (bp$meta$alive) {  # don't update it if unalive
+    bp <- suppressMessages(.update_blueprint())
+  }
 
   return(bp)
+
+}
+
+.check_blueprint <-  function(blueprint) {
+
+  if (!is.list(blueprint) |
+      length(blueprint) != 4 |
+      all(lengths(blueprint) != c(3L, 4L, 2L, 3L))
+  ) {
+    stop("Argument 'blueprint' must be a list of lists", call. = FALSE)
+  }
 
 }

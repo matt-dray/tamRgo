@@ -3,12 +3,14 @@
 #'
 #' @description Update time-dependent blueprint values given how much time has
 #'     elapsed since the last recorded interaction. Affects statuses ('happy',
-#'     'hungry') and experience ('XP', 'level').
+#'     'hungry', 'dirty') and experience ('XP', 'level').
 #'
-#' @param happy_increment Integer. How many minutes must elapse before the
+#' @param happy_decrement Integer. How many minutes must elapse before the
 #'     'happy' status value decreases by 1?
 #' @param hungry_increment Integer. How many minutes must elapse before the
-#'     'hungry' status value decreases by 1?
+#'     'hungry' status value increases by 1?
+#' @param dirty_increment Integer. How many minutes must elapse before the
+#'     'dirty' status value increases by 1?
 #' @param xp_increment Integer. How many minutes must elapse before the pet
 #'     gains 1 XP (experience point)?
 #' @param xp_threshold_1 Integer. Minimum experience points (XP) required to
@@ -26,9 +28,10 @@
 #'
 #' @noRd
 .update_blueprint <- function(
-    happy_increment  = 5L,
-    hungry_increment = 10L,
-    xp_increment     = 5L,
+    happy_decrement  = 15L,
+    hungry_increment = 30L,
+    dirty_increment  = 45L,
+    xp_increment     = 60L,
     xp_threshold_1   = 100L,
     xp_threshold_2   = 200L,
     xp_threshold_3   = 500L,
@@ -40,7 +43,10 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("A pet blueprint hasn't been found.")
+    stop(
+      "A pet blueprint hasn't been found. Use lay_egg() for a new pet.",
+      call. = FALSE
+    )
   }
 
   bp <- .read_blueprint()
@@ -60,8 +66,9 @@
   bp <- .update_status(
     bp,
     time_diff,
-    happy_increment,
-    hungry_increment
+    happy_decrement,
+    hungry_increment,
+    dirty_increment
   )
 
   bp <- .update_xp(
@@ -75,7 +82,18 @@
   )
 
   bp$meta$last_interaction <- current_time
+
+  bp <- .update_alive(bp, bp$characteristics$age)
+
   .write_blueprint(bp, ask = FALSE)
+
+  if (!bp$meta$alive) {
+    message(
+      "Uhoh, your pet ", bp$characteristics$name, " is unalive!",
+      "\n- Review their stats with get_stats()",
+      "\n- Get a new pet with lay_egg()"
+      )
+  }
 
   return(bp)
 
@@ -83,15 +101,10 @@
 
 .update_age <- function(blueprint, date) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists.")
-  }
+  .check_blueprint(blueprint)
 
   if (!inherits(date, "Date")) {
-    stop("Argument 'date' must be of class Date.")
+    stop("Argument 'date' must be of class Date.", call. = FALSE)
   }
 
   blueprint$characteristics$age <- as.integer(
@@ -111,10 +124,16 @@
 #'     elapsed since the last recorded interaction. Affects  experience values
 #'     ('XP', 'level').
 #'
-#' @param happy_increment Integer. How many minutes must elapse before the
-#'     'happy' status value decreases by 1?
-#' @param hungry_increment Integer. How many minutes must elapse before the
-#'     'hungry' status value decreases by 1?
+#' @param xp_increment Integer. How many minutes must elapse before the pet
+#'     gains 1 XP (experience point)?
+#' @param xp_threshold_1 Integer. Minimum experience points (XP) required to
+#'     reach level 1.
+#' @param xp_threshold_2 Integer. Minimum experience points (XP) required to
+#'     reach level 2.
+#' @param xp_threshold_3 Integer. Minimum experience points (XP) required to
+#'     reach level 3.
+#' @param xp_threshold_4 Integer. Minimum experience points (XP) required to
+#'     reach level 4.
 #'
 #' @details A sub-function of \code{\link{.update_blueprint}}.
 #'
@@ -133,17 +152,12 @@
     xp_threshold_4
 ) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists.")
-  }
+  .check_blueprint(blueprint)
 
   if(!is.integer(
     c(xp_threshold_1, xp_threshold_2, xp_threshold_3, xp_threshold_4))
   ) {
-    stop("Arguments 'xp_threshold_*' must be integers.")
+    stop("Arguments 'xp_threshold_*' must be integers.", call. = FALSE)
   }
 
   # Increment XP
@@ -171,10 +185,12 @@
 #'     elapsed since the last recorded interaction. Affects statuses ('happy',
 #'     'hungry').
 #'
-#' @param happy_increment Integer. How many minutes must elapse before the
+#' @param happy_decrement Integer. How many minutes must elapse before the
 #'     'happy' status value decreases by 1?
 #' @param hungry_increment Integer. How many minutes must elapse before the
 #'     'hungry' status value decreases by 1?
+#' @param dirty_increment Integer. How many minutes must elapse before the
+#'     'dirty' status value decreases by 1?
 #'
 #' @details A sub-function of \code{\link{.update_blueprint}}.
 #'
@@ -186,26 +202,44 @@
 .update_status <- function(
     blueprint,
     time_difference,
-    happy_increment,
-    hungry_increment
+    happy_decrement,
+    hungry_increment,
+    dirty_increment
 ) {
 
-  if (!is.list(blueprint) |
-      length(blueprint) != 4 |
-      all(lengths(blueprint) != c(2L, 4L, 2L, 2L))
-  ) {
-    stop("Argument 'blueprint' must be a list of lists.")
-  }
+  .check_blueprint(blueprint)
 
-  if(!is.integer(c(happy_increment, hungry_increment))) {
-    stop("Arguments '*_increment' must be integers.")
+  if(!is.integer(c(happy_decrement, hungry_increment, dirty_increment))) {
+    stop("Arguments '*_increment' must be integers.", call. = FALSE)
   }
 
   blueprint$status$happy <-
-    max(blueprint$status$happy - (time_difference %/% happy_increment), 0L)
+    max(blueprint$status$happy - (time_difference %/% happy_decrement), 0L)
 
   blueprint$status$hungry <-
     min(blueprint$status$hungry + (time_difference %/% hungry_increment), 5L)
+
+  blueprint$status$dirty <-
+    min(blueprint$status$dirty + (time_difference %/% dirty_increment), 5L)
+
+  return(blueprint)
+
+}
+
+.update_alive <- function(blueprint, age) {
+
+  .check_blueprint(blueprint)
+
+  if (!inherits(age, "integer")) {
+    stop("Argument 'age' must be of class integer.", call. = FALSE)
+  }
+
+  if (age > 21L) {
+
+    blueprint$characteristics$alive <- FALSE
+    blueprint$experience$level <- 5L
+
+  }
 
   return(blueprint)
 

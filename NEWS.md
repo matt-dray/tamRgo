@@ -1,8 +1,15 @@
+# tamRgo 0.0.0.9006
+
+* Add simple draft of unalive logic (towards #23).
+* Re-instigated concept of 'dirty'.
+* Add warning to `get_stats()` if status bars have reached their maximum negative score.
+* Add check_blueprint to utils.
 
 # tamRgo 0.0.0.9005
 
 * Allowed for fourth level, a stage at which a pet can become unalive (towards #23).
 * Added common images for level 4 and unalive (towards #23).
+* Removed 'dirty' concept for simplificiation.
 
 # tamRgo 0.0.0.9004
 
@@ -13,7 +20,7 @@
 
 * Added a list of placeholder 'graphics' as internal data, with methods to call (i.e. `.get_pet_matrix()`) and print them (i.e. `.draw_pet()`), wrapped into the exported function `see_pet()` (towards #10).
 * Added simple system for levelling up through `.update_xp()` (towards #9, #24).
-* `see_stats` renamed to `get_stats()`
+* `see_stats()` renamed to `get_stats()`
 
 # tamRgo 0.0.0.9002
 
