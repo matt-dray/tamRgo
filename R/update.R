@@ -5,12 +5,12 @@
 #'     elapsed since the last recorded interaction. Affects statuses ('happy',
 #'     'hungry', 'dirty') and experience ('XP', 'level').
 #'
-#' @param happy_increment Integer. How many minutes must elapse before the
+#' @param happy_decrement Integer. How many minutes must elapse before the
 #'     'happy' status value decreases by 1?
 #' @param hungry_increment Integer. How many minutes must elapse before the
-#'     'hungry' status value decreases by 1?
+#'     'hungry' status value increases by 1?
 #' @param dirty_increment Integer. How many minutes must elapse before the
-#'     'dirty' status value decreases by 1?
+#'     'dirty' status value increases by 1?
 #' @param xp_increment Integer. How many minutes must elapse before the pet
 #'     gains 1 XP (experience point)?
 #' @param xp_threshold_1 Integer. Minimum experience points (XP) required to
@@ -28,10 +28,10 @@
 #'
 #' @noRd
 .update_blueprint <- function(
-    happy_increment  = 5L,
-    hungry_increment = 10L,
-    dirty_increment  = 15L,
-    xp_increment     = 5L,
+    happy_decrement  = 15L,
+    hungry_increment = 30L,
+    dirty_increment  = 45L,
+    xp_increment     = 60L,
     xp_threshold_1   = 100L,
     xp_threshold_2   = 200L,
     xp_threshold_3   = 500L,
@@ -66,7 +66,7 @@
   bp <- .update_status(
     bp,
     time_diff,
-    happy_increment,
+    happy_decrement,
     hungry_increment,
     dirty_increment
   )
@@ -185,7 +185,7 @@
 #'     elapsed since the last recorded interaction. Affects statuses ('happy',
 #'     'hungry').
 #'
-#' @param happy_increment Integer. How many minutes must elapse before the
+#' @param happy_decrement Integer. How many minutes must elapse before the
 #'     'happy' status value decreases by 1?
 #' @param hungry_increment Integer. How many minutes must elapse before the
 #'     'hungry' status value decreases by 1?
@@ -202,19 +202,19 @@
 .update_status <- function(
     blueprint,
     time_difference,
-    happy_increment,
+    happy_decrement,
     hungry_increment,
     dirty_increment
 ) {
 
   .check_blueprint(blueprint)
 
-  if(!is.integer(c(happy_increment, hungry_increment, dirty_increment))) {
+  if(!is.integer(c(happy_decrement, hungry_increment, dirty_increment))) {
     stop("Arguments '*_increment' must be integers.", call. = FALSE)
   }
 
   blueprint$status$happy <-
-    max(blueprint$status$happy - (time_difference %/% happy_increment), 0L)
+    max(blueprint$status$happy - (time_difference %/% happy_decrement), 0L)
 
   blueprint$status$hungry <-
     min(blueprint$status$hungry + (time_difference %/% hungry_increment), 5L)

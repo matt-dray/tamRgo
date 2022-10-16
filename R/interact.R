@@ -156,7 +156,7 @@ play <- function() {
   }
 
   bp$status$happy <- min(bp$status$happy + 1L, 5L)
-  bp$experience$xp <- bp$experience$xp + 10L
+  bp$experience$xp <- bp$experience$xp + 5L
   suppressMessages(.write_blueprint(bp, ask = FALSE))
   message("'Happy' status value is now ", bp$status$happy, "/5")
 
