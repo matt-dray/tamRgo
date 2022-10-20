@@ -68,6 +68,7 @@
     ),
     experience = list(
       xp = 0L,
+      xp_freeze = NA_numeric_,
       level = 0L
     ),
     status = list(

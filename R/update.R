@@ -134,6 +134,8 @@
 #'     reach level 3.
 #' @param xp_threshold_4 Integer. Minimum experience points (XP) required to
 #'     reach level 4.
+#' @param xp_freeze Integer. Age in days at which to store the current XP value.
+#'     Used to help calculate chance of being unalive after that age.
 #'
 #' @details A sub-function of \code{\link{.update_blueprint}}.
 #'
@@ -149,7 +151,8 @@
     xp_threshold_1,
     xp_threshold_2,
     xp_threshold_3,
-    xp_threshold_4
+    xp_threshold_4,
+    age_freeze
 ) {
 
   .check_blueprint(blueprint)
@@ -163,6 +166,12 @@
   # Increment XP
   blueprint$experience$xp <-
     blueprint$experience$xp + (time_difference %/% xp_increment)
+
+  if (blueprint$characteristics$age >= age_freeze) {
+    # TODO: if pet has reached age 21 since last interaction, will need to
+    # calculate what the XP would have been on that day and then pass into:
+    # blueprint$experience$xp_freeze <- frozen_xp
+  }
 
   old_level <- blueprint$experience$xp
 
@@ -248,6 +257,7 @@
 
   if (age > 21L) {
 
+    # TODO: need to record XP at age 21
     unalive_chance <- 100 / blueprint$experience$xp
 
     is_alive <- sample(
