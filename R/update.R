@@ -31,7 +31,7 @@
     happy_decrement  = 15L,
     hungry_increment = 30L,
     dirty_increment  = 45L,
-    xp_increment     = 60L,
+    xp_increment     = 30L,
     xp_threshold_1   = 100L,
     xp_threshold_2   = 200L,
     xp_threshold_3   = 500L,
