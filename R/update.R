@@ -92,7 +92,7 @@
       "Uhoh, your pet ", bp$characteristics$name, " is unalive!",
       "\n- Review their stats with get_stats()",
       "\n- Get a new pet with lay_egg()"
-      )
+    )
   }
 
   return(bp)
@@ -164,6 +164,8 @@
   blueprint$experience$xp <-
     blueprint$experience$xp + (time_difference %/% xp_increment)
 
+  old_level <- blueprint$experience$xp
+
   # Check if XP meets threshold to level up
   if (blueprint$experience$xp >= xp_threshold_4) {
     blueprint$experience$level <- 4L
@@ -173,6 +175,15 @@
     blueprint$experience$level <- 2L
   } else if (blueprint$experience$xp >= xp_threshold_1) {
     blueprint$experience$level <- 1L
+  }
+
+  new_level <- blueprint$experience$xp
+
+  if (new_level > old_level) {
+    message(
+      blueprint$characteristics$name,
+      " increased level from ", old_level, " to ", new_level, "!"
+    )
   }
 
   return(blueprint)
