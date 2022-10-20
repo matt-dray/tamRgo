@@ -245,10 +245,22 @@
     stop("Argument 'age' must be of class integer.", call. = FALSE)
   }
 
+
   if (age > 21L) {
 
-    blueprint$characteristics$alive <- FALSE
-    blueprint$experience$level <- 5L
+    unalive_chance <- 100 / blueprint$experience$xp
+
+    is_alive <- sample(
+      c(FALSE, TRUE),
+      size = 1,
+      prob = c(unalive_chance, 1 - unalive_chance)
+    )
+
+    blueprint$characteristics$alive <- is_alive
+
+    if (!is_alive) {
+      blueprint$experience$level <- 5L
+    }
 
   }
 
