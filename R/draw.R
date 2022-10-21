@@ -18,49 +18,33 @@
     )
   }
 
-  if (level == 0L) {
-    return(species_images$XYZ$level_0)
-  } else if (level == 4L) {
-    return(species_images$XYZ$level_4)
-  } else if (level == 5L) {
-    return(species_images$XYZ$unalive)
-  }
+  if (level == 0L) return(internal$sprites$sp_xyz$lvl_0)
+  if (level == 4L) return(internal$sprites$sp_xyz$lvl_4)
+  if (level == 5L) return(internal$sprites$sp_xyz$lvl_5)
 
   if (species == "X") {
-    if (level == 1L) {
-      return(species_images$X$level_1)
-    } else if (level == 2L) {
-      return(species_images$X$level_2)
-    } else if (level == 3L) {
-      return(species_images$X$level_3)
-    }
+    if (level == 1L) return(internal$sprites$sp_x$lvl_1)
+    if (level == 2L) return(internal$sprites$sp_x$lvl_2)
+    if (level == 3L) return(internal$sprites$sp_x$lvl_3)
   }
 
   if (species == "Y") {
-    if (level == 1L) {
-      return(species_images$Y$level_1)
-    } else if (level == 2L) {
-      return(species_images$Y$level_2)
-    } else if (level == 3L) {
-      return(species_images$Y$level_3)
-    }
+    if (level == 1L) return(internal$sprites$sp_y$lvl_1)
+    if (level == 2L) return(internal$sprites$sp_y$lvl_2)
+    if (level == 3L) return(internal$sprites$sp_y$lvl_3)
   }
 
   if (species == "Z") {
-    if (level == 1L) {
-      return(species_images$Z$level_1)
-    } else if (level == 2L) {
-      return(species_images$Z$level_2)
-    } else if (level == 3L) {
-      return(species_images$Z$level_3)
-    }
+    if (level == 1L) return(internal$sprites$sp_z$lvl_1)
+    if (level == 2L) return(internal$sprites$sp_z$lvl_2)
+    if (level == 3L) return(internal$sprites$sp_z$lvl_3)
   }
 
 }
 
 #' Print Pet Image to Console
 #'
-#' @description Draw a matrix representaiton of a pet's image to the console
+#' @description Draw a matrix representation of a pet's image to the console
 #'     row-by-row.
 #'
 #' @param pet_matrix Matrix.
