@@ -35,7 +35,8 @@
     xp_threshold_1   = 100L,
     xp_threshold_2   = 200L,
     xp_threshold_3   = 500L,
-    xp_threshold_4   = 1000L
+    xp_threshold_4   = 1000L,
+    age_freeze       = 21
 ) {
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
@@ -78,7 +79,8 @@
     xp_threshold_1,
     xp_threshold_2,
     xp_threshold_3,
-    xp_threshold_4
+    xp_threshold_4,
+    age_freeze
   )
 
   bp$meta$last_interaction <- current_time
@@ -134,7 +136,7 @@
 #'     reach level 3.
 #' @param xp_threshold_4 Integer. Minimum experience points (XP) required to
 #'     reach level 4.
-#' @param xp_freeze Integer. Age in days at which to store the current XP value.
+#' @param age_freeze Integer. Age in days at which to store the current XP value.
 #'     Used to help calculate chance of being unalive after that age.
 #'
 #' @details A sub-function of \code{\link{.update_blueprint}}.
