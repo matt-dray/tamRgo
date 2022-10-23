@@ -1,15 +1,4 @@
 
-#' Update Blueprint Over Time
-#'
-#' @description Update time-dependent blueprint values given how much time has
-#'     elapsed since the last recorded interaction. Affects statuses ('happy',
-#'     'hungry', 'dirty') and experience ('XP', 'level').
-#'
-#' @return A list.
-#'
-#' @examples \dontrun{.update_blueprint()}
-#'
-#' @noRd
 .update_blueprint <- function() {
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
@@ -25,6 +14,8 @@
 
   bp <- .read_blueprint()
 
+  last_age <- bp$characteristics$age
+
   current_time <- Sys.time()
   current_date <- Sys.Date()
 
@@ -36,13 +27,13 @@
   )
 
   bp <- .update_age(bp, current_date)
+  bp <- .update_xp_freeze(bp, last_age, age_updated = bp$characteristics$age)
 
   bp <- .update_status(bp, time_diff)
 
   bp <- .update_xp(bp, time_diff)
 
   bp$meta$last_interaction <- current_time
-
   bp <- .update_alive(bp, bp$characteristics$age)
 
   .write_blueprint(bp, ask = FALSE)
@@ -78,55 +69,29 @@
 
 }
 
-#' Update Time-Dependent Experience Values
-#'
-#' @description Update time-dependent blueprint values given how much time has
-#'     elapsed since the last recorded interaction. Affects  experience values
-#'     ('XP', 'level').
-#'
-#' @details A sub-function of \code{\link{.update_blueprint}}.
-#'
-#' @return A list.available
-#'
-#' @examples \dontrun{.update_status()}
-#'
-#' @noRd
 .update_xp <- function(blueprint, time_difference) {
 
   .check_blueprint(blueprint)
 
-  # Increment XP
-  blueprint$experience$xp <-
-    blueprint$experience$xp + (time_difference %/% internal$constants$xp_increment)
+  # Increment passive XP
+  passive_xp_gained <- time_difference %/% internal$constants$xp_increment
+  blueprint$experience$xp <- blueprint$experience$xp + passive_xp_gained
 
-  if (blueprint$characteristics$age >= internal$constants$age_freeze) {
-    # TODO: if pet has reached age 21 since last interaction, will need to
-    # calculate what the XP would have been on that day and then pass into:
-    # blueprint$experience$xp_freeze <- frozen_xp
-  }
-
-  old_level <- blueprint$experience$xp
+  old_level <- blueprint$experience$level
 
   # Check if XP meets threshold to level up
-  #
+
   if (blueprint$experience$xp >= internal$constants$xp_threshold_4) {
     blueprint$experience$level <- 4L
-  }
-
-  if (blueprint$experience$xp >= internal$constants$xp_threshold_3) {
+  } else if (blueprint$experience$xp >= internal$constants$xp_threshold_3) {
     blueprint$experience$level <- 3L
-  }
-
-  if (blueprint$experience$xp >= internal$constants$xp_threshold_2) {
+  } else if (blueprint$experience$xp >= internal$constants$xp_threshold_2) {
     blueprint$experience$level <- 2L
-  }
-
-  if (blueprint$experience$xp >= internal$constants$xp_threshold_1) {
+  } else if (blueprint$experience$xp >= internal$constants$xp_threshold_1) {
     blueprint$experience$level <- 1L
   }
 
-
-  new_level <- blueprint$experience$xp
+  new_level <- blueprint$experience$level
 
   if (new_level > old_level) {
     message(
@@ -139,31 +104,41 @@
 
 }
 
-#' Update Time-Dependent Status Values
-#'
-#' @description Update time-dependent blueprint values given how much time has
-#'     elapsed since the last recorded interaction. Affects statuses ('happy',
-#'     'hungry').
-#'
-#' @details A sub-function of \code{\link{.update_blueprint}}.
-#'
-#' @return A list.available
-#'
-#' @examples \dontrun{.update_status()}
-#'
-#' @noRd
+.update_xp_freeze <- function(blueprint, age_last, age_updated) {
+
+  if (internal$constants$age_freeze %in% c(age_last:age_updated)) {
+
+    if (!is.na(blueprint$experience$xp_freeze)) {
+
+      days_last_to_freeze <- internal$constants$age_freeze - age_last
+      xp_per_hour <- 60 / internal$constants$xp_increment
+      xp_to_freeze <- xp_per_hour * (days_last_to_freeze * 24)
+
+      xp_freeze_value <- blueprint$experience$xp_freeze + xp_to_freeze
+
+      blueprint$experience$xp_freeze <- xp_freeze_value
+
+    }
+
+  }
+
+  return(blueprint)
+
+}
+
 .update_status <- function(blueprint, time_difference) {
 
   .check_blueprint(blueprint)
 
-  blueprint$status$happy <-
-    max(blueprint$status$happy - (time_difference %/% internal$constants$happy_decrement), 0L)
+  # Calculate status value change given time
+  happy_integral  <- time_difference %/% internal$constants$happy_decrement
+  hungry_integral <- time_difference %/% internal$constants$hungry_decrement
+  dirty_integral  <- time_difference %/% internal$constants$dirty_decrement
 
-  blueprint$status$hungry <-
-    min(blueprint$status$hungry + (time_difference %/% internal$constants$hungry_increment), 5L)
-
-  blueprint$status$dirty <-
-    min(blueprint$status$dirty + (time_difference %/% internal$constants$dirty_increment), 5L)
+  # Ensure status scale bounds are not exceeded
+  blueprint$status$happy  <- max(0L, blueprint$status$happy  - happy_integral)
+  blueprint$status$hungry <- min(5L, blueprint$status$hungry + hungry_integral)
+  blueprint$status$dirty  <- min(5L, blueprint$status$dirty  + dirty_integral)
 
   return(blueprint)
 
@@ -178,10 +153,9 @@
   }
 
 
-  if (age > 21L) {
+  if (!is.na(blueprint$experience$xp_freeze)) {  # XP at the time the pet was 21
 
-    # TODO: need to record XP at age 21
-    unalive_chance <- 100 / blueprint$experience$xp
+    unalive_chance <- 100 / blueprint$experience$xp_freeze
 
     is_alive <- sample(
       c(FALSE, TRUE),

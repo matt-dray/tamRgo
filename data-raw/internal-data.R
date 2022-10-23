@@ -2,19 +2,23 @@
 # Create internal data list of species images -----------------------------
 
 
+# Use {pixeltrix} to generate binary matrices representing sprites
+# remotes::install_github("matt-dray/pixeltrix")
+library(pixeltrix)
+
 # Interactive pixel drawing, outputs binary matrix
-xyz0 <- pixeltrix::click_pixels(7, 7)
-x1   <- pixeltrix::click_pixels(8, 8)
-x2   <- pixeltrix::click_pixels(10, 10)
-x3   <- pixeltrix::click_pixels(12, 12)
-y1   <- pixeltrix::click_pixels(8, 8)
-y2   <- pixeltrix::click_pixels(10, 10)
-y3   <- pixeltrix::click_pixels(12, 12)
-z1   <- pixeltrix::click_pixels(8, 8)
-z2   <- pixeltrix::click_pixels(10, 10)
-z3   <- pixeltrix::click_pixels(12, 12)
-xyz4 <- pixeltrix::click_pixels(12, 12)
-xyz5 <- pixeltrix::click_pixels(10, 10)
+xyz0 <- click_pixels(7, 7)
+x1   <- click_pixels(8, 8)
+x2   <- click_pixels(10, 10)
+x3   <- click_pixels(12, 12)
+y1   <- click_pixels(8, 8)
+y2   <- click_pixels(10, 10)
+y3   <- click_pixels(12, 12)
+z1   <- click_pixels(8, 8)
+z2   <- click_pixels(10, 10)
+z3   <- click_pixels(12, 12)
+xyz4 <- click_pixels(12, 12)
+xyz5 <- click_pixels(10, 10)
 
 
 # Function to convert from binary matrix to pixel matrix
@@ -73,7 +77,7 @@ constants <- list(
   xp_threshold_2   = 200L,
   xp_threshold_3   = 500L,
   xp_threshold_4   = 1000L,
-  age_freeze       = 21,
+  age_freeze       = 21L,
   level_names = list(
     lvl_0 = "newborn",
     lvl_1 = "child",
@@ -90,7 +94,7 @@ constants <- list(
 
 # Combine the lists
 internal <- list(
-  sprites = species_images,
+  sprites = internal$sprites,
   constants = constants
 )
 
