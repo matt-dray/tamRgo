@@ -152,21 +152,38 @@
     stop("Argument 'age' must be of class integer.", call. = FALSE)
   }
 
-
-  if (!is.na(blueprint$experience$xp_freeze)) {  # XP at the time the pet was 21
+  if (!is.na(blueprint$experience$xp_freeze)) {
 
     unalive_chance <- 100 / blueprint$experience$xp_freeze
 
-    is_alive <- sample(
-      c(FALSE, TRUE),
-      size = 1,
-      prob = c(unalive_chance, 1 - unalive_chance)
-    )
+    days_since_freeze <-
+      blueprint$characteristics$age - internal$constants$age_freeze
 
-    blueprint$characteristics$alive <- is_alive
+    if (days_since_freeze > 0) {
 
-    if (!is_alive) {
-      blueprint$experience$level <- 5L
+      for (day in seq(days_since_freeze)) {
+
+        unalive_chance_day <- unalive_chance * day
+        alive_chance_day <- 1 - unalive_chance_day
+
+        is_alive <- sample(
+          c(FALSE, TRUE),
+          size = 1,
+          prob = c(
+            unalive_chance_day,
+            alive_chance_day
+          )
+        )
+
+        blueprint$characteristics$alive <- is_alive
+
+        if (!is_alive) {
+          blueprint$experience$level <- 5L
+          break
+        }
+
+      }
+
     }
 
   }
