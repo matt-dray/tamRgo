@@ -56,14 +56,14 @@ see_stats()
 #   Age:     0
 #   Level:   0 (newborn)
 # Status
-#   Happy:  □□□□□ !
-#   Hungry: □□□□□
+#   Happy:  ■■■□□ 
+#   Hungry: ■■■□□
 #   Dirty:  □□□□□
 ```
 
 These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate (hidden) experience points (XP) that contribute towards levelling up and visual transformations.
 
-You can view in the console an image of your pet at any time. Their appearance will depend on their species.
+You can view in the console an image of your pet at any time. Their appearance will depend on their species and level.
 
 ```
 see_pet()
@@ -80,7 +80,7 @@ You can `play()`, `feed()` or `clean()` to change your pet's status values.
 
 ``` r
 play()
-# 'Happy' status value is now 1/5
+# 'Happy' status value is now 4/5
 ```
 
 Let's recheck the 'happy' status.
@@ -93,8 +93,8 @@ see_stats()
 #   Age:     0
 #   Level:   0 (newborn)
 # Status
-#   Happy:  ■□□□□
-#   Hungry: □□□□□
+#   Happy:  ■■■■□
+#   Hungry: ■■■□□
 #   Dirty:  □□□□□
 ```
 
@@ -112,8 +112,6 @@ release_pet()
 ```
 
 Fare thee well, sweet KEVIN.
-
-
 
 ## Advanced
 

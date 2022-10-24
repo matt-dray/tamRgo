@@ -1,9 +1,16 @@
+# tamRgo 0.0.0.9007
+
+* Used concept of 'XP freeze' at a certain age (21); chance of being unalive after this is dependent on that freeze value and the number of days since that age was reached (towards #23).
+* Adjusedt passive XP accumulation (#24).
+* Alerted user on level up.
+* Created internal dataset as `internal`, containing `$sprites` and `$constants` for a single source of truth on level up thresholds, age for XP freeze, etc.
+
 # tamRgo 0.0.0.9006
 
-* Add simple draft of unalive logic (towards #23).
+* Added simple draft of unalive logic (towards #23).
 * Re-instigated concept of 'dirty'.
-* Add warning to `get_stats()` if status bars have reached their maximum negative score.
-* Add check_blueprint to utils.
+* Added warning to `get_stats()` if status bars have reached their maximum negative score.
+* Added check_blueprint to utils.
 
 # tamRgo 0.0.0.9005
 

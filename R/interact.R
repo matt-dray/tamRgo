@@ -54,19 +54,12 @@ get_stats <- function() {
 
   bp <- .check_and_update()
 
-  if (bp$experience$level == 0L) {
-    level_text <- "newborn"
-  } else if (bp$experience$level == 1L) {
-    level_text <- "child"
-  } else if (bp$experience$level == 2L) {
-    level_text <- "youngling"
-  } else if (bp$experience$level == 3L) {
-    level_text <- "adult"
-  } else if (bp$experience$level == 4L) {
-    level_text <- "mature"
-  } else if (bp$experience$level == 5L) {
-    level_text <- "unalive"
-  }
+  if (bp$experience$level == 0L) level_text <- internal$constants$level_names$lvl_0
+  if (bp$experience$level == 1L) level_text <- internal$constants$level_names$lvl_1
+  if (bp$experience$level == 2L) level_text <- internal$constants$level_names$lvl_2
+  if (bp$experience$level == 3L) level_text <- internal$constants$level_names$lvl_3
+  if (bp$experience$level == 4L) level_text <- internal$constants$level_names$lvl_4
+  if (bp$experience$level == 5L) level_text <- internal$constants$level_names$lvl_5
 
   empty_happy  <- rep("\U025A0", bp$status$happy)
   empty_hungry <- rep("\U025A0", bp$status$hungry)
@@ -158,6 +151,7 @@ play <- function() {
   bp$status$happy <- min(bp$status$happy + 1L, 5L)
   bp$experience$xp <- bp$experience$xp + 5L
   suppressMessages(.write_blueprint(bp, ask = FALSE))
+
   message("'Happy' status value is now ", bp$status$happy, "/5")
 
 }

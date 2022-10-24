@@ -1,17 +1,4 @@
-#' Check-and-Update Routine
-#'
-#' @description Check that a pet blueprint (RDS) exists in the package's
-#'     user-data directory , read it and update it given the time elapsed since
-#'     the last interaction .This function is responsible for the illusion of
-#'     the pet existing in 'real-time'.
-#'
-#' @return A list.
-#'
-#' @export
-#'
-#' @examples \dontrun{.check_and_update()}
-#'
-#' @noRd
+
 .check_and_update <- function() {
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
@@ -39,7 +26,7 @@
 
   if (!is.list(blueprint) |
       length(blueprint) != 4 |
-      all(lengths(blueprint) != c(3L, 4L, 2L, 3L))
+      all(lengths(blueprint) != c(3L, 4L, 3L, 3L))
   ) {
     stop("Argument 'blueprint' must be a list of lists", call. = FALSE)
   }

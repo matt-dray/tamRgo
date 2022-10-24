@@ -68,11 +68,12 @@
     ),
     experience = list(
       xp = 0L,
+      xp_freeze = NA_real_,
       level = 0L
     ),
     status = list(
-      happy = 0L,
-      hungry = 0L,
+      happy = 3L,
+      hungry = 3L,
       dirty = 0L
     )
   )
