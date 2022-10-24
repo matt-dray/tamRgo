@@ -34,7 +34,7 @@
   bp <- .update_xp(bp, time_diff)
 
   bp$meta$last_interaction <- current_time
-  bp <- .update_alive(bp, bp$characteristics$age)
+  bp <- .update_alive(bp, age_updated = bp$characteristics$age)
 
   .write_blueprint(bp, ask = FALSE)
 
@@ -104,17 +104,22 @@
 
 }
 
+# Store in the blueprint the XP value at a pre-chosen 'age freeze' (21). The XP gained
+# to this point will be used to calculate the chance of reaching the unalive state in the
+# .update_alive function. Will only run if the age freeze date is today or was recahed
+# between the age at last interaction and today's age.
 .update_xp_freeze <- function(blueprint, age_last, age_updated) {
 
-  if (internal$constants$age_freeze %in% c(age_last:age_updated)) {
+  if (internal$constants$age_freeze %in% c(age_last:age_updated)) {  # if age freeze met since last interaction
 
-    if (!is.na(blueprint$experience$xp_freeze)) {
+    if (!is.na(blueprint$experience$xp_freeze)) {   # if the xp value has not yet been stored already
 
-      days_last_to_freeze <- internal$constants$age_freeze - age_last
-      xp_per_hour <- 60 / internal$constants$xp_increment
-      xp_to_freeze <- xp_per_hour * (days_last_to_freeze * 24)
+      # Calculate how many passive XP woul dhave been accumulated between last interaction and age freeze
+      days_last_to_freeze <- internal$constants$age_freeze - age_last  # days between last interaction and the age freeze
+      xp_per_hour <- 60 / internal$constants$xp_increment  # pass ive XP per hour
+      xp_to_freeze <- xp_per_hour * (days_last_to_freeze * 24)  # XP per hour, times days between last interaction and age freeze
 
-      xp_freeze_value <- blueprint$experience$xp_freeze + xp_to_freeze
+      xp_freeze_value <- blueprint$experience$xp_freeze + xp_to_freeze  # XP at last interaction plus XP to age freeze from last interaction
 
       blueprint$experience$xp_freeze <- xp_freeze_value
 
@@ -144,42 +149,48 @@
 
 }
 
-.update_alive <- function(blueprint, age) {
+# Pet won't have a chance to reach the unalive state until the age for the XP freeze.
+# At 21 days, the XP value is stored in the blueprint. For each day after the age freeze,
+# the chance of the unalive state is calculated as 100 / frozen XP, multiplied by how many days
+# since the freeze. So if the XP was 920 and it's three days later, then 100 / 920 = ~11%,
+# multiplied by 3 is ~33%. If the frozen XP had been 1203, then the chance is ~25% on the third day.
+# A frozen XP of 1024 results in approximately 10, 20, 31, 41, 51% for days 1 to 5 after
+# the age freeze.
+.update_alive <- function(blueprint, age_updated) {
 
   .check_blueprint(blueprint)
 
-  if (!inherits(age, "integer")) {
-    stop("Argument 'age' must be of class integer.", call. = FALSE)
+  if (!inherits(age_updated, "integer")) {
+    stop("Argument 'age_updated' must be of class integer.", call. = FALSE)
   }
 
   if (!is.na(blueprint$experience$xp_freeze)) {
 
-    unalive_chance <- 100 / blueprint$experience$xp_freeze
+    # Calculate base chance of survival
+    unalive_chance <- 100 / blueprint$experience$xp_freeze  # chance of sampling FALSE
 
-    days_since_freeze <-
-      blueprint$characteristics$age - internal$constants$age_freeze
+    days_since_freeze <-  # number of days to sample for
+      blueprint$characteristics$age_updated - internal$constants$age_freeze
 
-    if (days_since_freeze > 0) {
+    if (days_since_freeze > 0) {  # if the XP freeze has occurred
 
-      for (day in seq(days_since_freeze)) {
+      for (day in seq(days_since_freeze)) {  # for each day since the freeze
 
-        unalive_chance_day <- unalive_chance * day
-        alive_chance_day <- 1 - unalive_chance_day
+        # Calculate day's chance of survival
+        unalive_chance_day <- min(0.999, unalive_chance * day)  # chance of unalive state increases with time
+        alive_chance_day <- 1 - unalive_chance_day  # chance of alive is inverse
 
         is_alive <- sample(
           c(FALSE, TRUE),
           size = 1,
-          prob = c(
-            unalive_chance_day,
-            alive_chance_day
-          )
+          prob = c(unalive_chance_day, alive_chance_day)
         )
 
         blueprint$characteristics$alive <- is_alive
 
         if (!is_alive) {
-          blueprint$experience$level <- 5L
-          break
+          blueprint$experience$level <- 5L  # set level to unalive stage
+          break  # no need to calculate chance for further days if is_alive is FALSE already
         }
 
       }
