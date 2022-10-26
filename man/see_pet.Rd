@@ -10,7 +10,11 @@ see_pet()
 Nothing.
 }
 \description{
-Print to the console an image of your pet.
+Print to the console an image of your digital pet.
+}
+\details{
+The appearance of your pet is dependent on its species and level,
+which you can view with \code{\link{get_stats}}.
 }
 \examples{
 \dontrun{see_pet()}

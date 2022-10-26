@@ -2,21 +2,27 @@
 % Please edit documentation in R/interact.R
 \name{lay_egg}
 \alias{lay_egg}
-\title{Create a New Pet}
+\title{Generate a New Pet}
 \usage{
 lay_egg(pet_name)
 }
 \arguments{
-\item{pet_name}{Character. A name for the new tamRgo pet. Maximum eight
-characters.}
+\item{pet_name}{Character. A name for your new pet. Maximum eight characters.}
 }
 \value{
 Nothing.
 }
 \description{
-Generate and save a new pet's blueprint. The pet begins life as
-an egg.
+Lays an egg that contains a new digital pet who will live on
+your computer.
+}
+\details{
+A persistent 'blueprint' file of your pet's characteristics will be
+saved to your computer. It will be saved as an RDS to the directory
+location given by \code{tools::R_user_dir("tamRgo", which = "data")}. You can
+only have store one blueprint at a time, so you can only have one pet at
+a time on your computer. .
 }
 \examples{
-\dontrun{lay_egg(name = "KEVIN")}
+\dontrun{lay_egg(pet_name = "KEVIN")}
 }

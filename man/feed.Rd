@@ -10,7 +10,8 @@ feed()
 Nothing.
 }
 \description{
-Reduce 'hungry' status value by 1 (min 0).
+Give food to your pet, which reduces your pet's 'hungry' status
+value by 1, down to a minimum of 0.
 }
 \examples{
 \dontrun{feed()}

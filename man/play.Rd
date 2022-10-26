@@ -10,7 +10,8 @@ play()
 Nothing.
 }
 \description{
-Increase 'happy' status value by 1 (max 5) and add 10 XP.
+Play a game of chance with your pet, which increases your pet's
+'happy' status value by 1, up to a maximum of 5.
 }
 \examples{
 \dontrun{play()}

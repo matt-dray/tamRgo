@@ -1,16 +1,21 @@
-#' Create a New Pet
+#' Generate a New Pet
 #'
-#' @description Generate and save a new pet's blueprint. The pet begins life as
-#'     an egg.
+#' @description Lays an egg that contains a new digital pet who will live on
+#'     your computer.
 #'
-#' @param pet_name Character. A name for the new tamRgo pet. Maximum eight
-#'     characters.
+#' @param pet_name Character. A name for your new pet. Maximum eight characters.
+#'
+#' @details A persistent 'blueprint' file of your pet's characteristics will be
+#'     saved to your computer. It will be saved as an RDS to the directory
+#'     location given by `tools::R_user_dir("tamRgo", which = "data")`. You can
+#'     only have store one blueprint at a time, so you can only have one pet at
+#'     a time on your computer. .
 #'
 #' @return Nothing.
 #'
 #' @export
 #'
-#' @examples \dontrun{lay_egg(name = "KEVIN")}
+#' @examples \dontrun{lay_egg(pet_name = "KEVIN")}
 lay_egg <- function(pet_name) {
 
   bp <- .create_blueprint(pet_name)
@@ -25,31 +30,28 @@ lay_egg <- function(pet_name) {
 
 }
 
-#' Print Your Pet's Stats
+#' Print Pet Statistics
 #'
-#' @description Print to the console the characteristics, experience and status
-#'     of the current pet.
+#' @description Print to the console your pet's current characteristics and
+#'     status values.
 #'
-#' @details The  output will show the following elements of the blueprint:
+#' @details The output will show the following elements:
 #'
-#' Section 'characteristics':
 #' \describe{
-#'   \item{name}{Pet's user-provided name.}
-#'   \item{species}{Randomly-selected pet species.}
-#'   \item{born}{Date that the pet was created.}
-#'   \item{age}{Days since born.}
-#'   \item{level}{Growth stage.}
-#'   \item{xp}{Experience points.}
-#'   \item{happy}{Happiness on a scale of 0 to 5.}
-#'   \item{hungry}{Hunger on a scale of 0 to 5.}
-#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
+#'   \item{Name}{Pet's user-provided name.}
+#'   \item{Species}{Randomly-selected pet species.}
+#'   \item{Age}{Days since born.}
+#'   \item{Level}{Growth stage.}
+#'   \item{Happy}{Happiness on a scale of 0 to 5.}
+#'   \item{Hungry}{Hunger on a scale of 0 to 5.}
+#'   \item{Dirty}{Dirtiness on a scale of 0 to 5.}
 #' }
 #'
 #' @return Nothing.
 #'
 #' @export
 #'
-#' @examples \dontrun{see_stats()}
+#' @examples \dontrun{get_stats()}
 get_stats <- function() {
 
   bp <- .check_and_update()
@@ -108,7 +110,10 @@ get_stats <- function() {
 
 #' See Your Pet
 #'
-#' @description Print to the console an image of your pet.
+#' @description Print to the console an image of your digital pet.
+#'
+#' @details The appearance of your pet is dependent on its species and level,
+#'     which you can view with \code{\link{get_stats}}.
 #'
 #' @return Nothing.
 #'
@@ -130,7 +135,8 @@ see_pet <- function() {
 
 #' Play with Your Pet
 #'
-#' @description Increase 'happy' status value by 1 (max 5) and add 10 XP.
+#' @description Play a game of chance with your pet, which increases your pet's
+#'     'happy' status value by 1, up to a maximum of 5.
 #'
 #' @return Nothing.
 #'
@@ -148,8 +154,37 @@ play <- function() {
     )
   }
 
+  results <- vector(mode = "list", length = 5)
+
+  for (i in 1:5) {
+
+    answer <- sample(c("h", "t"), size = 1)
+    guess <- tolower(readline("Heads or tails? Type 'h' or 't': "))
+    is_correct <- guess == answer
+
+    if (is_correct) {
+
+      results[i] <- TRUE
+      correct_n <- length(Filter(isTRUE, results))
+      message("Correct! ", correct_n, "/5.")
+
+    }
+
+    if (!is_correct) {
+
+      results[i] <- FALSE
+      correct_n <- length(Filter(isTRUE, results))
+      message("Wrong! ", correct_n, "/5.")
+
+    }
+
+  }
+
+  correct_n <- length(Filter(isTRUE, results))
+  message("Result: you scored ", correct_n, "/5!")
+
   bp$status$happy <- min(bp$status$happy + 1L, 5L)
-  bp$experience$xp <- bp$experience$xp + 5L
+  bp$experience$xp <- bp$experience$xp + correct_n
   suppressMessages(.write_blueprint(bp, ask = FALSE))
 
   message("'Happy' status value is now ", bp$status$happy, "/5")
@@ -158,7 +193,8 @@ play <- function() {
 
 #' Feed Your Pet
 #'
-#' @description Reduce 'hungry' status value by 1 (min 0).
+#' @description Give food to your pet, which reduces your pet's 'hungry' status
+#'     value by 1, down to a minimum of 0.
 #'
 #' @return Nothing.
 #'
@@ -184,7 +220,8 @@ feed <- function() {
 
 #' Clean Your Pet
 #'
-#' @description Reduces 'dirty' status value to 0.
+#' @description  Clean dirt off your pet, which reduces your pet's 'dirty'
+#'     status value by 1, down to a minimum of 0.
 #'
 #' @return Nothing.
 #'
@@ -210,13 +247,18 @@ clean <- function() {
 
 #' Release Your Pet
 #'
-#' @description Delete the current blueprint.
+#' @description Release your pet into the world. Once released, they're gone
+#'     forever.
+#'
+#' @details Deletes the persistent 'blueprint' file of your pet's
+#'     characteristics that's saved as an RDS in the directory location given
+#'     by `tools::R_user_dir("tamRgo", which = "data")`.
 #'
 #' @return Nothing.
 #'
 #' @export
 #'
-#' @examples \dontrun{see_stats()}
+#' @examples \dontrun{release()}
 release <- function() {
 
   bp <- .check_and_update()

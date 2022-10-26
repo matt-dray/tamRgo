@@ -10,7 +10,8 @@ clean()
 Nothing.
 }
 \description{
-Reduces 'dirty' status value to 0.
+Clean dirt off your pet, which reduces your pet's 'dirty'
+status value by 1, down to a minimum of 0.
 }
 \examples{
 \dontrun{clean()}

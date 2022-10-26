@@ -2,7 +2,7 @@
 % Please edit documentation in R/interact.R
 \name{get_stats}
 \alias{get_stats}
-\title{Print Your Pet's Stats}
+\title{Print Pet Statistics}
 \usage{
 get_stats()
 }
@@ -10,25 +10,22 @@ get_stats()
 Nothing.
 }
 \description{
-Print to the console the characteristics, experience and status
-of the current pet.
+Print to the console your pet's current characteristics and
+status values.
 }
 \details{
-The  output will show the following elements of the blueprint:
+The output will show the following elements:
 
-Section 'characteristics':
 \describe{
-\item{name}{Pet's user-provided name.}
-\item{species}{Randomly-selected pet species.}
-\item{born}{Date that the pet was created.}
-\item{age}{Days since born.}
-\item{level}{Growth stage.}
-\item{xp}{Experience points.}
-\item{happy}{Happiness on a scale of 0 to 5.}
-\item{hungry}{Hunger on a scale of 0 to 5.}
-\item{dirty}{Dirtiness on a scale of 0 to 5.}
+\item{Name}{Pet's user-provided name.}
+\item{Species}{Randomly-selected pet species.}
+\item{Age}{Days since born.}
+\item{Level}{Growth stage.}
+\item{Happy}{Happiness on a scale of 0 to 5.}
+\item{Hungry}{Hunger on a scale of 0 to 5.}
+\item{Dirty}{Dirtiness on a scale of 0 to 5.}
 }
 }
 \examples{
-\dontrun{see_stats()}
+\dontrun{get_stats()}
 }

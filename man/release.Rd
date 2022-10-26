@@ -10,8 +10,14 @@ release()
 Nothing.
 }
 \description{
-Delete the current blueprint.
+Release your pet into the world. Once released, they're gone
+forever.
+}
+\details{
+Deletes the persistent 'blueprint' file of your pet's
+characteristics that's saved as an RDS in the directory location given
+by \code{tools::R_user_dir("tamRgo", which = "data")}.
 }
 \examples{
-\dontrun{see_stats()}
+\dontrun{release()}
 }
