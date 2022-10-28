@@ -3,8 +3,8 @@ Title: Digital Pets in R
 Version: 0.0.0.9007
 Authors@R: c(person("Matt", "Dray", , "mwdray@gmail.com", role = c("aut", "cre")),
     person("Adriana", "De Palma", , , role = "ctb"))
-Description: Store a digital pet on your computer and interact with it in your R
-    console.
+Description: Store a persistent digital pet on your computer and interact with
+    it in your R console.
 License: MIT + file LICENSE
 URL: https://matt-dray.github.io/tamRgo/, https://github.com/matt-dray/tamRgo
 BugReports: https://github.com/matt-dray/tamRgo/issues
