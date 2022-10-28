@@ -154,13 +154,38 @@ play <- function() {
     )
   }
 
+  if (bp$status$dirty > 0) {
+    stop(
+      paste(
+        bp$characteristics$name, "is dirty! You should clean() before you play!"
+      ),
+      call. = FALSE
+    )
+  }
+
+  chance_bad_base <- 1 - (1 / bp$status$hungry)
+  chance_bad <- chance_bad_base / 4
+  chance_good <- (1 - chance_bad_base) / 6
+
   results <- vector(mode = "list", length = 5)
 
   for (i in 1:5) {
 
-    answer <- sample(c("h", "t"), size = 1)
-    guess <- tolower(readline("Heads or tails? Type 'h' or 't': "))
-    is_correct <- guess == answer
+    shown <- sample(
+      1:10,
+      size = 1,
+      prob = c(rep(chance_good, 2), rep(chance_bad, 6), rep(chance_good, 2))
+    )
+
+    actual <- sample(1:10, size = 1)
+    actual_direction <- sign(actual - shown)
+
+    guess <- tolower(readline("Higher or lower? Type 'H' or 'L': "))
+
+    if (guess == "h") guess_direction <- 1
+    if (guess == "l") guess_direction <- -1
+
+    is_correct <- actual_direction == guess_direction
 
     if (is_correct) {
 
