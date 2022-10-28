@@ -137,8 +137,8 @@
 
   # Calculate status value change given time
   happy_integral  <- time_difference %/% internal$constants$happy_decrement
-  hungry_integral <- time_difference %/% internal$constants$hungry_decrement
-  dirty_integral  <- time_difference %/% internal$constants$dirty_decrement
+  hungry_integral <- time_difference %/% internal$constants$hungry_increment
+  dirty_integral  <- time_difference %/% internal$constants$dirty_increment
 
   # Ensure status scale bounds are not exceeded
   blueprint$status$happy  <- max(0L, blueprint$status$happy  - happy_integral)
