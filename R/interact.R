@@ -131,6 +131,10 @@ see_pet <- function() {
 
   .draw_pet(pet_matrix)
 
+  if (bp$status$dirty > 0) {
+    .draw_pet(internal$graphics$dirt)
+  }
+
 }
 
 #' Play with Your Pet

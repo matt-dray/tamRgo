@@ -65,6 +65,14 @@ sprites <- list(
 )
 
 
+
+# Other graphics ----------------------------------------------------------
+
+
+dirt <- click_pixels(5, 7)
+graphics <- list(dirt = matrix_to_sprite(dirt))
+
+
 # Declare constants -------------------------------------------------------
 
 
@@ -94,7 +102,8 @@ constants <- list(
 
 # Combine the lists
 internal <- list(
-  sprites = internal$sprites,
+  sprites = sprites,
+  graphics = graphics,
   constants = constants
 )
 
