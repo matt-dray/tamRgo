@@ -188,7 +188,10 @@
 
         blueprint$characteristics$alive <- is_alive
 
-        if (!is_alive) break  # stop sampling if now unalive
+        if (!is_alive) {
+          message("Oh no!", blueprint$characteristics$name, "is unalive!")
+          break  # stop sampling if now unalive
+        }
 
       }
 
