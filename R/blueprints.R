@@ -76,7 +76,12 @@
 
   if (ask & !has_data_file) {
 
-    answer <- readline("Save pet blueprint? y/n: ")
+    answer <- readline(
+      paste(
+        "Your pet's data is stored as a small 'blueprint' file on your computer.",
+        "Save pet blueprint? y/n: "
+      )
+    )
 
     if (substr(tolower(answer), 1, 1) == "y") {
 
@@ -127,7 +132,7 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("There is no blueprint to read.", call. = FALSE)
+    stop("There is no pet blueprint to read.", call. = FALSE)
   }
 
   if (has_data_file) {

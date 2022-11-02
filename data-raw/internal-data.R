@@ -1,4 +1,11 @@
 
+
+# Load in existing data for editing ---------------------------------------
+
+
+load("R/sysdata.rda")
+
+
 # Create internal data list of species images -----------------------------
 
 
@@ -102,13 +109,12 @@ constants <- list(
 
 # Combine the lists
 internal <- list(
-  sprites = sprites,
-  graphics = graphics,
+  sprites = internal$sprites,
+  graphics = internal$graphics,
   constants = constants
 )
 
 # Write the object
 usethis::use_data(internal, internal = TRUE, overwrite = TRUE)
 
-# Load in existing saved file for editing
-load("R/sysdata.rda")
+

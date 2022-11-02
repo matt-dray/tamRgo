@@ -110,16 +110,16 @@
 # between the age at last interaction and today's age.
 .update_xp_freeze <- function(blueprint, age_last, age_updated) {
 
-  if (internal$constants$age_freeze %in% c(age_last:age_updated)) {  # if age freeze met since last interaction
+  if (internal$constants$age_freeze %in% age_last:age_updated) {  # if age freeze met since last interaction
 
-    if (!is.na(blueprint$experience$xp_freeze)) {   # if the xp value has not yet been stored already
+    if (is.na(blueprint$experience$xp_freeze)) {   # if the xp value has not yet been stored already
 
       # Calculate how many passive XP woul dhave been accumulated between last interaction and age freeze
       days_last_to_freeze <- internal$constants$age_freeze - age_last  # days between last interaction and the age freeze
       xp_per_hour <- 60 / internal$constants$xp_increment  # pass ive XP per hour
       xp_to_freeze <- xp_per_hour * (days_last_to_freeze * 24)  # XP per hour, times days between last interaction and age freeze
 
-      xp_freeze_value <- blueprint$experience$xp_freeze + xp_to_freeze  # XP at last interaction plus XP to age freeze from last interaction
+      xp_freeze_value <- blueprint$experience$xp + xp_to_freeze  # XP at last interaction plus XP to age freeze from last interaction
 
       blueprint$experience$xp_freeze <- xp_freeze_value
 
@@ -169,8 +169,8 @@
     # Calculate base chance of survival
     unalive_chance <- 100 / blueprint$experience$xp_freeze  # chance of sampling FALSE
 
-    days_since_freeze <-  # number of days to sample for
-      blueprint$characteristics$age_updated - internal$constants$age_freeze
+    # Number of days to sample for ()
+    days_since_freeze <- (age_updated - internal$constants$age_freeze) + 1  # +1 in case age is same day
 
     if (days_since_freeze > 0) {  # if the XP freeze has occurred
 
