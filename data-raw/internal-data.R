@@ -1,4 +1,11 @@
 
+
+# Load in existing data for editing ---------------------------------------
+
+
+load("R/sysdata.rda")
+
+
 # Create internal data list of species images -----------------------------
 
 
@@ -65,6 +72,14 @@ sprites <- list(
 )
 
 
+
+# Other graphics ----------------------------------------------------------
+
+
+dirt <- click_pixels(5, 7)
+graphics <- list(dirt = matrix_to_sprite(dirt))
+
+
 # Declare constants -------------------------------------------------------
 
 
@@ -95,11 +110,11 @@ constants <- list(
 # Combine the lists
 internal <- list(
   sprites = internal$sprites,
+  graphics = internal$graphics,
   constants = constants
 )
 
 # Write the object
 usethis::use_data(internal, internal = TRUE, overwrite = TRUE)
 
-# Load in existing saved file for editing
-load("R/sysdata.rda")
+

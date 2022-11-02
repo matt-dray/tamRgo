@@ -131,6 +131,10 @@ see_pet <- function() {
 
   .draw_pet(pet_matrix)
 
+  if (bp$status$dirty > 0) {
+    .draw_pet(internal$graphics$dirt)
+  }
+
 }
 
 #' Play with Your Pet
@@ -154,19 +158,48 @@ play <- function() {
     )
   }
 
+  if (bp$status$dirty > 0) {
+    stop(
+      paste(
+        bp$characteristics$name, "is dirty! You should clean() before you play!"
+      ),
+      call. = FALSE
+    )
+  }
+
+  chance_bad_base <- 1 - (1 / (bp$status$hungry + 1))
+  chance_bad <- chance_bad_base / 4
+  chance_good <- (1 - chance_bad_base) / 6
+
   results <- vector(mode = "list", length = 5)
 
   for (i in 1:5) {
 
-    answer <- sample(c("h", "t"), size = 1)
-    guess <- tolower(readline("Heads or tails? Type 'h' or 't': "))
-    is_correct <- guess == answer
+    shown <- sample(
+      1:10,
+      size = 1,
+      prob = c(rep(chance_good, 3), rep(chance_bad, 4), rep(chance_good, 3))
+    )
+
+    actual <- sample(1:10, size = 1)
+    actual_direction <- sign(actual - shown)
+
+    guess <- tolower(
+      readline(
+        paste0("The number is ", shown, ". Higher or lower? Type 'H' or 'L': ")
+      )
+    )
+
+    if (guess == "h") guess_direction <- 1
+    if (guess == "l") guess_direction <- -1
+
+    is_correct <- actual_direction == guess_direction
 
     if (is_correct) {
 
       results[i] <- TRUE
       correct_n <- length(Filter(isTRUE, results))
-      message("Correct! ", correct_n, "/5.")
+      message("Correct! It was ", actual, ". Score: ", correct_n, "/5.")
 
     }
 
@@ -174,7 +207,7 @@ play <- function() {
 
       results[i] <- FALSE
       correct_n <- length(Filter(isTRUE, results))
-      message("Wrong! ", correct_n, "/5.")
+      message("Wrong! It was ", actual, ". Score: ", correct_n, "/5.")
 
     }
 
@@ -183,7 +216,10 @@ play <- function() {
   correct_n <- length(Filter(isTRUE, results))
   message("Result: you scored ", correct_n, "/5!")
 
-  bp$status$happy <- min(bp$status$happy + 1L, 5L)
+  if (correct_n > 0) {
+    bp$status$happy <- min(bp$status$happy + 1L, 5L)
+  }
+
   bp$experience$xp <- bp$experience$xp + correct_n
   suppressMessages(.write_blueprint(bp, ask = FALSE))
 

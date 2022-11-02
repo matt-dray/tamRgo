@@ -1,47 +1,4 @@
 
-#' Create a Blueprint
-#'
-#' @description Generate a blueprint for a new pet. Includes date-dependent and
-#'    randomised elements.
-#'
-#' @param pet_name Character. A name for the new tamRgo pet. Maximum eight
-#'     characters.
-#'
-#' @details The full blueprint contains the following values.
-#'
-#' Section 'meta':
-#' \describe{
-#'   \item{pet_id}{Unique (probably) identification number.}
-#'   \item{alive}{Is the pet not unalive?}
-#'   \item{last_interaction}{Datetime that user last interacted with their pet.}
-#' }
-#'
-#' Section 'characteristics':
-#' \describe{
-#'   \item{name}{Pet's user-provided name.}
-#'   \item{species}{Randomly-selected pet species.}
-#'   \item{born}{Date that the pet was created.}
-#'   \item{age}{Days since born.}
-#' }
-#'
-#' Section 'experience':
-#' \describe{
-#'   \item{xp}{Experience points.}
-#'   \item{level}{Growth stage.}
-#' }
-#'
-#' Section 'status':
-#' \describe{
-#'   \item{happy}{Happiness on a scale of 0 to 5.}
-#'   \item{hungry}{Hunger on a scale of 0 to 5.}
-#'   \item{dirty}{Dirtiness on a scale of 0 to 5.}
-#' }
-#'
-#' @return A list.
-#'
-#' @examples \dontrun{.create_blueprint(name = "Kevin")}
-#'
-#' @noRd
 .create_blueprint <- function(pet_name) {
 
   if (!is.character(pet_name) | nchar(pet_name) > 8) {
@@ -80,15 +37,6 @@
 
 }
 
-#' Sample Characteristics for a New Pet
-#'
-#' @details A sub-function of \code{\link{.create_blueprint}}.
-#'
-#' @return A list.
-#'
-#' @examples \dontrun{.roll_characteristics()}
-#'
-#' @noRd
 .roll_characteristics <- function() {
 
   pet_id_chars <- c(letters, LETTERS, 0:9)
@@ -104,26 +52,6 @@
 
 }
 
-#' Write a Local Blueprint
-#'
-#' @description Save a newly-created pet blueprint to the package's directory
-#'     for user-specific data. The package will seek the blueprint from this
-#'     location, but its relatively hidden from the user.
-#'
-#' @param blueprint List. A pet's blueprint created via \code{\link{lay_egg}}.
-#' @param ask Logical. Should the user be asked about creating or updating the
-#'     existing blueprint file? Defaults to TRUE. Used internally with FALSE to
-#'     ignore interactivity.
-#'
-#' @return Nothing.
-#'
-#' @examples
-#' \dontrun{
-#' bp <- .create_blueprint("KEVIN")
-#' .write_blueprint(bp, ask = FALSE)
-#' }
-#'
-#' @noRd
 .write_blueprint <- function(blueprint, ask = TRUE) {
 
   .check_blueprint(blueprint)
@@ -148,7 +76,12 @@
 
   if (ask & !has_data_file) {
 
-    answer <- readline("Save pet blueprint? y/n: ")
+    answer <- readline(
+      paste(
+        "Your pet's data is stored as a small 'blueprint' file on your computer.",
+        "Save pet blueprint? y/n: "
+      )
+    )
 
     if (substr(tolower(answer), 1, 1) == "y") {
 
@@ -192,13 +125,6 @@
 
 }
 
-#' Read a Local Blueprint
-#'
-#' @return Nothing.
-#'
-#' @examples \dontrun{.read_blueprint()}
-#'
-#' @noRd
 .read_blueprint <- function() {
 
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
@@ -206,7 +132,7 @@
   has_data_file <- file.exists(data_file)
 
   if (!has_data_file) {
-    stop("There is no blueprint to read.", call. = FALSE)
+    stop("There is no pet blueprint to read.", call. = FALSE)
   }
 
   if (has_data_file) {
