@@ -14,19 +14,19 @@ load("R/sysdata.rda")
 library(pixeltrix)
 
 # Interactive pixel drawing, outputs binary matrix
-xyz0 <- click_pixels(7, 7)
-x1   <- click_pixels(8, 8)
-x2   <- click_pixels(10, 10)
-x3   <- click_pixels(12, 12)
-y1   <- click_pixels(8, 8)
-y2   <- click_pixels(10, 10)
-y3   <- click_pixels(12, 12)
-z1   <- click_pixels(8, 8)
-z2   <- click_pixels(10, 10)
-z3   <- click_pixels(12, 12)
-xyz4 <- click_pixels(12, 12)
-xyz5 <- click_pixels(10, 10)
-
+all_0 <- click_pixels(7, 7)
+x_1   <- click_pixels(8, 8)
+x_2   <- click_pixels(10, 10)
+x_3   <- click_pixels(12, 12)
+y_1   <- click_pixels(8, 8)
+y_2   <- click_pixels(10, 10)
+y_3   <- click_pixels(12, 12)
+z_1   <- click_pixels(8, 8)
+z_2   <- click_pixels(10, 10)
+z_3   <- click_pixels(12, 12)
+all_4 <- click_pixels(12, 12)
+all_unalive <- click_pixels(10, 10)
+dirt <- click_pixels(5, 7)
 
 # Function to convert from binary matrix to pixel matrix
 matrix_to_sprite <- function(
@@ -50,34 +50,28 @@ matrix_to_sprite <- function(
 }
 
 # Generate a pixel matrix for each sprite from their binary matrix
-xyz0_sprite <- matrix_to_sprite(xyz0)
-x1_sprite   <- matrix_to_sprite(x1)
-x2_sprite   <- matrix_to_sprite(x2)
-x3_sprite   <- matrix_to_sprite(x3)
-y1_sprite   <- matrix_to_sprite(y1)
-y2_sprite   <- matrix_to_sprite(y2)
-y3_sprite   <- matrix_to_sprite(y3)
-z1_sprite   <- matrix_to_sprite(z1)
-z2_sprite   <- matrix_to_sprite(z2)
-z3_sprite   <- matrix_to_sprite(z3)
-xyz4_sprite <- matrix_to_sprite(xyz4)
-xyz5_sprite <- matrix_to_sprite(xyz5)
+all_0_sprite <- matrix_to_sprite(all_0)
+x_1_sprite   <- matrix_to_sprite(x_1)
+x_2_sprite   <- matrix_to_sprite(x_2)
+x_3_sprite   <- matrix_to_sprite(x_3)
+y_1_sprite   <- matrix_to_sprite(y_1)
+y_2_sprite   <- matrix_to_sprite(y_2)
+y_3_sprite   <- matrix_to_sprite(y_3)
+z_1_sprite   <- matrix_to_sprite(z_1)
+z_2_sprite   <- matrix_to_sprite(z_2)
+z_3_sprite   <- matrix_to_sprite(z_3)
+all_4_sprite <- matrix_to_sprite(all_4)
+all_unalive_sprite <- matrix_to_sprite(all_unalive)
+dirt_sprite <- matrix_to_sprite(dirt)
 
 # Put the sprite matrices into a list object
 sprites <- list(
-  sp_xyz = list(lvl_0 = xyz0_sprite, lvl_4 = xyz4_sprite, lvl_5 = xyz5_sprite),
-  sp_x   = list(lvl_1 = x1_sprite,   lvl_2 = x2_sprite,   lvl_3 = x3_sprite),
-  sp_y   = list(lvl_1 = y1_sprite,   lvl_2 = y2_sprite,   lvl_3 = y3_sprite),
-  sp_z   = list(lvl_1 = z1_sprite,   lvl_2 = z2_sprite,   lvl_3 = z3_sprite)
+  sp_all = list(lvl_0 = all_0_sprite, lvl_4 = all_4_sprite, unalive = all_unalive_sprite),
+  sp_x   = list(lvl_1 = x_1_sprite,   lvl_2 = x_2_sprite,   lvl_3 = x_3_sprite),
+  sp_y   = list(lvl_1 = y_1_sprite,   lvl_2 = y_2_sprite,   lvl_3 = y_3_sprite),
+  sp_z   = list(lvl_1 = z_1_sprite,   lvl_2 = z_2_sprite,   lvl_3 = z_3_sprite),
+  other  = list(dirt = dirt_sprite)
 )
-
-
-
-# Other graphics ----------------------------------------------------------
-
-
-dirt <- click_pixels(5, 7)
-graphics <- list(dirt = matrix_to_sprite(dirt))
 
 
 # Declare constants -------------------------------------------------------
@@ -98,8 +92,7 @@ constants <- list(
     lvl_1 = "child",
     lvl_2 = "youngling",
     lvl_3 = "adult",
-    lvl_4 = "mature",
-    lvl_5 = "unalive"
+    lvl_4 = "mature"
   )
 )
 
@@ -108,13 +101,7 @@ constants <- list(
 
 
 # Combine the lists
-internal <- list(
-  sprites = internal$sprites,
-  graphics = internal$graphics,
-  constants = constants
-)
+internal <- list(sprites = sprites, constants = constants)
 
 # Write the object
 usethis::use_data(internal, internal = TRUE, overwrite = TRUE)
-
-

@@ -188,10 +188,7 @@
 
         blueprint$characteristics$alive <- is_alive
 
-        if (!is_alive) {
-          blueprint$experience$level <- 5L  # set level to unalive stage
-          break  # no need to calculate chance for further days if is_alive is FALSE already
-        }
+        if (!is_alive) break  # stop sampling if now unalive
 
       }
 

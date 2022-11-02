@@ -61,7 +61,7 @@ get_stats <- function() {
   if (bp$experience$level == 2L) level_text <- internal$constants$level_names$lvl_2
   if (bp$experience$level == 3L) level_text <- internal$constants$level_names$lvl_3
   if (bp$experience$level == 4L) level_text <- internal$constants$level_names$lvl_4
-  if (bp$experience$level == 5L) level_text <- internal$constants$level_names$lvl_5
+  if (!bp$meta$alive) level_text <- "unalive"
 
   empty_happy  <- rep("\U025A0", bp$status$happy)
   empty_hungry <- rep("\U025A0", bp$status$hungry)
@@ -132,7 +132,7 @@ see_pet <- function() {
   .draw_pet(pet_matrix)
 
   if (bp$status$dirty > 0) {
-    .draw_pet(internal$graphics$dirt)
+    .draw_pet(internal$sprites$other$dirt)
   }
 
 }
