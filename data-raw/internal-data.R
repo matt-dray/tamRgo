@@ -84,9 +84,9 @@ constants <- list(
   xp_increment     = 30L,
   xp_threshold_1   = 100L,
   xp_threshold_2   = 200L,
-  xp_threshold_3   = 500L,
-  xp_threshold_4   = 1000L,
-  age_freeze       = 21L,
+  xp_threshold_3   = 400L,
+  xp_threshold_4   = 800L,
+  age_freeze       = 7L,
   level_names = list(
     lvl_0 = "newborn",
     lvl_1 = "child",

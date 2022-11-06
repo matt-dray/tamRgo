@@ -308,10 +308,8 @@ release <- function() {
 
     if (substr(tolower(answer_b), 1, 1) == "y") {
 
-      file.remove(
-        file.path(tools::R_user_dir("tamRgo", which = "data"), "blueprint.rds")
-      )
-
+      blueprint_path <- tools::R_user_dir("tamRgo", which = "data")
+      file.remove(file.path(blueprint_path, "blueprint.rds"))
       message(bp$characteristics$name, " was set free!")
 
     } else {

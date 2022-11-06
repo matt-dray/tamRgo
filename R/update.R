@@ -1,47 +1,29 @@
 
 .update_blueprint <- function() {
 
-  data_dir <- tools::R_user_dir("tamRgo", which = "data")
-  data_file <- file.path(data_dir, "blueprint.rds")
-  has_data_file <- file.exists(data_file)
-
-  if (!has_data_file) {
-    stop(
-      "A pet blueprint hasn't been found. Use lay_egg() for a new pet.",
-      call. = FALSE
-    )
-  }
-
+  invisible(.check_blueprint_exists())
   bp <- .read_blueprint()
 
+  # Record current values
   last_age <- bp$characteristics$age
-  current_time <- Sys.time()
   current_date <- Sys.Date()
-
-  time_diff <- as.integer(
+  current_time <- Sys.time()
+  time_diff <- as.integer(  # time elapsed since last interaction
     as.numeric(
       current_time - bp$meta$last_interaction,
       units = "mins"
     )
   )
 
+  # Update blueprint elements
   bp <- .update_age(bp, current_date)
   bp <- .update_xp_freeze(bp, last_age, age_updated = bp$characteristics$age)
   bp <- .update_status(bp, time_diff)
   bp <- .update_xp(bp, time_diff)
   bp <- .update_alive(bp, age_updated = bp$characteristics$age)
-
   bp$meta$last_interaction <- current_time
 
   .write_blueprint(bp, ask = FALSE)
-
-  if (!bp$meta$alive) {
-    message(
-      "Uhoh, your pet ", bp$characteristics$name, " is unalive!",
-      "\n- Review their stats with get_stats()",
-      "\n- Get a new pet with lay_egg()"
-    )
-  }
 
   return(bp)
 
@@ -158,13 +140,13 @@
 
     if (Sys.Date() > last_interaction_date) {  # check only once per day
 
-      days_since_interaction <- as.numeric(Sys.Date() - last_interaction_date)
-      days_since_freeze <- age_updated - internal$constants$age_freeze
+      days_since_interaction <- max(1, as.numeric(Sys.Date() - last_interaction_date))
+      days_since_freeze <- max(1, age_updated - internal$constants$age_freeze)
 
       # Sequence of days since last interaction, expressed as days since XP freeze
       # (e.g. if 3 days since interaction, but 7 since freeze, then 4:7)
       days_to_sample <- seq(
-        days_since_freeze - days_since_interaction,
+        max(1, days_since_freeze - days_since_interaction),
         days_since_freeze
       )
 
@@ -189,12 +171,15 @@
 
           if (!is_alive) {
 
-            message("Oh no! ", blueprint$characteristics$name, " is unalive!")
-
-            # Set final age: last-interaction age + day that unalive was sampled
             blueprint$characteristics$age <- blueprint$characteristics$age + day
 
-            break  # stop sampling if now unalive
+            message(
+              "Uhoh, your pet ", bp$characteristics$name, " is unalive!",
+              "\n- Review their stats with get_stats()",
+              "\n- Get a new pet with lay_egg()"
+            )
+
+            break
 
           }
 
