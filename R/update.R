@@ -167,14 +167,14 @@
             prob = c(unalive_chance, alive_chance)
           )
 
-          blueprint$characteristics$alive <- is_alive
+          blueprint$meta$alive <- is_alive
 
           if (!is_alive) {
 
             blueprint$characteristics$age <- blueprint$characteristics$age + day
 
             message(
-              "Uhoh, your pet ", bp$characteristics$name, " is unalive!",
+              "Uhoh, your pet ", blueprint$characteristics$name, " is unalive!",
               "\n- Review their stats with get_stats()",
               "\n- Get a new pet with lay_egg()"
             )

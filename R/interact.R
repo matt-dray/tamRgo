@@ -106,6 +106,15 @@ get_stats <- function() {
     )
   }
 
+  if (bp$meta$alive) {
+    message(
+      "Status",
+      "\n  Happy:   ", empty_happy,  filled_happy,  warn_happy,
+      "\n  Hungry:  ", empty_hungry, filled_hungry, warn_hungry,
+      "\n  Dirty:   ", empty_dirty,  filled_dirty,  warn_dirty
+    )
+  }
+
 }
 
 #' See Your Pet
@@ -124,11 +133,7 @@ see_pet <- function() {
 
   bp <- .check_and_update()
 
-  pet_matrix <- .get_pet_matrix(
-    bp$characteristics$species,
-    bp$experience$level
-  )
-
+  pet_matrix <- .get_pet_matrix(bp)
   .draw_pet(pet_matrix)
 
   if (bp$status$dirty > 0) {
@@ -184,14 +189,27 @@ play <- function() {
     actual <- sample(1:10, size = 1)
     actual_direction <- sign(actual - shown)
 
-    guess <- tolower(
-      readline(
-        paste0("The number is ", shown, ". Higher or lower? Type 'H' or 'L': ")
-      )
-    )
+    guess_okay <- FALSE
 
-    if (guess == "h") guess_direction <- 1
-    if (guess == "l") guess_direction <- -1
+    while (!guess_okay) {
+
+      guess <- tolower(
+        readline(
+          paste0("Higher or lower than ", shown, "? Type h or l: ")
+        )
+      )
+
+      if (guess %in% c("h", "higher")) {
+        guess_direction <- 1
+       guess_okay <- TRUE
+      }
+
+      if (guess %in% c("l", "lower")) {
+        guess_direction <- -1
+        guess_okay <- TRUE
+      }
+
+    }
 
     is_correct <- actual_direction == guess_direction
 
