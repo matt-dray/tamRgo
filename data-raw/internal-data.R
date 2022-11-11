@@ -31,7 +31,7 @@ dirt <- click_pixels(5, 7)
 # Function to convert from binary matrix to pixel matrix
 matrix_to_sprite <- function(
     m,  # binary matrix representing sprite
-    states = c("0" = " ", "1" = "█"),  # convert binary to 'pixels'
+    states = c("0" = "░", "1" = "█"),  # convert binary to 'pixels'
     preview = TRUE  # autoprint to console
 ) {
 
@@ -86,7 +86,7 @@ constants <- list(
   xp_threshold_2   = 200L,
   xp_threshold_3   = 400L,
   xp_threshold_4   = 800L,
-  age_freeze       = 7L,
+  age_freeze       = 2L,
   level_names = list(
     lvl_0 = "newborn",
     lvl_1 = "child",
@@ -105,3 +105,4 @@ internal <- list(sprites = sprites, constants = constants)
 
 # Write the object
 usethis::use_data(internal, internal = TRUE, overwrite = TRUE)
+
