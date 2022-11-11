@@ -128,7 +128,14 @@ see_pet <- function() {
   .draw_pet(pet_matrix)
 
   if (bp$status$dirty > 0) {
-    .draw_pet(internal$sprites$other$dirt)
+
+    i <- bp$status$dirty
+
+    while (i > 0) {
+      .draw_pet(internal$sprites$other$dirt)
+      i <- i - 1
+    }
+
   }
 
 }
@@ -192,7 +199,7 @@ play <- function() {
 
       if (guess %in% c("h", "higher")) {
         guess_direction <- 1
-       guess_okay <- TRUE
+        guess_okay <- TRUE
       }
 
       if (guess %in% c("l", "lower")) {
