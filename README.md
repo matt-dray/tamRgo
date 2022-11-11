@@ -5,24 +5,23 @@
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
 [![R-CMD-check](https://github.com/matt-dray/tamRgo/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/tamRgo/actions)
 [![Codecov test coverage](https://codecov.io/gh/matt-dray/tamRgo/branch/main/graph/badge.svg)](https://app.codecov.io/gh/matt-dray/tamRgo?branch=main)
+[![Blog post](https://img.shields.io/badge/rostrum.blog-post_4-008900?labelColor=000000&logo=data%3Aimage%2Fgif%3Bbase64%2CR0lGODlhEAAQAPEAAAAAABWCBAAAAAAAACH5BAlkAAIAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAAC55QkISIiEoQQQgghRBBCiCAIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAAh%2BQQJZAACACwAAAAAEAAQAAAC55QkIiESIoQQQgghhAhCBCEIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAA7)](https://www.rostrum.blog/tags/tamRgo/)
 <!-- badges: end -->
 
 _Tamago_ (egg) + _uotchi_ ('watch') = [Tamagotchi](https://en.wikipedia.org/wiki/Tamagotchi). _Tamago_ + R = [{tamRgo}](https://github.com/matt-dray/tamRgo).
 
-A work-in-progress R package that lets you interact in the R console with a little digital pet that lives on your computer.
+A concept R package that lets you save a digital pet to your computer that persists between sessions and over time. You can interact with your pet in the R console.
 
 ## Install
 
-Install {tamRgo} [from GitHub](https://www.github.com/matt-dray/tamRgo).
+Install {tamRgo} [from GitHub](https://www.github.com/matt-dray/tamRgo). There are no package dependencies, but you need R version 4 or higher.
 
 ``` r
 install.packages("remotes")  # if not yet installed
 remotes::install_github("matt-dray/tamRgo")
 ```
 
-The package is currently dependency free, but you need R version 4 or higher.
-
-Instructions will appear when you load the package.
+Basic instructions appear when you attach the package.
 
 ``` r
 library(tamRgo)
@@ -32,21 +31,19 @@ library(tamRgo)
 #  - Then: get_stats(), see_pet(), play(), feed(), clean()
 ```
 
-## Play
+## How to
 
-Much of the package's functionality is yet to be developed. You can expect the code and outputs below to change a great deal. See [the GitHub issues](https://github.com/matt-dray/tamRgo/issues) for upcoming functionality. 
-
-You must first request for an egg to be laid. This stores a persistent blueprint of your pet to your computer for safekeeping.
+First, you simply lay an egg. This stores a persistent blueprint of your pet to your computer for safekeeping.
 
 ``` r
-lay_egg("KEVIN")
+lay_egg(pet_name = "KEVIN")
 # Save pet blueprint? y/n: y
 # Saved pet blueprint.
 # You have a new egg... it hatched!
 # See its stats with get_stats()
 ```
 
-At any time you can see the latest statistics about your pet. 
+You can print your pet's stats in the console.
 
 ``` r
 see_stats()
@@ -61,9 +58,7 @@ see_stats()
 #   Dirty:  □□□□□
 ```
 
-These values will update over time. For example, the longer you wait to interact with your pet, the higher the 'hunger' status value will get. The pet will also accumulate (hidden) experience points (XP) that contribute towards levelling up and visual transformations.
-
-You can view in the console an image of your pet at any time. Their appearance will depend on their species and level.
+There he is, sweet little KEVIN.
 
 ```
 see_pet()
@@ -76,43 +71,14 @@ see_pet()
        
 ```
 
-You can `play()`, `feed()` or `clean()` to change your pet's status values.
+Your pet's status values will update over time. You can `play()` with, `feed()` or `clean()` your pet to improve its status. 
 
-``` r
-play()
-# 'Happy' status value is now 4/5
-```
+Interact with your pet to accumulate (hidden) experience points (XP) that help it level up, change its appearance and, apparently, extend its life somehow.
 
-Let's recheck the 'happy' status.
+You can interact with your pet in new R sessions and on different days. Don't worry, I'm told they go to sleep when you aren't interacting with them.
 
-``` r
-see_stats()
-# Characteristics
-#   Name:    KEVIN
-#   Species: Z
-#   Age:     0
-#   Level:   0 (newborn)
-# Status
-#   Happy:  ■■■■□
-#   Hungry: ■■■□□
-#   Dirty:  □□□□□
-```
+## Spoilers, don't read this section
 
-Huzzah.
+The package's main mechanism is the persistent storage of a 'blueprint', an RDS file containing a list of pet-related values, which is saved to the path resolved by `tools::R_user_dir("tamRgo", which = "data")`. The values in the blueprint are updated when a player interacts with the pet, given the time that's elapsed since the last interaction. This gives the appearance that the pet lives 'in real time'.
 
-Note that your pet will get older and eventually it will be not be alive anymore. It's not completely clear what causes a pet to reach its demise, but I've heard that responsible pet owners may get longer-living pets.
-
-You can also release your pet if you feel the time is right. This will delete its blueprint from your computer.
-
-``` r
-release_pet()
-# Really release KEVIN? y/n: y
-# Are you sure? y/n: y
-# KEVIN was set free!
-```
-
-Fare thee well, sweet KEVIN.
-
-## Advanced
-
-The package's main mechanism is the persistent storage of a 'blueprint'&mdash;an RDS file containing a list of pet-related values&mdash;which is saved to the path resolved by `tools::R_user_dir("tamRgo", which = "data")`. The values in the blueprint are updated when a player interacts with the pet, given the time that's elapsed since the last interaction. This gives the appearance that the pet lives 'in real time'.
+You may `release_pet()` if you feel the time is right, which will erase the blueprint from your computer.

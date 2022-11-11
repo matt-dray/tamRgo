@@ -106,15 +106,6 @@ get_stats <- function() {
     )
   }
 
-  if (bp$meta$alive) {
-    message(
-      "Status",
-      "\n  Happy:   ", empty_happy,  filled_happy,  warn_happy,
-      "\n  Hungry:  ", empty_hungry, filled_hungry, warn_hungry,
-      "\n  Dirty:   ", empty_dirty,  filled_dirty,  warn_dirty
-    )
-  }
-
 }
 
 #' See Your Pet
