@@ -28,7 +28,7 @@
 
   if (bp$experience$level > last_level) {
     message(
-      "Great! ", blueprint$characteristics$name, " has reached level ", bp$experience$level, "!",
+      "Great! ", bp$characteristics$name, " has reached level ", bp$experience$level, "!",
       "\n- See how they look now with see_pet()",
       "\n- Review their stats with get_stats()"
     )
@@ -36,7 +36,7 @@
 
   if (!bp$meta$alive) {
     message(
-      "Uhoh, your pet ", blueprint$characteristics$name, " is unalive!",
+      "Uhoh, your pet ", bp$characteristics$name, " is unalive!",
       "\n- Review their stats with get_stats()",
       "\n- Get a new pet with lay_egg()"
     )
