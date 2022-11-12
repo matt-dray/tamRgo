@@ -1,11 +1,4 @@
 
-
-# Load in existing data for editing ---------------------------------------
-
-
-load("R/sysdata.rda")
-
-
 # Create internal data list of species images -----------------------------
 
 
@@ -86,7 +79,7 @@ constants <- list(
   xp_threshold_2   = 200L,
   xp_threshold_3   = 400L,
   xp_threshold_4   = 800L,
-  age_freeze       = 2L,
+  age_freeze       = 21L,
   level_names = list(
     lvl_0 = "newborn",
     lvl_1 = "child",
@@ -106,3 +99,8 @@ internal <- list(sprites = sprites, constants = constants)
 # Write the object
 usethis::use_data(internal, internal = TRUE, overwrite = TRUE)
 
+
+# Load in existing data for editing ---------------------------------------
+
+
+load("R/sysdata.rda")
