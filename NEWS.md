@@ -1,11 +1,12 @@
 # tamRgo 0.0.0.9007
 
-* Used concept of 'XP freeze' at a certain age (21); chance of being unalive after this is dependent on that freeze value and the number of days since that age was reached (towards #23).
+* Used concept of 'XP freeze' at a certain age given in `internal`; chance of being unalive after this is dependent on that freeze value and the number of days since that age was reached (#23).
 * Adjusted passive XP accumulation (#24).
 * Added alert for user when pet levels up.
 * Created internal dataset as `internal`, containing `$sprites` and `$constants` for a single source of truth on level up thresholds, age for XP freeze, etc.
 * Added a chance-based minigame to the `play()` function.
-* Corrected and update exported-function documentation.
+* Corrected and updated exported-function documentation.
+* Corrected unalive logic.
 
 # tamRgo 0.0.0.9006
 

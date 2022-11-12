@@ -61,7 +61,6 @@ get_stats <- function() {
   if (bp$experience$level == 2L) level_text <- internal$constants$level_names$lvl_2
   if (bp$experience$level == 3L) level_text <- internal$constants$level_names$lvl_3
   if (bp$experience$level == 4L) level_text <- internal$constants$level_names$lvl_4
-  if (bp$experience$level == 5L) level_text <- internal$constants$level_names$lvl_5
 
   empty_happy  <- rep("\U025A0", bp$status$happy)
   empty_hungry <- rep("\U025A0", bp$status$hungry)
@@ -71,38 +70,21 @@ get_stats <- function() {
   filled_hungry <- rep("\U025A1", 5 - bp$status$hungry)
   filled_dirty  <- rep("\U025A1", 5 - bp$status$dirty)
 
-  if (bp$status$happy == 0L) {
-    warn_happy  <- " !"
-  } else {
-    warn_happy <-  "  "
-  }
-
-  if (bp$status$hungry == 5L) {
-    warn_hungry <- " !"
-  } else {
-    warn_hungry <- "  "
-  }
-
-  if (bp$status$dirty == 5L) {
-    warn_dirty  <- " !"
-  } else {
-    warn_dirty  <- "  "
-  }
-
   message(
     "Characteristics",
     "\n  Name:    ", bp$characteristics$name,
     "\n  Species: ", bp$characteristics$species,
     "\n  Age:     ", bp$characteristics$age,
-    "\n  Level:   ", bp$experience$level, paste0(" (", level_text, ")")
+    "\n  Level:   ", bp$experience$level, paste0(" (", level_text, ")"),
+    "\n  Alive:   ", bp$meta$alive, ifelse(!bp$meta$alive, " :(", "")
   )
 
   if (bp$meta$alive) {
     message(
       "Status",
-      "\n  Happy:   ", empty_happy,  filled_happy,  warn_happy,
-      "\n  Hungry:  ", empty_hungry, filled_hungry, warn_hungry,
-      "\n  Dirty:   ", empty_dirty,  filled_dirty,  warn_dirty
+      "\n  Happy:   ", empty_happy,  filled_happy,  ifelse(bp$status$happy == 0L,  " !", "  "),
+      "\n  Hungry:  ", empty_hungry, filled_hungry, ifelse(bp$status$hungry == 5L, " !", "  "),
+      "\n  Dirty:   ", empty_dirty,  filled_dirty,  ifelse(bp$status$dirty == 5L,  " !", "  ")
     )
   }
 
@@ -124,15 +106,18 @@ see_pet <- function() {
 
   bp <- .check_and_update()
 
-  pet_matrix <- .get_pet_matrix(
-    bp$characteristics$species,
-    bp$experience$level
-  )
-
+  pet_matrix <- .get_pet_matrix(bp)
   .draw_pet(pet_matrix)
 
   if (bp$status$dirty > 0) {
-    .draw_pet(internal$graphics$dirt)
+
+    i <- bp$status$dirty
+
+    while (i > 0) {
+      .draw_pet(internal$sprites$other$dirt)
+      i <- i - 1
+    }
+
   }
 
 }
@@ -150,6 +135,13 @@ see_pet <- function() {
 play <- function() {
 
   bp <- .check_and_update()
+
+  if (!bp$meta$alive) {
+    stop(
+      bp$characteristics$name, " is unalive! Can't play.",
+      call. = FALSE
+    )
+  }
 
   if (bp$status$happy == 5) {
     stop(
@@ -184,14 +176,27 @@ play <- function() {
     actual <- sample(1:10, size = 1)
     actual_direction <- sign(actual - shown)
 
-    guess <- tolower(
-      readline(
-        paste0("The number is ", shown, ". Higher or lower? Type 'H' or 'L': ")
-      )
-    )
+    guess_okay <- FALSE
 
-    if (guess == "h") guess_direction <- 1
-    if (guess == "l") guess_direction <- -1
+    while (!guess_okay) {
+
+      guess <- tolower(
+        readline(
+          paste0("Higher or lower than ", shown, "? Type h or l: ")
+        )
+      )
+
+      if (guess %in% c("h", "higher")) {
+        guess_direction <- 1
+        guess_okay <- TRUE
+      }
+
+      if (guess %in% c("l", "lower")) {
+        guess_direction <- -1
+        guess_okay <- TRUE
+      }
+
+    }
 
     is_correct <- actual_direction == guess_direction
 
@@ -241,6 +246,13 @@ feed <- function() {
 
   bp <- .check_and_update()
 
+  if (!bp$meta$alive) {
+    stop(
+      bp$characteristics$name, " is unalive! Can't feed.",
+      call. = FALSE
+    )
+  }
+
   if (bp$status$hungry == 0) {
     stop(
       "Hunger is already at the minimum value! Can't feed.",
@@ -267,6 +279,13 @@ feed <- function() {
 clean <- function() {
 
   bp <- .check_and_update()
+
+  if (!bp$meta$alive) {
+    stop(
+      bp$characteristics$name, " is unalive! Can't clean.",
+      call. = FALSE
+    )
+  }
 
   if (bp$status$dirty == 0) {
     stop(
@@ -299,27 +318,59 @@ release <- function() {
 
   bp <- .check_and_update()
 
-  answer_a <-
-    readline(paste0("Really release ", bp$characteristics$name, "? y/n: "))
+  if (bp$meta$alive) {
 
-  if (substr(tolower(answer_a), 1, 1) == "y") {
+    answer_a <-
+      readline(paste0("Really release ", bp$characteristics$name, "? y/n: "))
 
-    answer_b <- readline("Are you sure? y/n: ")
+    if (substr(tolower(answer_a), 1, 1) == "y") {
 
-    if (substr(tolower(answer_b), 1, 1) == "y") {
+      answer_b <- readline("Are you sure? y/n: ")
 
-      file.remove(
-        file.path(tools::R_user_dir("tamRgo", which = "data"), "blueprint.rds")
-      )
+      if (substr(tolower(answer_b), 1, 1) == "y") {
 
-      message(bp$characteristics$name, " was set free!")
+        blueprint_path <- tools::R_user_dir("tamRgo", which = "data")
+        file.remove(file.path(blueprint_path, "blueprint.rds"))
+        message(bp$characteristics$name, " was set free!")
+
+      } else {
+        message(bp$characteristics$name, " was not released.")
+      }
 
     } else {
       message(bp$characteristics$name, " was not released.")
     }
 
-  } else {
-    message(bp$characteristics$name, " was not released.")
+  }
+
+  if (!bp$meta$alive) {
+
+    answer_a <-
+      readline(
+        paste0(
+          bp$characteristics$name, " is unalive! Can't release. ",
+          "Delete blueprint? y/n: "
+          )
+        )
+
+    if (substr(tolower(answer_a), 1, 1) == "y") {
+
+      answer_b <- readline("Are you sure? y/n: ")
+
+      if (substr(tolower(answer_b), 1, 1) == "y") {
+
+        blueprint_path <- tools::R_user_dir("tamRgo", which = "data")
+        file.remove(file.path(blueprint_path, "blueprint.rds"))
+        message(bp$characteristics$name, "'s blueprint was deleted!")
+
+      } else {
+        message(bp$characteristics$name, "'s blueprint was not deleted")
+      }
+
+    } else {
+      message(bp$characteristics$name, "'s blueprint was not deleted")
+    }
+
   }
 
 }

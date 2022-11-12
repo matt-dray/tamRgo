@@ -1,6 +1,20 @@
 
 .check_and_update <- function() {
 
+  invisible(.check_blueprint_exists())
+
+  bp <- .read_blueprint()
+
+  if (bp$meta$alive) {  # don't update it if unalive
+    bp <- suppressMessages(.update_blueprint())
+  }
+
+  return(bp)
+
+}
+
+.check_blueprint_exists <- function(return = TRUE) {
+
   data_dir <- tools::R_user_dir("tamRgo", which = "data")
   data_file <- file.path(data_dir, "blueprint.rds")
   has_data_file <- file.exists(data_file)
@@ -12,13 +26,11 @@
     )
   }
 
-  bp <- .read_blueprint()
-
-  if (bp$meta$alive) {  # don't update it if unalive
-    bp <- suppressMessages(.update_blueprint())
-  }
-
-  return(bp)
+  list(
+    data_dir = data_dir,
+    data_file = data_file,
+    has_data_file = has_data_file
+  )
 
 }
 

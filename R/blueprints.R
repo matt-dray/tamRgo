@@ -45,10 +45,7 @@
   species_list <- c("X", "Y", "Z")
   species <- sample(species_list, 1)
 
-  list(
-    pet_id = pet_id,
-    species = species
-  )
+  list(pet_id = pet_id, species = species)
 
 }
 
@@ -64,12 +61,8 @@
 
   if (!ask) {
 
-    if (!has_data_dir) {
-      dir.create(data_dir, recursive = TRUE)
-    }
-
+    if (!has_data_dir) dir.create(data_dir, recursive = TRUE)
     saveRDS(blueprint, file.path(data_file))
-
     message("Saved pet blueprint.")
 
   }
@@ -85,12 +78,8 @@
 
     if (substr(tolower(answer), 1, 1) == "y") {
 
-      if (!has_data_dir) {
-        dir.create(data_dir, recursive = TRUE)
-      }
-
+      if (!has_data_dir) dir.create(data_dir, recursive = TRUE)
       saveRDS(blueprint, file.path(data_file))
-
       message("Saved pet blueprint.")
 
     } else {
@@ -107,12 +96,8 @@
 
     if (substr(tolower(answer), 1, 1) == "y") {
 
-      if (!has_data_dir) {
-        dir.create(data_dir, recursive = TRUE)
-      }
-
+      if (!has_data_dir) dir.create(data_dir, recursive = TRUE)
       saveRDS(blueprint, file.path(data_file))
-
       message("Saved pet blueprint.")
 
     } else {
@@ -127,16 +112,7 @@
 
 .read_blueprint <- function() {
 
-  data_dir <- tools::R_user_dir("tamRgo", which = "data")
-  data_file <- file.path(data_dir, "blueprint.rds")
-  has_data_file <- file.exists(data_file)
-
-  if (!has_data_file) {
-    stop("There is no pet blueprint to read.", call. = FALSE)
-  }
-
-  if (has_data_file) {
-    readRDS(data_file)
-  }
+  check <- .check_blueprint_exists()
+  if (check$has_data_file) readRDS(check$data_file)
 
 }
