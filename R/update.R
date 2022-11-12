@@ -5,6 +5,7 @@
   bp <- .read_blueprint()
 
   # Record current values
+  last_level <- bp$experience$level
   last_age <- bp$characteristics$age
   current_date <- Sys.Date()
   current_time <- Sys.time()
@@ -24,6 +25,22 @@
   bp$meta$last_interaction <- current_time
 
   .write_blueprint(bp, ask = FALSE)
+
+  if (bp$experience$level > last_level) {
+    message(
+      "Great! ", blueprint$characteristics$name, " has reached level ", bp$experience$level, "!",
+      "\n- See how they look now with see_pet()",
+      "\n- Review their stats with get_stats()"
+    )
+  }
+
+  if (!bp$meta$alive) {
+    message(
+      "Uhoh, your pet ", blueprint$characteristics$name, " is unalive!",
+      "\n- Review their stats with get_stats()",
+      "\n- Get a new pet with lay_egg()"
+    )
+  }
 
   return(bp)
 
@@ -170,17 +187,8 @@
           blueprint$meta$alive <- is_alive
 
           if (!is_alive) {
-
             blueprint$characteristics$age <- blueprint$characteristics$age + day
-
-            message(
-              "Uhoh, your pet ", blueprint$characteristics$name, " is unalive!",
-              "\n- Review their stats with get_stats()",
-              "\n- Get a new pet with lay_egg()"
-            )
-
             break
-
           }
 
         }
