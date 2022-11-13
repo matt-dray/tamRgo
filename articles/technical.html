@@ -68,7 +68,8 @@
 
 
 
-<script src="technical_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Technical explanation</h1>
             
@@ -79,39 +80,63 @@
 
     
     
-<p>This (draft) technical document explains the main functions in the package and what they do.</p>
+<p>This (draft) technical document explains the main functions in the
+package and what they do.</p>
 <p>Blueprints</p>
 <ul>
 <li>
-<code>.create_blueprint()</code> is responsible for creating a new ‘blueprint’, a list of lists that contains the initial data for a new pet.</li>
+<code>.create_blueprint()</code> is responsible for creating a new
+‘blueprint’, a list of lists that contains the initial data for a new
+pet.</li>
 <li>
-<code>.write_blueprint()</code> takes a blueprint and saves it to the system-dependent file path at <code>tools::R_user_dir("tamRgo", which = "data")</code>. It first checks if a blueprint already exists at the location. The function is interactive and asks the user to confirm their choice, but it can be overridden with the <code>ask</code> argument.</li>
+<code>.write_blueprint()</code> takes a blueprint and saves it to
+the system-dependent file path at
+<code>tools::R_user_dir("tamRgo", which = "data")</code>. It first
+checks if a blueprint already exists at the location. The function is
+interactive and asks the user to confirm their choice, but it can be
+overridden with the <code>ask</code> argument.</li>
 <li>
-<code>.read_blueprint()</code> checks for a blueprint and reads it from the system-dependent path returned by <code>tools::R_user_dir("tamRgo", which = "data")</code>.</li>
+<code>.read_blueprint()</code> checks for a blueprint and reads it
+from the system-dependent path returned by
+<code>tools::R_user_dir("tamRgo", which = "data")</code>.</li>
 </ul>
 <p>Update blueprint</p>
 <ul>
 <li>
-<code>.update_blueprint()</code> reads the blueprint; calculates time elapsed since the last interaction; adjusts age, XP, levels and status; and writes the new blueprint.</li>
+<code>.update_blueprint()</code> reads the blueprint; calculates
+time elapsed since the last interaction; adjusts age, XP, levels and
+status; and writes the new blueprint.</li>
 <li>
-<code>.update_age()</code> checks the ‘born’ date in the blueprint against the current date. The difference days is the ‘age’ of the pet.</li>
+<code>.update_age()</code> checks the ‘born’ date in the blueprint
+against the current date. The difference days is the ‘age’ of the
+pet.</li>
 <li>
-<code>.update_xp()</code> uses the time elapsed since the last interaction to to adjust the XP value given the provided ‘XP increment’ value. The new XP is compared to certain thresholds and the pet’s level is adjusted depending on which of these are exceeded.</li>
+<code>.update_xp()</code> uses the time elapsed since the last
+interaction to to adjust the XP value given the provided ‘XP increment’
+value. The new XP is compared to certain thresholds and the pet’s level
+is adjusted depending on which of these are exceeded.</li>
 <li>
-<code>.update_status()</code> changes the status values (happy, hungry, dirty) given the elapsed since the last interaction</li>
+<code>.update_status()</code> changes the status values (happy,
+hungry, dirty) given the elapsed since the last interaction</li>
 </ul>
 <p>Interact with pet</p>
 <ul>
 <li>
-<code><a href="../reference/lay_egg.html">lay_egg()</a></code> generates and writes a new blueprint with some user interaction.</li>
+<code><a href="../reference/lay_egg.html">lay_egg()</a></code> generates and writes a new blueprint with
+some user interaction.</li>
 <li>
-<code><a href="../reference/get_stats.html">get_stats()</a></code> reads the blueprint and prints certain parts of it.</li>
+<code><a href="../reference/get_stats.html">get_stats()</a></code> reads the blueprint and prints certain
+parts of it.</li>
 <li>
-<code><a href="../reference/see_pet.html">see_pet()</a></code> fetches a matrix that encodes the pet’s image given its species and level and prints it to the console.</li>
+<code><a href="../reference/see_pet.html">see_pet()</a></code> fetches a matrix that encodes the pet’s image
+given its species and level and prints it to the console.</li>
 <li>
-<code><a href="../reference/play.html">play()</a></code>, <code><a href="../reference/feed.html">feed()</a></code> and <code><a href="../reference/clean.html">clean()</a></code> are cllaed by the user to adjust the ‘happy’ and ‘hungry’ values in the blueprint.</li>
+<code><a href="../reference/play.html">play()</a></code>, <code><a href="../reference/feed.html">feed()</a></code> and <code><a href="../reference/clean.html">clean()</a></code>
+are cllaed by the user to adjust the ‘happy’ and ‘hungry’ values in the
+blueprint.</li>
 <li>
-<code><a href="../reference/release.html">release()</a></code> deletes the blueprint from your computer.</li>
+<code><a href="../reference/release.html">release()</a></code> deletes the blueprint from your
+computer.</li>
 </ul></main>
 </div>
 

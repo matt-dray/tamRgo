@@ -72,87 +72,69 @@
 <div class="page-header"><h1 id="tamrgo">{tamRgo}<a class="anchor" aria-label="anchor" href="#tamrgo"></a>
 </h1></div>
 <!-- badges: start -->
+
 <p><em>Tamago</em> (egg) + <em>uotchi</em> (‘watch’) = <a href="https://en.wikipedia.org/wiki/Tamagotchi" class="external-link">Tamagotchi</a>. <em>Tamago</em> + R = <a href="https://github.com/matt-dray/tamRgo" class="external-link">{tamRgo}</a>.</p>
-<p>A work-in-progress R package that lets you interact in the R console with a little digital pet that lives on your computer.</p>
+<p>A concept R package that saves a digital pet to your computer who persists between sessions and whose stats update over time. You can interact with your pet in the R console.</p>
 <div class="section level2">
 <h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
 </h2>
-<p>Install {tamRgo} <a href="https://www.github.com/matt-dray/tamRgo">from GitHub</a>.</p>
+<p>Install {tamRgo} <a href="https://www.github.com/matt-dray/tamRgo">from GitHub</a>. There are no package dependencies, but you need R version 4 or higher.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>  <span class="co"># if not yet installed</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"matt-dray/tamRgo"</span><span class="op">)</span></span></code></pre></div>
-<p>The package is currently dependency free, but you need R version 4 or higher.</p>
-<p>Instructions will appear when you load the package.</p>
+<p>Basic instructions appear when you attach the package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://matt-dray.github.io/tamRgo/" class="external-link">tamRgo</a></span><span class="op">)</span></span>
-<span><span class="co"># Welcome to {tamRgo}, a digital pet in the R console!</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://matt-dray.github.io/tamRgo/" class="external-link">tamRgo</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Welcome to {tamRgo}, a digital pet in the R console!</span></span>
 <span><span class="co">#  - Docs: &lt;https://matt-dray.github.io/tamRgo&gt;</span></span>
 <span><span class="co">#  - New pet: lay_egg()</span></span>
 <span><span class="co">#  - Then: get_stats(), see_pet(), play(), feed(), clean()</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="play">Play<a class="anchor" aria-label="anchor" href="#play"></a>
+<h2 id="how-to">How to<a class="anchor" aria-label="anchor" href="#how-to"></a>
 </h2>
-<p>Much of the package’s functionality is yet to be developed. You can expect the code and outputs below to change a great deal. See <a href="https://github.com/matt-dray/tamRgo/issues" class="external-link">the GitHub issues</a> for upcoming functionality.</p>
-<p>You must first request for an egg to be laid. This stores a persistent blueprint of your pet to your computer for safekeeping.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/lay_egg.html">lay_egg</a></span><span class="op">(</span><span class="st">"KEVIN"</span><span class="op">)</span></span>
-<span><span class="co"># Save pet blueprint? y/n: y</span></span>
+<p>First, you simply lay an egg. A ‘blueprint’ of your pet is saved to your computer.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/lay_egg.html">lay_egg</a></span><span class="op">(</span>pet_name <span class="op">=</span> <span class="st">"KEVIN"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Save pet blueprint? y/n: y</span></span>
 <span><span class="co"># Saved pet blueprint.</span></span>
 <span><span class="co"># You have a new egg... it hatched!</span></span>
 <span><span class="co"># See its stats with get_stats()</span></span></code></pre></div>
-<p>At any time you can see the latest statistics about your pet.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">see_stats</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># Characteristics</span></span>
+<p>You can print your pet’s stats in the console.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">see_stats</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Characteristics</span></span>
 <span><span class="co">#   Name:    KEVIN</span></span>
 <span><span class="co">#   Species: Z</span></span>
 <span><span class="co">#   Age:     0</span></span>
 <span><span class="co">#   Level:   0 (newborn)</span></span>
+<span><span class="co">#   Alive:   TRUE</span></span>
 <span><span class="co"># Status</span></span>
 <span><span class="co">#   Happy:  ■■■□□ </span></span>
 <span><span class="co">#   Hungry: ■■■□□</span></span>
 <span><span class="co">#   Dirty:  □□□□□</span></span></code></pre></div>
-<p>These values will update over time. For example, the longer you wait to interact with your pet, the higher the ‘hunger’ status value will get. The pet will also accumulate (hidden) experience points (XP) that contribute towards levelling up and visual transformations.</p>
-<p>You can view in the console an image of your pet at any time. Their appearance will depend on their species and level.</p>
-<pre><code>see_pet()
-       
-  ███  
- █ █ █ 
- █████ 
- ██ ██ 
-  ███  
-       </code></pre>
-<p>You can <code><a href="reference/play.html">play()</a></code>, <code><a href="reference/feed.html">feed()</a></code> or <code><a href="reference/clean.html">clean()</a></code> to change your pet’s status values.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/play.html">play</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># 'Happy' status value is now 4/5</span></span></code></pre></div>
-<p>Let’s recheck the ‘happy’ status.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">see_stats</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># Characteristics</span></span>
-<span><span class="co">#   Name:    KEVIN</span></span>
-<span><span class="co">#   Species: Z</span></span>
-<span><span class="co">#   Age:     0</span></span>
-<span><span class="co">#   Level:   0 (newborn)</span></span>
-<span><span class="co"># Status</span></span>
-<span><span class="co">#   Happy:  ■■■■□</span></span>
-<span><span class="co">#   Hungry: ■■■□□</span></span>
-<span><span class="co">#   Dirty:  □□□□□</span></span></code></pre></div>
-<p>Huzzah.</p>
-<p>Note that your pet will get older and eventually it will be not be alive anymore. It’s not completely clear what causes a pet to reach its demise, but I’ve heard that responsible pet owners may get longer-living pets.</p>
-<p>You can also release your pet if you feel the time is right. This will delete its blueprint from your computer.</p>
+<p>There he is, sweet little KEVIN.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">release_pet</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># Really release KEVIN? y/n: y</span></span>
-<span><span class="co"># Are you sure? y/n: y</span></span>
-<span><span class="co"># KEVIN was set free!</span></span></code></pre></div>
-<p>Fare thee well, sweet KEVIN.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/see_pet.html">see_pet</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ░░░░░░░</span></span>
+<span><span class="co"># ░░███░░</span></span>
+<span><span class="co"># ░█░█░█░</span></span>
+<span><span class="co"># ░█████░</span></span>
+<span><span class="co"># ░██░██░</span></span>
+<span><span class="co"># ░░███░░</span></span>
+<span><span class="co"># ░░░░░░░</span></span></code></pre></div>
+<p>Your pet’s stats will update over time, even when you aren’t paying attention. You can <code><a href="reference/play.html">play()</a></code> with, <code><a href="reference/feed.html">feed()</a></code> or <code><a href="reference/clean.html">clean()</a></code> your pet to improve its status.</p>
+<p>Interact with your pet to accumulate (hidden) experience points that help it level up, change its appearance and, apparently, extend its life somehow.</p>
+<p>You may <code>release_pet()</code> if you feel the time is right, which will erase the blueprint from your computer. Fare thee well, sweet KEVIN.</p>
 </div>
 <div class="section level2">
-<h2 id="advanced">Advanced<a class="anchor" aria-label="anchor" href="#advanced"></a>
+<h2 id="spoiler">Spoiler<a class="anchor" aria-label="anchor" href="#spoiler"></a>
 </h2>
-<p>The package’s main mechanism is the persistent storage of a ‘blueprint’—an RDS file containing a list of pet-related values—which is saved to the path resolved by <code>tools::R_user_dir("tamRgo", which = "data")</code>. The values in the blueprint are updated when a player interacts with the pet, given the time that’s elapsed since the last interaction. This gives the appearance that the pet lives ‘in real time’.</p>
+<p>The package’s key mechanism is the persistent storage of a ‘blueprint’, an RDS file containing a list of pet-related values, which is saved to the path resolved by <code>tools::R_user_dir("tamRgo", which = "data")</code>. The values in the blueprint are updated when a player interacts with the pet, given the time that’s elapsed since the last interaction. This gives the appearance that the pet lives ‘in real time’.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -193,6 +175,7 @@
 <li><a href="https://www.repostatus.org/#concept" class="external-link"><img src="https://www.repostatus.org/badges/latest/concept.svg" alt="Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept."></a></li>
 <li><a href="https://github.com/matt-dray/tamRgo/actions" class="external-link"><img src="https://github.com/matt-dray/tamRgo/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/matt-dray/tamRgo?branch=main" class="external-link"><img src="https://codecov.io/gh/matt-dray/tamRgo/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://www.rostrum.blog/tags/tamRgo/" class="external-link"><img src="https://img.shields.io/badge/rostrum.blog-post-008900?labelColor=000000&amp;logo=data%3Aimage%2Fgif%3Bbase64%2CR0lGODlhEAAQAPEAAAAAABWCBAAAAAAAACH5BAlkAAIAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAAC55QkISIiEoQQQgghRBBCiCAIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAAh%2BQQJZAACACwAAAAAEAAQAAAC55QkIiESIoQQQgghhAhCBCEIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAA7" alt="Blog post"></a></li>
 </ul>
 </div>
 
