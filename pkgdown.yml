@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   technical: technical.html
-last_built: 2022-11-13T20:26Z
+last_built: 2022-11-13T21:09Z
 urls:
   reference: https://www.github.com/matt-dray/tamRgo/reference
   article: https://www.github.com/matt-dray/tamRgo/articles
