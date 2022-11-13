@@ -42,6 +42,7 @@ lay_egg <- function(pet_name) {
 #'   \item{Species}{Randomly-selected pet species.}
 #'   \item{Age}{Days since born.}
 #'   \item{Level}{Growth stage.}
+#'   \item{Alive}{Is the pet alive?}
 #'   \item{Happy}{Happiness on a scale of 0 to 5.}
 #'   \item{Hungry}{Hunger on a scale of 0 to 5.}
 #'   \item{Dirty}{Dirtiness on a scale of 0 to 5.}
