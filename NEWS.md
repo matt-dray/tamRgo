@@ -1,3 +1,9 @@
+# tamRgo 0.1.0
+
+* Finalised unalive logic (#38, #39), sprites.
+* Did a mild code refactor for easier reading.
+* Updated README.
+
 # tamRgo 0.0.0.9007
 
 * Used concept of 'XP freeze' at a certain age given in `internal`; chance of being unalive after this is dependent on that freeze value and the number of days since that age was reached (#23).

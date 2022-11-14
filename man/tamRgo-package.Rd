@@ -4,8 +4,10 @@
 \name{tamRgo-package}
 \alias{tamRgo}
 \alias{tamRgo-package}
-\title{tamRgo: Digital Pets in R}
+\title{tamRgo: Digital Pets for R}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Store a persistent digital pet on your computer and interact with it in your R console.
 }
 \seealso{
