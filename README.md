@@ -50,7 +50,7 @@ lay_egg(pet_name = "KEVIN")
 You can print your pet's stats in the console.
 
 ``` r
-see_stats()
+get_stats()
 ```
 ``` r
 # Characteristics
